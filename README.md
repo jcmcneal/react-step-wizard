@@ -47,7 +47,7 @@ For example:
 
 ### Transitions
 ---
-All the transitions are using CSS via [animate.css](https://daneden.github.io/animate.css/). You can override the transitions by passing in `transitions` prop to `<StepWizard>`.
+The default transitions are using CSS taken from [animate.css](https://daneden.github.io/animate.css/). You can override the transitions by passing in custom CSS classes to the `transitions` prop in `<StepWizard>`.
 ```html
 let custom = {
   enterRight: 'your custom css transition classes',

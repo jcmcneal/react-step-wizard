@@ -13,6 +13,7 @@
   "keywords": [
     "react",
     "step",
+    "multistep",
     "wizard",
     "es6"
   ],
@@ -22,7 +23,5 @@
     "url": "https://github.com/jcmcneal/react-step-wizard/issues"
   },
   "homepage": "https://github.com/jcmcneal/react-step-wizard#readme",
-  "dependencies": {
-    "animate.css": "^3.5.2"
-  }
+  "dependencies": {}
 }

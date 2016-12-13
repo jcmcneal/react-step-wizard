@@ -7,9 +7,9 @@ exports.Step = exports.StepWizard = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _animate = require('animate.css');
+var _animateCustom = require('./animate.custom.css');
 
-var _animate2 = _interopRequireDefault(_animate);
+var _animateCustom2 = _interopRequireDefault(_animateCustom);
 
 var _styles = require('./styles.css');
 
@@ -42,10 +42,10 @@ var StepWizard = exports.StepWizard = function (_React$Component) {
       var next = this.state.step + change;
       // console.log(change, active, next);
       var styles = this.props.transitions || {
-        enterRight: _animate2.default.animated + ' ' + _animate2.default.fadeInRight,
-        enterLeft: _animate2.default.animated + ' ' + _animate2.default.fadeInLeft,
-        exitRight: _animate2.default.animated + ' ' + _animate2.default.fadeOutRight,
-        exitLeft: _animate2.default.animated + ' ' + _animate2.default.fadeOutLeft
+        enterRight: _animateCustom2.default.animated + ' ' + _animateCustom2.default.fadeInRight,
+        enterLeft: _animateCustom2.default.animated + ' ' + _animateCustom2.default.fadeInLeft,
+        exitRight: _animateCustom2.default.animated + ' ' + _animateCustom2.default.fadeOutRight,
+        exitLeft: _animateCustom2.default.animated + ' ' + _animateCustom2.default.fadeOutLeft
       };
       var classes = this.state.classes;
       if (active < next) {

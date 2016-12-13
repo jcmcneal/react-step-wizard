@@ -1,4 +1,4 @@
-import animate from 'animate.css';
+import Animate from './animate.custom.css';
 import Styles from './styles.css';
 
 export class StepWizard extends React.Component {
@@ -11,10 +11,10 @@ export class StepWizard extends React.Component {
     let next = this.state.step + change;
     // console.log(change, active, next);
     let styles = this.props.transitions || {
-      enterRight: animate.animated+' '+animate.fadeInRight,
-      enterLeft : animate.animated+' '+animate.fadeInLeft,
-      exitRight : animate.animated+' '+animate.fadeOutRight,
-      exitLeft  : animate.animated+' '+animate.fadeOutLeft
+      enterRight: Animate.animated+' '+Animate.fadeInRight,
+      enterLeft : Animate.animated+' '+Animate.fadeInLeft,
+      exitRight : Animate.animated+' '+Animate.fadeOutRight,
+      exitLeft  : Animate.animated+' '+Animate.fadeOutLeft
     }
     let classes = this.state.classes;
     if(active < next) {
