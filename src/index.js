@@ -1,5 +1,5 @@
-import Animate from './animate.custom.css';
-import Styles from './styles.css';
+import Animate from '../dist/animate.custom.css';
+import Styles from '../dist/styles.css';
 
 export class StepWizard extends React.Component {
   constructor(props) {

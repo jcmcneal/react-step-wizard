@@ -1,7 +1,7 @@
 {
   "name": "react-step-wizard",
   "version": "1.1.0",
-  "description": "A modern flexible step wizard component built for React.",
+  "description": "A modern flexible step wizard component built for React",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

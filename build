@@ -1,0 +1,2 @@
+#!/bin/bash
+babel src/index.js --out-file dist/index.js -s --minified
