@@ -1,0 +1,28 @@
+{
+  "name": "react-step-wizard",
+  "version": "1.0.0",
+  "description": "A modern flexible step wizard component built for React.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcmcneal/react-step-wizard.git"
+  },
+  "keywords": [
+    "react",
+    "step",
+    "wizard",
+    "es6"
+  ],
+  "author": "Jason McNeal <jaywizard@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jcmcneal/react-step-wizard/issues"
+  },
+  "homepage": "https://github.com/jcmcneal/react-step-wizard#readme",
+  "dependencies": {
+    "animate.css": "^3.5.2"
+  }
+}

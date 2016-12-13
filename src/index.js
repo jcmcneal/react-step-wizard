@@ -1,4 +1,5 @@
 import animate from 'animate.css';
+import Styles from './styles.css';
 
 export class StepWizard extends React.Component {
   constructor(props) {
@@ -55,9 +56,9 @@ export class StepWizard extends React.Component {
         state.step = i;
         continue;
       }
-      state.classes[i] = 'hide';
+      state.classes[i] = Styles.hide;
     }
-    state.classes[state.step] = 'active';
+    state.classes[state.step] = Styles.active;
 
     return state;
   }
@@ -98,7 +99,7 @@ export class StepWizard extends React.Component {
     });
 
     return (
-      <div className='step-wizard'>
+      <div className={Styles['step-wizard']}>
         {childrenWithProps}
       </div>
     );
@@ -109,7 +110,7 @@ export class Step extends React.Component {
   render() {
     let content = React.cloneElement(this.props.children, this.props);
     return (
-      <div className={'step '+this.props.animate}>
+      <div className={Styles.step+' '+this.props.animate}>
         {content}
       </div>
     );
