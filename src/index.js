@@ -19,11 +19,11 @@ export class StepWizard extends React.Component {
     let classes = this.state.classes;
     if(active < next) {
       // slide left
-      classes[active] = styles.exitLeft,
+      classes[active] = Styles.hide+' '+styles.exitLeft,
       classes[next] = styles.enterRight
     } else {
       // slide right
-      classes[active] = styles.exitRight,
+      classes[active] = Styles.hide+' '+styles.exitRight,
       classes[next] = styles.enterLeft
     }
     this.setState(classes);
