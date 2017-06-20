@@ -1,5 +1,7 @@
 # React Step Wizard
 
+![Alt text](https://github.com/jcmcneal/react-step-wizard/blob/master/example.gif)
+
 ### Install
 ---
 ```
