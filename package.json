@@ -1,6 +1,6 @@
 {
   "name": "react-step-wizard",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "A modern flexible step wizard component built for React",
   "main": "dist/index.js",
   "scripts": {
