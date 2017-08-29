@@ -1,3 +1,4 @@
+import React from 'react';
 import Animate from '../dist/animate.custom.css';
 import Styles from '../dist/styles.css';
 

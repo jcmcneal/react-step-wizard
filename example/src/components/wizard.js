@@ -1,3 +1,4 @@
+import React from 'react';
 import {StepWizard, Step} from 'react-step-wizard';
 
 /**
@@ -56,14 +57,14 @@ class Stats extends React.Component {
           <button className='btn btn-success btn-block' onClick={this.props.nextStep}>Finish</button>
         }
         <hr />
-        <p>
+        <div style={{'fontSize':'21px','fontWeight':'200'}}>
           <h4>Other Functions</h4>
           <div>Current Step: {this.props.currentStep}</div>
           <div>Total Steps: {this.props.totalSteps}</div>
           <button className='btn btn-default' onClick={()=>this.props.goToStep(2)}>Go to Step 2</button>
           <button className='btn btn-default' onClick={this.props.firstStep}>First Step</button>
           <button className='btn btn-default' onClick={this.props.lastStep}>Last Step</button>
-        </p>
+        </div>
       </div>
     )
   }

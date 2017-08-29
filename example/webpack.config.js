@@ -16,8 +16,7 @@
                 use: [
                     'style-loader',
                     'css-loader?modules&importLoaders=1',
-                    'sass-loader',
-                    'postcss-loader'
+                    'sass-loader'
                 ]
             }
         ]
