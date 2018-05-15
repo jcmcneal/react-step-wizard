@@ -1,8 +1,8 @@
-import React from 'react';
-import Animate from '../dist/animate.custom.css';
-import Styles from '../dist/styles.css';
+import React, { Component } from 'react';
+import Animate from './animate.custom.css';
+import Styles from './styles.css';
 
-export class StepWizard extends React.Component {
+export class StepWizard extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState();
@@ -107,7 +107,7 @@ export class StepWizard extends React.Component {
   }
 }
 
-export class Step extends React.Component {
+export class Step extends Component {
   render() {
     let content = React.cloneElement(this.props.children, this.props);
     return (

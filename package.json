@@ -2,9 +2,13 @@
   "name": "react-step-wizard",
   "version": "1.2.1",
   "description": "A modern flexible step wizard component built for React",
-  "main": "dist/index.js",
+  "main": "dist/react-step-wizard.min.js",
+  "publishConfig": {
+    "access": "restricted"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "NODE_ENV=production && webpack --progress --optimize-minimize",
+    "prepublish": "rm -rf ./dist && yarn build"
   },
   "repository": {
     "type": "git",
@@ -23,11 +27,19 @@
     "url": "https://github.com/jcmcneal/react-step-wizard/issues"
   },
   "homepage": "https://github.com/jcmcneal/react-step-wizard#readme",
-  "dependencies": {},
+  "peerDependencies": {
+    "react": ">=15.0.1",
+    "react-dom": ">=15.0.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "react": "^15.6.1"
+    "css-loader": "^0.28.11",
+    "react": "^16.3.2",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
   }
 }
