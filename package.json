@@ -1,11 +1,8 @@
 {
   "name": "react-step-wizard",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "A modern flexible step wizard component built for React",
   "main": "dist/react-step-wizard.min.js",
-  "publishConfig": {
-    "access": "restricted"
-  },
   "scripts": {
     "build": "NODE_ENV=production && webpack --progress --optimize-minimize",
     "prepublish": "rm -rf ./dist && yarn build"
