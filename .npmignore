@@ -3,3 +3,4 @@ webpack.config.js
 .gitignore
 yarn.lock
 src
+example/

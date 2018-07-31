@@ -13,7 +13,7 @@
     "bootstrap": "^3.3.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-step-wizard": "^1.1.5",
+    "react-step-wizard": "^3.0.0",
     "requirejs": "^2.3.3"
   },
   "devDependencies": {

@@ -3485,9 +3485,9 @@ react-dom@^15.6.1:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react-step-wizard@^1.1.5:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/react-step-wizard/-/react-step-wizard-1.2.1.tgz#3e52c3847903a67d6a401e058c3f8c469b888a36"
+react-step-wizard@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-step-wizard/-/react-step-wizard-3.0.0.tgz#6a7d9c71264b885dcb190cb599347dcb129bf25a"
 
 react@^15.6.1:
   version "15.6.2"
