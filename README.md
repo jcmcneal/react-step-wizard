@@ -3,7 +3,7 @@
 ![What You Can Build](https://raw.githubusercontent.com/jcmcneal/react-step-wizard/master/example.gif)
 
 ### Try It Out!
-[Click here](https://jcmcneal.github.io/react-step-wizard/example/) to see a live example!
+<a href='https://jcmcneal.github.io/react-step-wizard/example/' target='_blank'>Click here</a> to see a live example!
 
 ### Install
 ---
