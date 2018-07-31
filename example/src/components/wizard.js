@@ -1,5 +1,5 @@
 import React from 'react';
-import {StepWizard, Step} from 'react-step-wizard';
+import { StepWizard, Step } from 'react-step-wizard';
 
 /**
  * A basic demonstration of how to use the step wizard
@@ -77,6 +77,8 @@ class First extends React.Component {
     this.props.update(e.target.name,e.target.value);
   }
   render() {
+    if (!this.props.isActive) return null;
+
     return (
       <div>
         <h3 className='text-center'>Welcome! Have a look around!</h3>
@@ -97,6 +99,8 @@ class Second extends React.Component {
     }
   }
   render() {
+    if (!this.props.isActive) return null;
+
     return (
       <div>
         { this.props.form.firstname &&
@@ -114,6 +118,8 @@ class Third extends React.Component {
     alert('You did it! Yay!')
   }
   render() {
+    if (!this.props.isActive) return null;
+
     return (
       <div>
         This is the last step in this example! Do you love it?

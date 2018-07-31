@@ -14,16 +14,16 @@ npm install react-step-wizard
 import {StepWizard, Step} from 'react-step-wizard';
 ```
 
-### Use
+### JSX Syntax
 ---
 Simply create a wrapper with `<StepWizard></StepWizard>` and then add each step as
-it's own component wrapped in `<Step></Step>`
+it's own component wrapped in a `<Step></Step>` component
 ```html
 <StepWizard>
     <Step><Step1 /></Step>
     <Step><Step2 /></Step>
-    <Step><Step.. /></Step>
-    <Step><Step..12 /></Step>
+    <Step><Step... /></Step>
+    <Step><Step5 /></Step>
     <Step><WhateverComponentName /></Step>
   </StepWizard>
 </section>
@@ -37,8 +37,11 @@ wizard functions via `this.props`
 For example:
 ```html
 <div>
+  <!-- Variables -->
   <h2>Step {this.props.currentStep}</h2>
   <p>Total Steps: {this.props.totalSteps}</p>
+  <p>Is Active: {this.props.isActive}</p>
+  <!-- Functions -->
   <p><button onClick={this.props.previousStep}>Previous Step</button></p>
   <p><button onClick={this.props.nextStep}>Next Step</button></p>
   <p><button onClick={()=>this.props.goToStep(2)}>Step 2</button></p>
@@ -62,7 +65,13 @@ let custom = {
 
 ### Initial Step
 ---
-The order of your steps in JSX will be loaded in the same order in the browser. However, you may specify which step to start on by passing in the `active` prop to `<Step>`. This doesn't reorder it to be first but rather skips directly to it on start.
+The order of your steps in JSX will be loaded in the same order in the browser. However, you may specify which step to start on page load by using the `initialStep` prop. It accepts a numeric value corresponding to the step order.
+
+```html
+<StepWizard initialStep={3}>...</StepWizard>
+```
+
+passing in the `active` prop to `<Step>`. This doesn't reorder it to be first but rather skips directly to it on start.
 ```html
 <Step active><Step7 /></Step>
 ```
