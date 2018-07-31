@@ -23,7 +23,7 @@ export default class Wizard extends React.Component {
 
         <div className='jumbotron'>
           <div className='row'>
-            <div className='col-xs-12 col-sm-6 col-sm-offset-3'>
+            <div className='col-xs-12 col-sm-6 offset-3'>
 
               <StepWizard>
                 <Step><First update={this.updateForm.bind(this)} /></Step>
@@ -61,9 +61,9 @@ class Stats extends React.Component {
           <h4>Other Functions</h4>
           <div>Current Step: {this.props.currentStep}</div>
           <div>Total Steps: {this.props.totalSteps}</div>
-          <button className='btn btn-default' onClick={()=>this.props.goToStep(2)}>Go to Step 2</button>
-          <button className='btn btn-default' onClick={this.props.firstStep}>First Step</button>
-          <button className='btn btn-default' onClick={this.props.lastStep}>Last Step</button>
+          <button className='btn btn-block btn-default' onClick={()=>this.props.goToStep(2)}>Go to Step 2</button>
+          <button className='btn btn-block btn-default' onClick={this.props.firstStep}>First Step</button>
+          <button className='btn btn-block btn-default' onClick={this.props.lastStep}>Last Step</button>
         </div>
       </div>
     )

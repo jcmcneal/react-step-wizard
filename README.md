@@ -2,6 +2,9 @@
 
 ![What You Can Build](https://raw.githubusercontent.com/jcmcneal/react-step-wizard/master/example.gif)
 
+### Try It Out!
+[Click here](https://jcmcneal.github.io/react-step-wizard/example/) to see a live example!
+
 ### Install
 ---
 ```
@@ -10,7 +13,7 @@ npm install react-step-wizard
 
 ### Import Component
 ---
-```javascript
+```js
 import {StepWizard, Step} from 'react-step-wizard';
 ```
 
@@ -18,15 +21,14 @@ import {StepWizard, Step} from 'react-step-wizard';
 ---
 Simply create a wrapper with `<StepWizard></StepWizard>` and then add each step as
 it's own component wrapped in a `<Step></Step>` component
-```html
+```jsx
 <StepWizard>
-    <Step><Step1 /></Step>
-    <Step><Step2 /></Step>
-    <Step><Step... /></Step>
-    <Step><Step5 /></Step>
-    <Step><WhateverComponentName /></Step>
-  </StepWizard>
-</section>
+  <Step><Step1 /></Step>
+  <Step><Step2 /></Step>
+  <Step><Step... /></Step>
+  <Step><Step5 /></Step>
+  <Step><WhateverComponentName /></Step>
+</StepWizard>
 ```
 
 ### Props
@@ -53,7 +55,7 @@ For example:
 ### Transitions
 ---
 The default transitions are using CSS taken from [animate.css](https://daneden.github.io/animate.css/). You can override the transitions by passing in custom CSS classes to the `transitions` prop in `<StepWizard>`.
-```html
+```jsx
 let custom = {
   enterRight: 'your custom css transition classes',
   enterLeft : 'your custom css transition classes',
@@ -67,12 +69,12 @@ let custom = {
 ---
 The order of your steps in JSX will be loaded in the same order in the browser. However, you may specify which step to start on page load by using the `initialStep` prop. It accepts a numeric value corresponding to the step order.
 
-```html
+```jsx
 <StepWizard initialStep={3}>...</StepWizard>
 ```
 
 passing in the `active` prop to `<Step>`. This doesn't reorder it to be first but rather skips directly to it on start.
-```html
+```jsx
 <Step active><Step7 /></Step>
 ```
 *Neglecting to pass in the `active` prop will result in the first component displaying first.
