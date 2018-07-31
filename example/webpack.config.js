@@ -1,10 +1,10 @@
- module.exports = {
-     entry: './src/index.js',
-     output: {
-         path: __dirname + '/dist',
-         filename: 'bundle.js',
-     },
-     module: {
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        path: `${__dirname}/dist`,
+        filename: 'bundle.js',
+    },
+    module: {
         rules: [
             {
                 test: /\.js$/,
@@ -16,9 +16,9 @@
                 use: [
                     'style-loader',
                     'css-loader?modules&importLoaders=1',
-                    'sass-loader'
-                ]
-            }
-        ]
-    }
- }
+                    'sass-loader',
+                ],
+            },
+        ],
+    },
+};

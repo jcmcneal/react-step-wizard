@@ -3,39 +3,37 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: __dirname + '/dist',
+        path: `${__dirname}/dist`,
         filename: 'react-step-wizard.min.js',
         libraryTarget: 'umd',
         publicPath: '/dist/',
-        umdNamedDefine: true
+        umdNamedDefine: true,
     },
-    devtool: 'source-map',
-    mode: 'production',
     module: {
         rules: [
             {
                 test: /\.js$/,
                 exclude: ['node_modules'],
-                loader: 'babel-loader'
+                loader: 'babel-loader',
             },
             {
                 test: /(\.scss|\.css)$/,
                 use: [{
                     loader: 'style-loader',
                     options: {
-                        hmr: false
-                    }
+                        hmr: false,
+                    },
                 }, {
                     loader: 'css-loader',
                     options: {
                         modules: true,
                         importLoaders: 1,
                         sourceMap: false,
-                        localIdentName: '[local]_[hash:base64:5]'
-                    }
-                }]
-            }
-        ]
+                        localIdentName: '[local]_[hash:base64:5]',
+                    },
+                }],
+            },
+        ],
     },
     externals: {
         // Don't bundle react
@@ -43,11 +41,11 @@ module.exports = {
             commonjs: 'react',
             commonjs2: 'react',
             amd: 'React',
-            root: 'React'
-        }
+            root: 'React',
+        },
     },
     node: {
-        Buffer: false
+        Buffer: false,
     },
     plugins: [
         new UglifyJsPlugin({
@@ -60,9 +58,9 @@ module.exports = {
                     unsafe_comps: true,
                 },
                 output: {
-                    comments: false
-                }
-            }
-        })
-    ]
+                    comments: false,
+                },
+            },
+        }),
+    ],
 };
