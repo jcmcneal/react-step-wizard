@@ -3,7 +3,7 @@
 ![What You Can Build](https://raw.githubusercontent.com/jcmcneal/react-step-wizard/master/example.gif)
 
 ### Try It Out!
-<a href='https://jcmcneal.github.io/react-step-wizard/example/' target='_blank'>Click here</a> to see a live example!
+<a href='https://jcmcneal.github.io/react-step-wizard/example/'>Click here</a> to see a live example!
 
 ### Install
 ---
@@ -14,27 +14,25 @@ npm install react-step-wizard
 ### Import Component
 ---
 ```js
-import {StepWizard, Step} from 'react-step-wizard';
+import StepWizard from 'react-step-wizard';
 ```
 
 ### JSX Syntax
 ---
-Simply create a wrapper with `<StepWizard></StepWizard>` and then add each step as
-it's own component wrapped in a `<Step></Step>` component
+Simply create a wrapper with `<StepWizard></StepWizard>` and each child component will be treated as an individual step.
 ```jsx
 <StepWizard>
-  <Step><Step1 /></Step>
-  <Step><Step2 /></Step>
-  <Step><Step... /></Step>
-  <Step><Step5 /></Step>
-  <Step><WhateverComponentName /></Step>
+  <Step1 />
+  <Step2 />
+  ...
+  <Step5 />
+  <WhateverComponentName />
 </StepWizard>
 ```
 
 ### Props
 ---
-I wanted this step wizard to be as flexible as possible so each step has access to the step
-wizard functions via `this.props`
+I wanted this step wizard to be as flexible as possible so each child has access to the StepWizard functions via `this.props`
 
 For example:
 ```html
@@ -51,6 +49,23 @@ For example:
   <p><button onClick={this.props.lastStep}>Last Step</button></p>
 </div>
 ```
+#### User-Defined Props
+Prop | Data Type | Default
+--- | --- | ---
+initialStep | `integer` | none
+transitions | `object`  | none
+
+#### Props Accessible On Each Child (_Step_) Component
+Prop | Data Type | Parameters
+--- | --- | ---
+currentStep | `integer`
+totalSteps | `integer`
+firstStep | `function`
+lastStep | `function`
+nextStep | `function`
+previousStep | `function`
+goToStep | `function` | `integer` : `goToStep(3)`
+---
 
 ### Transitions
 ---
@@ -73,8 +88,11 @@ The order of your steps in JSX will be loaded in the same order in the browser. 
 <StepWizard initialStep={3}>...</StepWizard>
 ```
 
-passing in the `active` prop to `<Step>`. This doesn't reorder it to be first but rather skips directly to it on start.
+Alternatively, passing the `active` prop to a child component makes it the initial step. This doesn't reorder it to be first but rather skips directly to it on start.
 ```jsx
-<Step active><Step7 /></Step>
+<StepWizard>
+  <Step1>...</Step1>
+  <Step2 active>...</Step2>
+</StepWizard>
 ```
-*Neglecting to pass in the `active` prop will result in the first component displaying first.
+<small>*Neglecting to pass in the `active` prop will result in the first component displaying first.</small>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Animate from './animate.custom.css';
 import Styles from './styles.css';
 
-export class StepWizard extends Component {
+export default class StepWizard extends Component {
     constructor(props) {
         super(props);
 
@@ -131,24 +131,17 @@ export class StepWizard extends Component {
         const childrenWithProps = React.Children.map(this.props.children, (child, i) => {
             props.isActive = (i === this.state.activeStep);
             props.animate = classes[i];
-            return React.cloneElement(child, props);
+
+            return (
+                <div className={`${Styles.step} ${props.animate}`}>
+                    { React.cloneElement(child, props) }
+                </div>
+            );
         });
 
         return (
             <div className={Styles['step-wizard']}>
                 { childrenWithProps }
-            </div>
-        );
-    }
-}
-
-export class Step extends Component {
-    render() {
-        const content = React.cloneElement(this.props.children, this.props);
-
-        return (
-            <div className={`${Styles.step} ${this.props.animate}`}>
-                { content }
             </div>
         );
     }
