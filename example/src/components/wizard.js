@@ -1,130 +1,139 @@
-import React from 'react';
-import { StepWizard, Step } from 'react-step-wizard';
+import React, { Component } from 'react';
+import StepWizard from 'react-step-wizard';
+
+/* eslint react/prop-types: 0 */
 
 /**
  * A basic demonstration of how to use the step wizard
  */
-export default class Wizard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      form: {}
+export default class Wizard extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            form: {},
+        };
     }
-  }
-  updateForm(key, value) {
-    let form = this.state.form;
-    form[key] = value;
-    this.setState({form:form});
-  }
-  render() {
-    return (
-      <div className='container'>
-        <h2>React Step Wizard</h2>
 
-        <div className='jumbotron'>
-          <div className='row'>
-            <div className='col-xs-12 col-sm-6 offset-3'>
+    updateForm = (key, value) => {
+        const { form } = this.state;
 
-              <StepWizard>
-                <Step><First update={this.updateForm.bind(this)} /></Step>
-                <Step><Second form={this.state.form} /></Step>
-                <Step><Third /></Step>
-              </StepWizard>
+        form[key] = value;
+        this.setState({ form });
+    }
 
+    render() {
+        return (
+            <div className='container'>
+                <h2>React Step Wizard</h2>
+
+                <div className='jumbotron'>
+                    <div className='row'>
+                        <div className='col-xs-12 col-sm-6 offset-3'>
+                            <StepWizard>
+                                <First update={this.updateForm} />
+                                <Second form={this.state.form} />
+                                <Third />
+                            </StepWizard>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 /**
  * Stats Component - to illustrate the possible functions
  * Could be used for nav buttons or overview
  */
-class Stats extends React.Component {
-  render() {
-    return (
-      <div>
+const Stats = ({
+    currentStep,
+    firstStep,
+    goToStep,
+    lastStep,
+    nextStep,
+    previousStep,
+    totalSteps,
+}) => (
+    <div>
         <hr />
-        { this.props.currentStep > 1 &&
-          <button className='btn btn-default btn-block' onClick={this.props.previousStep}>Go Back</button>
+        { currentStep > 1 &&
+            <button className='btn btn-default btn-block' onClick={previousStep}>Go Back</button>
         }
-        { this.props.currentStep < this.props.totalSteps ?
-          <button className='btn btn-primary btn-block' onClick={this.props.nextStep}>Continue</button>
-          :
-          <button className='btn btn-success btn-block' onClick={this.props.nextStep}>Finish</button>
+        { currentStep < totalSteps ?
+            <button className='btn btn-primary btn-block' onClick={nextStep}>Continue</button>
+            :
+            <button className='btn btn-success btn-block' onClick={nextStep}>Finish</button>
         }
         <hr />
-        <div style={{'fontSize':'21px','fontWeight':'200'}}>
-          <h4>Other Functions</h4>
-          <div>Current Step: {this.props.currentStep}</div>
-          <div>Total Steps: {this.props.totalSteps}</div>
-          <button className='btn btn-block btn-default' onClick={()=>this.props.goToStep(2)}>Go to Step 2</button>
-          <button className='btn btn-block btn-default' onClick={this.props.firstStep}>First Step</button>
-          <button className='btn btn-block btn-default' onClick={this.props.lastStep}>Last Step</button>
+        <div style={{ fontSize: '21px', fontWeight: '200' }}>
+            <h4>Other Functions</h4>
+            <div>Current Step: {currentStep}</div>
+            <div>Total Steps: {totalSteps}</div>
+            <button className='btn btn-block btn-default' onClick={() => goToStep(2)}>Go to Step 2</button>
+            <button className='btn btn-block btn-default' onClick={firstStep}>First Step</button>
+            <button className='btn btn-block btn-default' onClick={lastStep}>Last Step</button>
         </div>
-      </div>
-    )
-  }
-}
+    </div>
+);
 
 /** Steps */
 
-class First extends React.Component {
-  update(e) {
-    this.props.update(e.target.name,e.target.value);
-  }
-  render() {
-    if (!this.props.isActive) return null;
-
-    return (
-      <div>
-        <h3 className='text-center'>Welcome! Have a look around!</h3>
-
-        <label>First Name</label>
-        <input type='text' className='form-control' name='firstname' placeholder='First Name'
-          onChange={this.update.bind(this)} />
-        <Stats {...this.props} />
-      </div>
-    );
-  }
-}
-
-class Second extends React.Component {
-  validate() {
-    if(confirm('Are you sure you want to go back?')) {
-      this.props.previousStep();
+class First extends Component {
+    update = (e) => {
+        this.props.update(e.target.name, e.target.value);
     }
-  }
-  render() {
-    if (!this.props.isActive) return null;
 
-    return (
-      <div>
-        { this.props.form.firstname &&
-          <h3>Hey {this.props.form.firstname}! 👋</h3>
-        }
-        I've added validation to the previous button.
-        <Stats {...this.props} previousStep={this.validate.bind(this)} />
-      </div>
-    );
-  }
+    render() {
+        if (!this.props.isActive) return null;
+
+        return (
+            <div>
+                <h3 className='text-center'>Welcome! Have a look around!</h3>
+
+                <label>First Name</label>
+                <input type='text' className='form-control' name='firstname' placeholder='First Name'
+                    onChange={this.update} />
+                <Stats {...this.props} />
+            </div>
+        );
+    }
 }
 
-class Third extends React.Component {
-  submit() {
-    alert('You did it! Yay!')
-  }
-  render() {
-    if (!this.props.isActive) return null;
+class Second extends Component {
+    validate = () => {
+        if (confirm('Are you sure you want to go back?')) { // eslint-disable-line
+            this.props.previousStep();
+        }
+    }
 
-    return (
-      <div>
-        This is the last step in this example! Do you love it?
-        <Stats {...this.props} nextStep={this.submit.bind(this)} />
-      </div>
-    );
-  }
+    render() {
+        if (!this.props.isActive) return null;
+
+        return (
+            <div>
+                { this.props.form.firstname && <h3>Hey {this.props.form.firstname}! 👋</h3> }
+                I've added validation to the previous button.
+                <Stats {...this.props} previousStep={this.validate} />
+            </div>
+        );
+    }
+}
+
+class Third extends Component {
+    submit = () => {
+        alert('You did it! Yay!') // eslint-disable-line
+    }
+
+    render() {
+        if (!this.props.isActive) return null;
+
+        return (
+            <div>
+                This is the last step in this example! Do you love it?
+                <Stats {...this.props} nextStep={this.submit.bind(this)} />
+            </div>
+        );
+    }
 }
