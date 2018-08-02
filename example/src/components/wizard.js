@@ -131,7 +131,15 @@ class Third extends Component {
 
         return (
             <div>
-                This is the last step in this example! Do you love it?
+                <div className={'text-center'}>
+                    <h2>This is the last step in this example!</h2>
+                    <hr />
+                    <h4>Do you love it? Star it! 🤩</h4>
+                    <iframe
+                        src="https://ghbtns.com/github-btn.html?user=jcmcneal&repo=react-step-wizard&type=star&count=true&size=large"
+                        frameBorder="0" scrolling="0" width="160px" height="30px"
+                    />
+                </div>
                 <Stats {...this.props} nextStep={this.submit.bind(this)} />
             </div>
         );
