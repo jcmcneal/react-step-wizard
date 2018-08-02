@@ -1,6 +1,12 @@
-webpack.config.js
+.babelrc
+.cache/
 .eslintrc
 .gitignore
-yarn.lock
-src
+.nvmrc
+.vscode/
+CHANGELOG.md
+example.gif
 example/
+src/
+webpack.config.js
+yarn.lock
