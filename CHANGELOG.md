@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [4.1.0]
+• Added `isLazyMount` prop for dynamically mounting steps
+
+> Dev Changes
+    • Added webpack-dev-server to example for convenience
+
 ### [4.0.0] \*Breaking Changes\*
 • Removed `Step` component. It wasn't necessary
 • Made `StepWizard` the default export

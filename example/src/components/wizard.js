@@ -30,7 +30,7 @@ export default class Wizard extends Component {
                 <div className='jumbotron'>
                     <div className='row'>
                         <div className='col-xs-12 col-sm-6 offset-3'>
-                            <StepWizard>
+                            <StepWizard isLazyMount>
                                 <First update={this.updateForm} />
                                 <Second form={this.state.form} />
                                 <Third />
@@ -109,8 +109,6 @@ class Second extends Component {
     }
 
     render() {
-        if (!this.props.isActive) return null;
-
         return (
             <div>
                 { this.props.form.firstname && <h3>Hey {this.props.form.firstname}! 👋</h3> }
@@ -127,8 +125,6 @@ class Third extends Component {
     }
 
     render() {
-        if (!this.props.isActive) return null;
-
         return (
             <div>
                 <div className={'text-center'}>

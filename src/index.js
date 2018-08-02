@@ -130,13 +130,14 @@ export default class StepWizard extends Component {
 
         const childrenWithProps = React.Children.map(this.props.children, (child, i) => {
             props.isActive = (i === this.state.activeStep);
-            props.animate = classes[i];
+            props.transitions = classes[i];
 
-            return (
-                <div className={`${Styles.step} ${props.animate}`}>
-                    { React.cloneElement(child, props) }
-                </div>
-            );
+            // Not Lazy Mount || isLazyMount && isActive
+            if (!this.props.isLazyMount || (this.props.isLazyMount && props.isActive)) {
+                return <Step {...props}>{ React.cloneElement(child, props) }</Step>;
+            }
+
+            return null;
         });
 
         return (
@@ -146,3 +147,9 @@ export default class StepWizard extends Component {
         );
     }
 }
+
+export const Step = ({ children, transitions }) => (
+    <div className={`${Styles.step} ${transitions}`}>
+        { children }
+    </div>
+);
