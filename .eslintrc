@@ -9,6 +9,7 @@
         "indent": [ "error", 4 ],
         "no-continue": 0,
         "operator-linebreak": 0,
-        "react/no-unescaped-entities": 0
+        "react/no-unescaped-entities": 0,
+        "import/no-extraneous-dependencies": 0
     }
 }

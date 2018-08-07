@@ -1,5 +1,15 @@
 {
-    "presets": ["env", "react"],
+    "presets": ["react"],
+    "env": {
+        "production": {
+            "plugins": [
+                ["transform-react-remove-prop-types", {
+                    "mode": "remove",
+                    "removeImport": true
+                }]
+            ]
+        }
+    },
     "plugins": [
         "transform-class-properties"
     ]

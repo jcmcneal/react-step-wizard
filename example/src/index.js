@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import Wizard from './components/wizard';
 
-import styles from './less/app.less';
+import './less/app.less';
 import 'bootstrap/dist/css/bootstrap.css';
 
-class App extends Component {
-  render() {
-    return (
-        <Wizard />
-    );
-  }
-}
+const App = () => (
+    <Wizard />
+);
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'));

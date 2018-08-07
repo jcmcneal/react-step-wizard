@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [4.1.1]
+> Dev Changes
+    • Added PropTypes for development
+
 ### [4.1.0]
 • Added `isLazyMount` prop for dynamically mounting steps
 

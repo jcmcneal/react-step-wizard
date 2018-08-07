@@ -5,7 +5,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.join(__dirname, 'dist'),
-        publicPath: 'http://localhost:8080/dist/'
+        publicPath: 'http://localhost:8080/dist/',
     },
     devServer: {
         compress: true,
@@ -14,7 +14,7 @@ module.exports = {
             warnings: false,
             errors: true,
         },
-        publicPath: 'http://localhost:8080/dist/'
+        publicPath: 'http://localhost:8080/dist/',
     },
     module: {
         rules: [
@@ -28,8 +28,8 @@ module.exports = {
                 test: /(\.css)$/,
                 use: [
                     'style-loader',
-                    'css-loader'
-                ]
+                    'css-loader',
+                ],
             },
             {
                 test: /(\.less)$/,
@@ -42,6 +42,6 @@ module.exports = {
         ],
     },
     stats: {
-        warnings: false
-    }
+        warnings: false,
+    },
 };

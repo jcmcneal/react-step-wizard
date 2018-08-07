@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Animate from './animate.custom.css';
 import Styles from './styles.css';
 
@@ -148,8 +149,32 @@ export default class StepWizard extends Component {
     }
 }
 
+StepWizard.propTypes = {
+    children: PropTypes.node,
+    initialStep: PropTypes.number,
+    isLazyMount: PropTypes.bool,
+    transitions: PropTypes.object,
+};
+
+StepWizard.defaultProps = {
+    children: null,
+    initialStep: 1,
+    isLazyMount: false,
+    transitions: undefined,
+};
+
 export const Step = ({ children, transitions }) => (
     <div className={`${Styles.step} ${transitions}`}>
         { children }
     </div>
 );
+
+Step.propTypes = {
+    children: PropTypes.node,
+    transitions: PropTypes.string,
+};
+
+Step.defaultProps = {
+    children: null,
+    transitions: '',
+};
