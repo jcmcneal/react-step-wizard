@@ -1,5 +1,3 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -47,20 +45,7 @@ module.exports = {
     node: {
         Buffer: false,
     },
-    plugins: [
-        new UglifyJsPlugin({
-            uglifyOptions: {
-                mangle: true,
-                compress: {
-                    warnings: false,
-                    pure_getters: true,
-                    unsafe: true,
-                    unsafe_comps: true,
-                },
-                output: {
-                    comments: false,
-                },
-            },
-        }),
-    ],
+    optimization: {
+        minimize: false,
+    },
 };

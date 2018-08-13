@@ -1,16 +1,22 @@
 {
-    "presets": ["react"],
-    "env": {
-        "production": {
-            "plugins": [
-                ["transform-react-remove-prop-types", {
-                    "mode": "remove",
-                    "removeImport": true
-                }]
-            ]
-        }
-    },
+    "presets": [
+        ["env", {
+            "production": {
+                "plugins": [
+                    ["transform-react-remove-prop-types", {
+                        "mode": "remove",
+                        "removeImport": true
+                    }]
+                ]
+            },
+            "targets": ["ie >= 11"]
+        }],
+        "stage-0",
+        "react"
+    ],
     "plugins": [
-        "transform-class-properties"
+        "transform-class-properties",
+        "transform-es3-member-expression-literals",
+        "transform-es3-property-literals"
     ]
 }

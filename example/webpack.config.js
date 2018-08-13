@@ -1,20 +1,15 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = {
+/** Is Development */
+const isDev = process.env.NODE_ENV !== 'production';
+
+/** Config */
+const config = {
     entry: path.join(__dirname, 'src/index.js'),
     output: {
         filename: 'bundle.js',
         path: path.join(__dirname, 'dist'),
-        publicPath: 'http://localhost:8080/dist/',
-    },
-    devServer: {
-        compress: true,
-        index: 'index.html',
-        overlay: {
-            warnings: false,
-            errors: true,
-        },
-        publicPath: 'http://localhost:8080/dist/',
     },
     module: {
         rules: [
@@ -44,4 +39,24 @@ module.exports = {
     stats: {
         warnings: false,
     },
+    optimization: {
+        minimize: false,
+    },
 };
+
+/** Dev Server */
+if (isDev) {
+    config.output.publicPath = 'http://localhost:8080/dist/';
+    config.devServer = {
+        compress: true,
+        index: 'index.html',
+        overlay: {
+            warnings: false,
+            errors: true,
+        },
+        publicPath: 'http://localhost:8080/dist/',
+    };
+}
+
+/** Export */
+module.exports = config;

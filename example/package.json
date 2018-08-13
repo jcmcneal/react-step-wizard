@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "webpack-dev-server --open --mode='development'",
-    "build": "webpack --progress --optimize-minimize --mode='production'"
+    "dev": "export NODE_ENV=development; webpack-dev-server --open --mode='development'",
+    "build": "export NODE_ENV=production; webpack --progress --optimize-minimize --mode='production'"
   },
   "author": "Jason McNeal <jaywizard@gmail.com>",
   "license": "ISC",
@@ -16,11 +16,14 @@
     "react-step-wizard": "^4.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.25.0",
+    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
+    "babel-plugin-transform-es3-property-literals": "^6.22.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.5",
     "less": "^3.8.0",
     "less-loader": "^4.1.0",

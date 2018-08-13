@@ -21,10 +21,9 @@ export default class StepWizard extends Component {
         for (let i = 0; i < this.props.children.length; i += 1) {
             if (this.props.children[i].props.active) {
                 state.activeStep = i;
-                continue;
+            } else {
+                state.classes[i] = Styles.hide;
             }
-
-            state.classes[i] = Styles.hide;
         }
 
         // Check for initialStep prop
