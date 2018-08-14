@@ -39,12 +39,9 @@ const config = {
     stats: {
         warnings: false,
     },
-    optimization: {
-        minimize: false,
-    },
 };
 
-/** Dev Server */
+/** Development */
 if (isDev) {
     config.output.publicPath = 'http://localhost:8080/dist/';
     config.devServer = {
@@ -56,6 +53,27 @@ if (isDev) {
         },
         publicPath: 'http://localhost:8080/dist/',
     };
+    config.optimization = {
+        minimize: false,
+    };
+} else {
+    /** Prod */
+    config.plugins = [
+        new UglifyJsPlugin({
+            uglifyOptions: {
+                mangle: true,
+                compress: {
+                    warnings: false,
+                    pure_getters: true,
+                    unsafe: true,
+                    unsafe_comps: true,
+                },
+                output: {
+                    comments: false,
+                },
+            },
+        }),
+    ];
 }
 
 /** Export */

@@ -1,4 +1,6 @@
-module.exports = {
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+const config = {
     entry: './src/index.js',
     output: {
         path: `${__dirname}/dist`,
@@ -15,7 +17,7 @@ module.exports = {
                 loader: 'babel-loader',
             },
             {
-                test: /(\.scss|\.css)$/,
+                test: /(\.css)$/,
                 use: [{
                     loader: 'style-loader',
                     options: {
@@ -45,7 +47,22 @@ module.exports = {
     node: {
         Buffer: false,
     },
-    optimization: {
-        minimize: false,
-    },
+    plugins: [
+        new UglifyJsPlugin({
+            uglifyOptions: {
+                mangle: true,
+                compress: {
+                    warnings: false,
+                    pure_getters: true,
+                    unsafe: true,
+                    unsafe_comps: true,
+                },
+                output: {
+                    comments: false,
+                },
+            },
+        }),
+    ],
 };
+
+module.exports = config;

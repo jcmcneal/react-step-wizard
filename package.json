@@ -4,8 +4,8 @@
   "description": "A modern flexible step wizard component built for React",
   "main": "dist/react-step-wizard.min.js",
   "scripts": {
-    "dev": "webpack --progress --watch --mode='development'",
-    "build": "webpack --progress --optimize-minimize --mode='production'",
+    "dev": "export NODE_ENV=development; webpack --progress --watch --mode='development'",
+    "build": "export NODE_ENV=production; webpack --progress --optimize-minimize --mode='production'",
     "prepublish": "rm -rf ./dist && yarn build"
   },
   "repository": {
