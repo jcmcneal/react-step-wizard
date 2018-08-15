@@ -84,14 +84,18 @@ export default class StepWizard extends Component {
 
     /** Next Step */
     nextStep = () => {
+        const nextStep = this.state.activeStep + 1;
         this.animateSteps(1);
-        this.setActiveStep(this.state.activeStep + 1);
+        this.setActiveStep(nextStep);
+        this.props.onNextStep(nextStep);
     }
 
     /** Previous Step */
     previousStep = () => {
+        const previousStep = this.state.activeStep - 1;
         this.animateSteps(-1);
-        this.setActiveStep(this.state.activeStep - 1);
+        this.setActiveStep(previousStep);
+        this.props.onPreviousStep(previousStep);
     }
 
     /** Go to step index */
@@ -154,6 +158,8 @@ StepWizard.propTypes = {
     initialStep: PropTypes.number,
     isLazyMount: PropTypes.bool,
     transitions: PropTypes.object,
+    onNextStep: PropTypes.func,
+    onPreviousStep: PropTypes.func,
 };
 
 StepWizard.defaultProps = {
@@ -161,6 +167,8 @@ StepWizard.defaultProps = {
     initialStep: 1,
     isLazyMount: false,
     transitions: undefined,
+    onNextStep: () => {},
+    onPreviousStep: () => {},
 };
 
 export const Step = ({ children, transitions }) => (
