@@ -39,7 +39,7 @@ export default class Wizard extends Component {
                                 <First update={this.updateForm} />
                                 <Second form={this.state.form} />
                                 <Progress />
-                                <Last />
+                                {/* <Last /> */}
                             </StepWizard>
                         </div>
                     </div>
@@ -78,6 +78,7 @@ const Stats = ({
             <div>Current Step: {currentStep}</div>
             <div>Total Steps: {totalSteps}</div>
             <button className='btn btn-block btn-default' onClick={() => goToStep(2)}>Go to Step 2</button>
+            <button className='btn btn-block btn-default' onClick={() => goToStep(3)}>Go to Step 3</button>
             <button className='btn btn-block btn-default' onClick={firstStep}>First Step</button>
             <button className='btn btn-block btn-default' onClick={lastStep}>Last Step</button>
         </div>
@@ -127,20 +128,23 @@ class Second extends Component {
 
 class Progress extends Component {
     render() {
-        let progressClass = '';
+        let isActiveClass = '';
+
         if (this.props.isActive) {
-            progressClass = styles.loaded;
+            isActiveClass = styles.loaded;
 
             setTimeout(() => {
-                this.props.nextStep();
+                // this.props.nextStep();
             }, 5000);
         }
+
+        console.log({ isActiveClass });
 
         return (
             <div className={styles['progress-wrapper']}>
                 <p className='text-center'>Automated Progress...</p>
-                <div className={`progress ${styles.progress}`}>
-                    <div className={`${styles['progress-bar']} progress-bar-striped progress-bar-animated ${progressClass}`} />
+                <div className={`${styles.progress} ${isActiveClass}`}>
+                    <div className={`${styles['progress-bar']}`} />
                 </div>
             </div>
         );

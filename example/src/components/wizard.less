@@ -3,15 +3,24 @@
 }
 
 .progress {
+    border-radius: 0;
     height: 8px;
+    overflow: hidden;
 }
 
 .progress-bar {
+    -webkit-transition: background-color 5s ease,
+                width 5s ease;
+    -o-transition: background-color 5s ease,
+                width 5s ease;
+    transition: background-color 5s ease,
+                width 5s ease;
     background-color: purple;
-    transition: all 5s ease;
+    height: 8px;
     width: 0%;
+    will-change: background-color, width;
 
-    &.loaded {
+    .loaded & {
         background-color: #007bff;
         width: 100%;
     }
