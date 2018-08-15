@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StepWizard from 'react-step-wizard';
 
+import styles from './wizard.less';
 /* eslint react/prop-types: 0 */
 
 /**
@@ -29,15 +30,16 @@ export default class Wizard extends Component {
     render() {
         return (
             <div className='container'>
-                <h2>React Step Wizard</h2>
+                <h3>React Step Wizard</h3>
 
                 <div className='jumbotron'>
                     <div className='row'>
                         <div className='col-xs-12 col-sm-6 offset-3'>
-                            <StepWizard isLazyMount onStepChange={this.onStepChange}>
+                            <StepWizard onStepChange={this.onStepChange}>
                                 <First update={this.updateForm} />
                                 <Second form={this.state.form} />
-                                <Third />
+                                <Progress />
+                                <Last />
                             </StepWizard>
                         </div>
                     </div>
@@ -123,7 +125,29 @@ class Second extends Component {
     }
 }
 
-class Third extends Component {
+class Progress extends Component {
+    render() {
+        let progressClass = '';
+        if (this.props.isActive) {
+            progressClass = styles.loaded;
+
+            setTimeout(() => {
+                this.props.nextStep();
+            }, 5000);
+        }
+
+        return (
+            <div className={styles['progress-wrapper']}>
+                <p className='text-center'>Automated Progress...</p>
+                <div className={`progress ${styles.progress}`}>
+                    <div className={`${styles['progress-bar']} progress-bar-striped progress-bar-animated ${progressClass}`} />
+                </div>
+            </div>
+        );
+    }
+}
+
+class Last extends Component {
     submit = () => {
         alert('You did it! Yay!') // eslint-disable-line
     }
@@ -132,7 +156,7 @@ class Third extends Component {
         return (
             <div>
                 <div className={'text-center'}>
-                    <h2>This is the last step in this example!</h2>
+                    <h3>This is the last step in this example!</h3>
                     <hr />
                     <h4>Do you love it? Star it! 🤩</h4>
                     <iframe
