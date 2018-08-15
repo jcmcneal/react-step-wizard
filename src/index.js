@@ -42,9 +42,16 @@ export default class StepWizard extends Component {
         return state;
     }
 
-    animateSteps = (change) => {
+    isInvalidStep = next => (next < 0 || next >= this.props.children.length)
+
+    setActiveStep = (next) => {
         const active = this.state.activeStep;
-        const next = this.state.activeStep + change;
+        if (active === next) return;
+        if (this.isInvalidStep(next)) {
+            console.error(`${next + 1} is an invalid step`);
+            return;
+        }
+
         // console.log(change, active, next);
         const styles = this.props.transitions || {
             enterRight: `${Animate.animated} ${Animate.fadeInRight}`,
@@ -65,50 +72,32 @@ export default class StepWizard extends Component {
             classes[next] = styles.enterLeft;
         }
 
-        this.setState({ classes });
-    }
-
-    setActiveStep = (activeStep) => {
-        this.setState({ activeStep });
+        this.setState({
+            activeStep: next,
+            classes,
+        }, () => {
+            const result = {
+                previousStep: active + 1,
+                activeStep: next + 1,
+            };
+            this.props.onStepChange(result);
+        });
     }
 
     /** Go to first step */
-    firstStep = () => {
-        this.goToStep(1);
-    }
+    firstStep = () => this.goToStep(1)
 
     /** Go to last step */
-    lastStep = () => {
-        this.goToStep(this.props.children.length);
-    }
+    lastStep = () => this.goToStep(this.props.children.length)
 
     /** Next Step */
-    nextStep = () => {
-        this.animateSteps(1);
-        this.setActiveStep(this.state.activeStep + 1);
-    }
+    nextStep = () => this.setActiveStep(this.state.activeStep + 1)
 
     /** Previous Step */
-    previousStep = () => {
-        this.animateSteps(-1);
-        this.setActiveStep(this.state.activeStep - 1);
-    }
+    previousStep = () => this.setActiveStep(this.state.activeStep - 1)
 
     /** Go to step index */
-    goToStep = (step) => {
-        const next = step - 1;
-        const current = this.state.activeStep;
-        const change = (next - current);
-        const action = (change > 0) ? this.nextStep : this.previousStep;
-        // console.log(current, next, change, Math.abs(change));
-        let pause = 0;
-        for (let i = 0; i < Math.abs(change); i += 1) {
-            setTimeout(() => {
-                action();
-            }, pause);
-            pause += 5;
-        }
-    }
+    goToStep = step => this.setActiveStep(step - 1)
 
     // updateHash = (activeStep) => {
     //     window.location.hash = `step${activeStep + 1}`;
@@ -153,6 +142,7 @@ StepWizard.propTypes = {
     children: PropTypes.node,
     initialStep: PropTypes.number,
     isLazyMount: PropTypes.bool,
+    onStepChange: PropTypes.func,
     transitions: PropTypes.object,
 };
 
@@ -160,6 +150,7 @@ StepWizard.defaultProps = {
     children: null,
     initialStep: 1,
     isLazyMount: false,
+    onStepChange: () => {},
     transitions: undefined,
 };
 

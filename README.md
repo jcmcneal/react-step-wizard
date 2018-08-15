@@ -60,7 +60,8 @@ Prop | Data Type | Default | Description
 --- | --- | --- | ---
 initialStep | `integer` | 1
 isLazyMount | `boolean` | false | Only mounts the child component when `isActive` is true
-transitions | `object`  | | CSS classes for transitioning between steps
+onStepChange | `function` || Callback for step change
+transitions | `object`  || CSS classes for transitioning between steps
 
 #### Props Accessible On Each Child (_Step_) Component
 Prop | Data Type | Parameters

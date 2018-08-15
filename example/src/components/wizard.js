@@ -22,6 +22,10 @@ export default class Wizard extends Component {
         this.setState({ form });
     }
 
+    onStepChange = (stats) => {
+        console.log({ stats });
+    }
+
     render() {
         return (
             <div className='container'>
@@ -30,7 +34,7 @@ export default class Wizard extends Component {
                 <div className='jumbotron'>
                     <div className='row'>
                         <div className='col-xs-12 col-sm-6 offset-3'>
-                            <StepWizard isLazyMount>
+                            <StepWizard isLazyMount onStepChange={this.onStepChange}>
                                 <First update={this.updateForm} />
                                 <Second form={this.state.form} />
                                 <Third />

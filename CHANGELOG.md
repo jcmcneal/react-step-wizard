@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [4.2.0]
+• Added `onStepChange` callback for when step changes
+
 ### [4.1.2]
 • Fix for IE support
 
