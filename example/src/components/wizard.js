@@ -39,7 +39,7 @@ export default class Wizard extends Component {
                                 <First update={this.updateForm} />
                                 <Second form={this.state.form} />
                                 <Progress />
-                                {/* <Last /> */}
+                                <Last />
                             </StepWizard>
                         </div>
                     </div>
@@ -126,30 +126,26 @@ class Second extends Component {
     }
 }
 
-class Progress extends Component {
-    render() {
-        let isActiveClass = '';
+const Progress = (props) => {
+    let isActiveClass = '';
 
-        if (this.props.isActive) {
-            isActiveClass = styles.loaded;
+    if (props.isActive) {
+        isActiveClass = styles.loaded;
 
-            setTimeout(() => {
-                // this.props.nextStep();
-            }, 5000);
-        }
-
-        console.log({ isActiveClass });
-
-        return (
-            <div className={styles['progress-wrapper']}>
-                <p className='text-center'>Automated Progress...</p>
-                <div className={`${styles.progress} ${isActiveClass}`}>
-                    <div className={`${styles['progress-bar']}`} />
-                </div>
-            </div>
-        );
+        setTimeout(() => {
+            props.nextStep();
+        }, 5000);
     }
-}
+
+    return (
+        <div className={styles['progress-wrapper']}>
+            <p className='text-center'>Automated Progress...</p>
+            <div className={`${styles.progress} ${isActiveClass}`}>
+                <div className={`${styles['progress-bar']} progress-bar-striped`} />
+            </div>
+        </div>
+    );
+};
 
 class Last extends Component {
     submit = () => {

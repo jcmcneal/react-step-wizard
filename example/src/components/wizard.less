@@ -1,27 +1,40 @@
+@progress-height: 5px;
+
+@keyframes stripes {
+    from { background-position: 1rem 0 }
+    to { background-position: 0 0 }
+}
+
+@keyframes rainbow {
+    0% { background-color: var(--red) }
+    20% { background-color: var(--orange) }
+    40% { background-color: var(--yellow) }
+    60% { background-color: var(--green) }
+    80% { background-color: var(--blue) }
+    100% { background-color: var(--indigo) }
+}
+
+@keyframes grow {
+    from { width: 0% }
+    to { width: 100% }
+}
+
 .progress-wrapper {
-    padding-top: 100px;
+    padding-top: 25%;
 }
 
 .progress {
-    border-radius: 0;
-    height: 8px;
+    height: @progress-height;
     overflow: hidden;
 }
 
 .progress-bar {
-    -webkit-transition: background-color 5s ease,
-                width 5s ease;
-    -o-transition: background-color 5s ease,
-                width 5s ease;
-    transition: background-color 5s ease,
-                width 5s ease;
-    background-color: purple;
-    height: 8px;
-    width: 0%;
-    will-change: background-color, width;
+    height: @progress-height;
+    width: 100%;
 
     .loaded & {
-        background-color: #007bff;
-        width: 100%;
+        animation: grow 5s ease,
+            stripes 1s linear infinite,
+            rainbow 5s ease infinite;
     }
 }
