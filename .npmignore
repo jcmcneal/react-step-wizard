@@ -2,6 +2,7 @@
 !dist/
 
 # Ignore List
+_config.yml
 .babelrc
 .cache/
 .eslintrc
