@@ -11,8 +11,9 @@
 CHANGELOG.md
 example.gif
 example/
+index.html
+react-step-wizard-*.tgz
 src/
 webpack.config.js
 yarn.lock
 yarn*.log
-react-step-wizard-*.tgz
