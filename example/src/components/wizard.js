@@ -34,7 +34,7 @@ export default class Wizard extends Component {
 
                 <div className='jumbotron'>
                     <div className='row'>
-                        <div className='col-xs-12 col-sm-6 offset-3'>
+                        <div className='col-12 col-sm-6 offset-sm-3'>
                             <StepWizard onStepChange={this.onStepChange}>
                                 <First update={this.updateForm} />
                                 <Second form={this.state.form} />
