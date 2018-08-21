@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import Animate from './animate.custom.css';
-import Styles from './styles.css';
+import styles from './styles.css';
 
 export default class StepWizard extends Component {
     constructor(props) {
         super(props);
 
         this.state = this.initialState();
+
+        // Transition Classes
+        this.state.transitions = props.transitions || {
+            enterRight: `${Animate.animated} ${Animate.fadeInRight}`,
+            enterLeft: `${Animate.animated} ${Animate.fadeInLeft}`,
+            exitRight: `${Animate.animated} ${Animate.fadeOutRight}`,
+            exitLeft: `${Animate.animated} ${Animate.fadeOutLeft}`,
+        };
     }
 
     /** Setup Steps */
@@ -18,14 +27,15 @@ export default class StepWizard extends Component {
         };
 
         // Set initial classes
-        for (let i = 0; i < this.props.children.length; i += 1) {
-            if (this.props.children[i].props.active) {
+        this.props.children.forEach((child, i) => {
+            if (child.props.active) {
                 state.activeStep = i;
-                continue;
+
+                return;
             }
 
-            state.classes[i] = Styles.hide;
-        }
+            state.classes[i] = styles.hide;
+        });
 
         // Check for initialStep prop
         if (this.props.initialStep) {
@@ -37,7 +47,7 @@ export default class StepWizard extends Component {
             }
         }
 
-        state.classes[state.activeStep] = Styles.active;
+        state.classes[state.activeStep] = styles.active;
 
         return state;
     }
@@ -53,35 +63,37 @@ export default class StepWizard extends Component {
         }
 
         // console.log(change, active, next);
-        const styles = this.props.transitions || {
-            enterRight: `${Animate.animated} ${Animate.fadeInRight}`,
-            enterLeft: `${Animate.animated} ${Animate.fadeInLeft}`,
-            exitRight: `${Animate.animated} ${Animate.fadeOutRight}`,
-            exitLeft: `${Animate.animated} ${Animate.fadeOutLeft}`,
-        };
 
-        const { classes } = this.state;
+        const { classes, transitions } = this.state;
 
         if (active < next) {
             // slide left
-            classes[active] = `${Styles.hide} ${styles.exitLeft}`;
-            classes[next] = styles.enterRight;
+            classes[active] = `${styles.hide} ${transitions.exitLeft}`;
+            classes[next] = transitions.enterRight;
         } else {
             // slide right
-            classes[active] = `${Styles.hide} ${styles.exitRight}`;
-            classes[next] = styles.enterLeft;
+            classes[active] = `${styles.hide} ${transitions.exitRight}`;
+            classes[next] = transitions.enterLeft;
         }
 
         this.setState({
             activeStep: next,
             classes,
         }, () => {
-            const result = {
+            // Step change callback
+            this.onStepChange({
                 previousStep: active + 1,
                 activeStep: next + 1,
-            };
-            this.props.onStepChange(result);
+            });
         });
+    }
+
+    onStepChange = (stats) => {
+        // User callback
+        this.props.onStepChange(stats);
+
+        // Update hash if prop set
+        if (this.props.hashKey) this.updateHash(this.state.activeStep);
     }
 
     /** Go to first step */
@@ -99,9 +111,9 @@ export default class StepWizard extends Component {
     /** Go to step index */
     goToStep = step => this.setActiveStep(step - 1)
 
-    // updateHash = (activeStep) => {
-    //     window.location.hash = `step${activeStep + 1}`;
-    // }
+    updateHash = (activeStep) => {
+        window.location.hash = `step${activeStep + 1}`;
+    }
 
     /** Render */
     render() {
@@ -131,7 +143,7 @@ export default class StepWizard extends Component {
         });
 
         return (
-            <div className={Styles['step-wizard']}>
+            <div className={styles['step-wizard']}>
                 { childrenWithProps }
             </div>
         );
@@ -155,7 +167,7 @@ StepWizard.defaultProps = {
 };
 
 export const Step = ({ children, transitions }) => (
-    <div className={`${Styles.step} ${transitions}`}>
+    <div className={`${styles.step} ${transitions}`}>
         { children }
     </div>
 );

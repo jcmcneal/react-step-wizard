@@ -24,7 +24,7 @@ export default class Wizard extends Component {
     }
 
     onStepChange = (stats) => {
-        console.log({ stats });
+        // console.log({ stats });
     }
 
     render() {
@@ -35,8 +35,8 @@ export default class Wizard extends Component {
                 <div className='jumbotron'>
                     <div className='row'>
                         <div className='col-12 col-sm-6 offset-sm-3'>
-                            <StepWizard onStepChange={this.onStepChange}>
-                                <First update={this.updateForm} />
+                            <StepWizard onStepChange={this.onStepChange} hashKey>
+                                <First hashKey={'Name'} update={this.updateForm} />
                                 <Second form={this.state.form} />
                                 <Progress />
                                 <Last />

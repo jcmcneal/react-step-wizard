@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "export NODE_ENV=development; webpack-dev-server --open --mode='development'",
+    "dev": "export NODE_ENV=development; webpack-dev-server --open --mode='development' --hot --inline",
     "build": "export NODE_ENV=production; webpack --progress --optimize-minimize --mode='production'"
   },
   "author": "Jason McNeal <jaywizard@gmail.com>",
