@@ -12,19 +12,16 @@ A flexible multistep wizard built for React
 If you've made something you're proud of with `react-step-wizard` and want to show it off to the world, send me a message with a link to your project and I'll add it to the README!
 
 ### Install
----
 ```
 npm install react-step-wizard
 ```
 
 ### Import Component
----
 ```js
 import StepWizard from 'react-step-wizard';
 ```
 
 ### JSX Syntax
----
 Simply create a wrapper with `<StepWizard></StepWizard>` and each child component will be treated as an individual step.
 ```jsx
 <StepWizard>
@@ -37,7 +34,6 @@ Simply create a wrapper with `<StepWizard></StepWizard>` and each child componen
 ```
 
 ### Props
----
 I wanted this step wizard to be as flexible as possible so each child has access to the StepWizard functions via `this.props`
 
 For example:
@@ -58,7 +54,9 @@ For example:
 #### User-Defined Props
 Prop | Data Type | Default | Description
 --- | --- | --- | ---
+hashKey | `string` |`step{n}`| Prop on child component to use when updating URL hash. Corresponds with `isHashEnabled`.
 initialStep | `integer` | 1
+isHashEnabled | `bool` | false | Persists the current step in the URL (hash)
 isLazyMount | `boolean` | false | Only mounts the child component when `isActive` is true
 onStepChange | `function` || Callback for step change
 transitions | `object`  || CSS classes for transitioning between steps
@@ -77,7 +75,6 @@ goToStep | `function` | `integer` : `goToStep(3)`
 ---
 
 ### Transitions
----
 The default transitions are using CSS taken from [animate.css](https://daneden.github.io/animate.css/). You can override the transitions by passing in custom CSS classes to the `transitions` prop in `<StepWizard>`.
 ```jsx
 let custom = {
@@ -90,18 +87,19 @@ let custom = {
 ```
 
 ### Initial Step
----
 The order of your steps in JSX will be loaded in the same order in the browser. However, you may specify which step to start on page load by using the `initialStep` prop. It accepts a numeric value corresponding to the step order.
 
 ```jsx
 <StepWizard initialStep={3}>...</StepWizard>
 ```
 
-Alternatively, passing the `active` prop to a child component makes it the initial step. This doesn't reorder it to be first but rather skips directly to it on start.
+### Persist Step In URL
+An example of how `isHashEnabled` and `hashKey` work together:
 ```jsx
-<StepWizard>
-  <Step1>...</Step1>
-  <Step2 active>...</Step2>
+<StepWizard isHashEnabled={true}>
+  <BasicInfo hashKey={'basic'} /> // https://domain.com/#basic
+  <ContactInfo hashKey={'contact'} /> // https://domain.com/#contact
+  <TermsConditions /> // https://domain.com/#step3
 </StepWizard>
 ```
-<small>*Neglecting to pass in the `active` prop will result in the first component displaying first.</small>
+As you can see, the `hashKey` corresponds with the url hash and will be updated when the step becomes active. The `hashKey` defaults to `step{n}`. If `isHashEnabled` is `false` then the url hash, or `hashKey`, will not be used.

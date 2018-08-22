@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [4.3.0]
+• Added `hashKey` for persisting step in URL
+• Removed `active` prop for child components - use `initialStep` instead
+
 ### [4.2.0]
 • Added `onStepChange` callback for when step changes
 

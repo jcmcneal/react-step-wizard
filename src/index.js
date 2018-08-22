@@ -9,14 +9,6 @@ export default class StepWizard extends Component {
         super(props);
 
         this.state = this.initialState();
-
-        // Transition Classes
-        this.state.transitions = props.transitions || {
-            enterRight: `${Animate.animated} ${Animate.fadeInRight}`,
-            enterLeft: `${Animate.animated} ${Animate.fadeInLeft}`,
-            exitRight: `${Animate.animated} ${Animate.fadeOutRight}`,
-            exitLeft: `${Animate.animated} ${Animate.fadeOutLeft}`,
-        };
     }
 
     /** Setup Steps */
@@ -24,30 +16,42 @@ export default class StepWizard extends Component {
         const state = {
             activeStep: 0,
             classes: {},
+            hashKeys: {},
+            // Transition Classes
+            transitions: this.props.transitions || {
+                enterRight: `${Animate.animated} ${Animate.fadeInRight}`,
+                enterLeft: `${Animate.animated} ${Animate.fadeInLeft}`,
+                exitRight: `${Animate.animated} ${Animate.fadeOutRight}`,
+                exitLeft: `${Animate.animated} ${Animate.fadeOutLeft}`,
+            },
         };
+        state.transitions.intro = '';
 
         // Set initial classes
+        const hash = decodeURI(window.location.hash).replace(/^#/, '');
         this.props.children.forEach((child, i) => {
-            if (child.props.active) {
-                state.activeStep = i;
+            // Create hashKey map
+            state.hashKeys[i] = child.props.hashKey || `step${i + 1}`;
+            state.hashKeys[state.hashKeys[i]] = i;
 
-                return;
-            }
-
+            // Hide steps by default
             state.classes[i] = styles.hide;
         });
 
-        // Check for initialStep prop
-        if (this.props.initialStep) {
-            const initialStep = this.props.initialStep - 1;
-            if (this.props.children[initialStep] !== undefined) {
-                state.activeStep = initialStep;
-            } else {
-                console.error("Can't find Step from `initialStep` value.");
-            }
+        // Set activeStep to initialStep if exists
+        const initialStep = this.props.initialStep - 1;
+        if (initialStep && this.props.children[initialStep]) {
+            state.activeStep = initialStep;
         }
 
-        state.classes[state.activeStep] = styles.active;
+        // Set activeStep from hash - trumps initialStep
+        if (this.props.isHashEnabled && hash && state.hashKeys[hash] !== undefined) {
+            // References hashKey
+            state.activeStep = state.hashKeys[hash];
+        }
+
+        // Give initial step an intro class
+        state.classes[state.activeStep] = state.transitions.intro;
 
         return state;
     }
@@ -93,7 +97,7 @@ export default class StepWizard extends Component {
         this.props.onStepChange(stats);
 
         // Update hash if prop set
-        if (this.props.hashKey) this.updateHash(this.state.activeStep);
+        if (this.props.isHashEnabled) this.updateHash(this.state.activeStep);
     }
 
     /** Go to first step */
@@ -112,7 +116,7 @@ export default class StepWizard extends Component {
     goToStep = step => this.setActiveStep(step - 1)
 
     updateHash = (activeStep) => {
-        window.location.hash = `step${activeStep + 1}`;
+        window.location.hash = this.state.hashKeys[activeStep];
     }
 
     /** Render */
@@ -153,6 +157,7 @@ export default class StepWizard extends Component {
 StepWizard.propTypes = {
     children: PropTypes.node,
     initialStep: PropTypes.number,
+    isHashEnabled: PropTypes.bool,
     isLazyMount: PropTypes.bool,
     onStepChange: PropTypes.func,
     transitions: PropTypes.object,
@@ -161,6 +166,7 @@ StepWizard.propTypes = {
 StepWizard.defaultProps = {
     children: null,
     initialStep: 1,
+    isHashEnabled: false,
     isLazyMount: false,
     onStepChange: () => {},
     transitions: undefined,
