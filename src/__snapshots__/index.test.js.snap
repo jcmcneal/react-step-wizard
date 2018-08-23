@@ -1,0 +1,294 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Step Wizard Component empty component 1`] = `
+<div
+  className="step-wizard"
+/>
+`;
+
+exports[`Step Wizard Component empty component 2`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {
+    "0": "",
+  },
+  "hashKeys": Object {},
+  "transitions": Object {
+    "enterLeft": "animated fadeInLeft",
+    "enterRight": "animated fadeInRight",
+    "exitLeft": "animated fadeOutLeft",
+    "exitRight": "animated fadeOutRight",
+    "intro": "",
+  },
+}
+`;
+
+exports[`Step Wizard Component garbage props 1`] = `
+<div
+  className="step-wizard"
+>
+  <div
+    className="step "
+  >
+    <div>
+      Step 1
+    </div>
+  </div>
+  <div
+    className="step hide"
+  >
+    <div>
+      Step 2
+    </div>
+  </div>
+  <div
+    className="step hide"
+  >
+    <div>
+      Step 3
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component garbage props 2`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {
+    "0": "",
+    "1": "hide",
+    "2": "hide",
+  },
+  "hashKeys": Object {
+    "0": "First *3@ #$~!,\\";",
+    "1": "step2",
+    "2": "The End!",
+    "First *3@ #$~!,\\";": 0,
+    "The End!": 2,
+    "step2": 1,
+  },
+  "transitions": Object {
+    "enterLeft": "animated fadeInLeft",
+    "enterRight": "animated fadeInRight",
+    "exitLeft": "animated fadeOutLeft",
+    "exitRight": "animated fadeOutRight",
+    "intro": "",
+  },
+}
+`;
+
+exports[`Step Wizard Component initialStep set to 2 1`] = `
+<div
+  className="step-wizard"
+>
+  <div
+    className="step hide"
+  >
+    <div>
+      Step 1
+    </div>
+  </div>
+  <div
+    className="step "
+  >
+    <div>
+      Step 2
+    </div>
+  </div>
+  <div
+    className="step hide"
+  >
+    <div>
+      Step 3
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component initialStep set to 2 2`] = `
+Object {
+  "activeStep": 1,
+  "classes": Object {
+    "0": "hide",
+    "1": "",
+    "2": "hide",
+  },
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "transitions": Object {
+    "enterLeft": "animated fadeInLeft",
+    "enterRight": "animated fadeInRight",
+    "exitLeft": "animated fadeOutLeft",
+    "exitRight": "animated fadeOutRight",
+    "intro": "",
+  },
+}
+`;
+
+exports[`Step Wizard Component isHashEnabled - false 1`] = `
+<div
+  className="step-wizard"
+>
+  <div
+    className="step "
+  >
+    <div>
+      Step 1
+    </div>
+  </div>
+  <div
+    className="step hide"
+  >
+    <div>
+      Step 2
+    </div>
+  </div>
+  <div
+    className="step hide"
+  >
+    <div>
+      Step 3
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component isHashEnabled - false 2`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {
+    "0": "",
+    "1": "hide",
+    "2": "hide",
+  },
+  "hashKeys": Object {
+    "0": "First",
+    "1": "step2",
+    "2": "The End!",
+    "First": 0,
+    "The End!": 2,
+    "step2": 1,
+  },
+  "transitions": Object {
+    "enterLeft": "animated fadeInLeft",
+    "enterRight": "animated fadeInRight",
+    "exitLeft": "animated fadeOutLeft",
+    "exitRight": "animated fadeOutRight",
+    "intro": "",
+  },
+}
+`;
+
+exports[`Step Wizard Component isHashEnabled - true 1`] = `
+<div
+  className="step-wizard"
+>
+  <div
+    className="step "
+  >
+    <div>
+      Step 1
+    </div>
+  </div>
+  <div
+    className="step hide"
+  >
+    <div>
+      Step 2
+    </div>
+  </div>
+  <div
+    className="step hide"
+  >
+    <div>
+      Step 3
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component isHashEnabled - true 2`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {
+    "0": "",
+    "1": "hide",
+    "2": "hide",
+  },
+  "hashKeys": Object {
+    "0": "First",
+    "1": "step2",
+    "2": "The End!",
+    "First": 0,
+    "The End!": 2,
+    "step2": 1,
+  },
+  "transitions": Object {
+    "enterLeft": "animated fadeInLeft",
+    "enterRight": "animated fadeInRight",
+    "exitLeft": "animated fadeOutLeft",
+    "exitRight": "animated fadeOutRight",
+    "intro": "",
+  },
+}
+`;
+
+exports[`Step Wizard Component with 3 basic components 1`] = `
+<div
+  className="step-wizard"
+>
+  <div
+    className="step "
+  >
+    <div>
+      Step 1
+    </div>
+  </div>
+  <div
+    className="step hide"
+  >
+    <div>
+      Step 2
+    </div>
+  </div>
+  <div
+    className="step hide"
+  >
+    <div>
+      Step 3
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component with 3 basic components 2`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {
+    "0": "",
+    "1": "hide",
+    "2": "hide",
+  },
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "transitions": Object {
+    "enterLeft": "animated fadeInLeft",
+    "enterRight": "animated fadeInRight",
+    "exitLeft": "animated fadeOutLeft",
+    "exitRight": "animated fadeOutRight",
+    "intro": "",
+  },
+}
+`;

@@ -178,7 +178,7 @@ StepWizard.propTypes = {
 };
 
 StepWizard.defaultProps = {
-    children: null,
+    children: [],
     initialStep: 1,
     isHashEnabled: false,
     isLazyMount: false,
@@ -198,6 +198,6 @@ Step.propTypes = {
 };
 
 Step.defaultProps = {
-    children: null,
+    children: [],
     transitions: '',
 };

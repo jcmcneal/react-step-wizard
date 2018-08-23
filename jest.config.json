@@ -1,0 +1,6 @@
+{
+    "rootDir": "src",
+    "moduleNameMapper": {
+        "\\.(css|less)$": "identity-obj-proxy"
+    }
+}

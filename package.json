@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "export NODE_ENV=development; webpack --progress --watch --mode='development'",
     "build": "export NODE_ENV=production; webpack --progress --optimize-minimize --mode='production'",
-    "prepublish": "rm -rf ./dist && yarn build"
+    "prepublish": "rm -rf ./dist && yarn build",
+    "test": "jest --watch --config=jest.config.json"
   },
   "repository": {
     "type": "git",
@@ -32,19 +33,26 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.2",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.14",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "enzyme": "^3.4.4",
+    "enzyme-adapter-react-16": "^1.2.0",
     "eslint": "^5.2.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-react": "^7.10.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.5.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-test-renderer": "^16.4.2",
     "style-loader": "^0.21.0",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.3"
