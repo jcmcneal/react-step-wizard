@@ -9,6 +9,11 @@ export default class StepWizard extends Component {
         super(props);
 
         this.state = this.initialState();
+
+        // Hash change listener - for back/forward button
+        if (props.isHashEnabled) {
+            window.onhashchange = this.onHashChange;
+        }
     }
 
     /** Setup Steps */
@@ -28,7 +33,7 @@ export default class StepWizard extends Component {
         state.transitions.intro = '';
 
         // Set initial classes
-        const hash = decodeURI(window.location.hash).replace(/^#/, '');
+        const hash = this.getHash();
         this.props.children.forEach((child, i) => {
             // Create hashKey map
             state.hashKeys[i] = child.props.hashKey || `step${i + 1}`;
@@ -54,6 +59,15 @@ export default class StepWizard extends Component {
         state.classes[state.activeStep] = state.transitions.intro;
 
         return state;
+    }
+
+    // Get hash and remove #
+    getHash = () => decodeURI(window.location.hash).replace(/^#/, '')
+
+    onHashChange = () => {
+        const next = this.state.hashKeys[this.getHash()];
+
+        if (next !== undefined) this.setActiveStep(next);
     }
 
     isInvalidStep = next => (next < 0 || next >= this.props.children.length)

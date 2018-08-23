@@ -35,10 +35,7 @@ export default class Wizard extends Component {
                 <div className='jumbotron'>
                     <div className='row'>
                         <div className='col-12 col-sm-6 offset-sm-3'>
-                            <StepWizard
-                                onStepChange={this.onStepChange}
-                                isHashEnabled
-                            >
+                            <StepWizard onStepChange={this.onStepChange}>
                                 <First hashKey={'FirstStep'} update={this.updateForm} />
                                 <Second form={this.state.form} />
                                 <Progress />
