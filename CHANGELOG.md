@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [4.3.1]
+• Updated component to change step `onhashchange` when using browser back/forward buttons - (applicable only when `isHashEnabled` is `true`)
+
 ### [4.3.0]
 • Added `hashKey` for persisting step in URL
 • Removed `active` prop for child components - use `initialStep` instead
