@@ -28,7 +28,7 @@ const testComponent = (component) => {
 };
 
 /** Capture console errors */
-// console.error = jest.fn();
+console.error = jest.fn();
 
 /** Unit Tests */
 describe('Step Wizard Component', () => {
@@ -77,18 +77,25 @@ describe('Step Wizard Component', () => {
     });
 
     it('garbage props', () => {
-        // console.error.mockClear();
+        console.error.mockClear();
 
-        const state = testComponent((
-            <StepWizard isHashEnabled={'fdjlk'} initialStep={true}>
+        testComponent((
+            <StepWizard
+                initialStep={true}
+                isHashEnabled={'fdjlk'}
+                onStepChange={true}
+                transitions={false}
+            >
                 <Step1 hashKey={'First *3@ #$~!,";'} />
                 <Step2 />
                 <Step3 hashKey={1} />
             </StepWizard>
         ));
 
-        expect(console.error).toHaveBeenCalledWith('Warning: Failed prop type: Invalid prop `initialStep` of type `boolean` supplied to `StepWizard`, expected `number`.');
-        console.log({ calls: console.error.mock.calls });
+        expect(console.error).toHaveBeenCalledWith('Warning: Failed prop type: Invalid prop `initialStep` of type `boolean` supplied to `StepWizard`, expected `number`.\n    in StepWizard');
+        expect(console.error).toHaveBeenCalledWith('Warning: Failed prop type: Invalid prop `isHashEnabled` of type `string` supplied to `StepWizard`, expected `boolean`.\n    in StepWizard');
+        expect(console.error).toHaveBeenCalledWith('Warning: Failed prop type: Invalid prop `onStepChange` of type `boolean` supplied to `StepWizard`, expected `function`.\n    in StepWizard');
+        expect(console.error).toHaveBeenCalledWith('Warning: Failed prop type: Invalid prop `transitions` of type `boolean` supplied to `StepWizard`, expected `object`.\n    in StepWizard');
     });
 });
 

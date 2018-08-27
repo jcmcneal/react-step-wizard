@@ -61,10 +61,9 @@ Object {
   },
   "hashKeys": Object {
     "0": "First *3@ #$~!,\\";",
-    "1": "step2",
-    "2": "The End!",
+    "1": 2,
+    "2": 1,
     "First *3@ #$~!,\\";": 0,
-    "The End!": 2,
     "step2": 1,
   },
   "transitions": Object {
