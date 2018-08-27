@@ -1,23 +1,21 @@
 import React from 'react';
 import Renderer from 'react-test-renderer';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+// import Enzyme from 'enzyme';
+// import Adapter from 'enzyme-adapter-react-16';
 
 import StepWizard from './index';
 
-Enzyme.configure({ adapter: new Adapter() });
+// Enzyme.configure({ adapter: new Adapter() });
 
 /** Helper Functions */
-const getState = (component) => {
-    const wrapper = shallow(component);
-    wrapper.instance();
-
-    return wrapper.state();
-};
 const render = jsx => Renderer.create(jsx);
+const getInstance = (component) => {
+    const wrapper = render(component);
+    return wrapper.getInstance();
+};
+const getState = component => getInstance(component).state;
 const takeSnapshot = test => expect(test).toMatchSnapshot();
 const getTreeSnapshot = component => takeSnapshot(render(component));
-// const getStateSnapshot = component => takeSnapshot(getState(component));
 const testComponent = (component) => {
     getTreeSnapshot(component);
 
@@ -26,6 +24,15 @@ const testComponent = (component) => {
 
     return state;
 };
+const basicComponent = () => (
+    getInstance((
+        <StepWizard>
+            <Step1 />
+            <Step2 />
+            <Step3 />
+        </StepWizard>
+    ))
+);
 
 /** Capture console errors */
 console.error = jest.fn();
@@ -76,6 +83,16 @@ describe('Step Wizard Component', () => {
         ));
     });
 
+    it('isLazyMount - true', () => {
+        testComponent((
+            <StepWizard isLazyMount initialStep={2}>
+                <Step1 />
+                <Step2 />
+                <Step3 />
+            </StepWizard>
+        ));
+    });
+
     it('garbage props', () => {
         console.error.mockClear();
 
@@ -100,12 +117,33 @@ describe('Step Wizard Component', () => {
 });
 
 describe('Step Wizard Functions', () => {
-    // it('test', async () => {
-    //     const wrapper = shallow(<StepWizard />);
-    //     await wrapper.instance();
-
-    //     expect(wrapper.state()).toEqual({});
-    // });
+    it('lastStep', () => {
+        const wrapper = basicComponent();
+        wrapper.lastStep();
+        takeSnapshot(wrapper.state);
+        expect(wrapper.state.activeStep).toEqual(2);
+    });
+    it('firstStep', () => {
+        const wrapper = basicComponent();
+        wrapper.firstStep();
+        takeSnapshot(wrapper.state);
+        expect(wrapper.state.activeStep).toEqual(0);
+    });
+    it('nextStep', () => {
+        const wrapper = basicComponent();
+        wrapper.nextStep();
+        takeSnapshot(wrapper.state);
+        expect(wrapper.state.activeStep).toEqual(1);
+    });
+    // getHash
+    // goToStep
+    // initialState
+    // isInvalidStep
+    // onHashChange
+    // onStepChange
+    // previousStep
+    // setActiveStep
+    // updateHash
 });
 
 const Step1 = () => <div>Step 1</div>;

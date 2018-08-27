@@ -238,6 +238,46 @@ Object {
 }
 `;
 
+exports[`Step Wizard Component isLazyMount - true 1`] = `
+<div
+  className="step-wizard"
+>
+  <div
+    className="step "
+  >
+    <div>
+      Step 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component isLazyMount - true 2`] = `
+Object {
+  "activeStep": 1,
+  "classes": Object {
+    "0": "hide",
+    "1": "",
+    "2": "hide",
+  },
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "transitions": Object {
+    "enterLeft": "animated fadeInLeft",
+    "enterRight": "animated fadeInRight",
+    "exitLeft": "animated fadeOutLeft",
+    "exitRight": "animated fadeOutRight",
+    "intro": "",
+  },
+}
+`;
+
 exports[`Step Wizard Component with 3 basic components 1`] = `
 <div
   className="step-wizard"
@@ -272,6 +312,84 @@ Object {
   "classes": Object {
     "0": "",
     "1": "hide",
+    "2": "hide",
+  },
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "transitions": Object {
+    "enterLeft": "animated fadeInLeft",
+    "enterRight": "animated fadeInRight",
+    "exitLeft": "animated fadeOutLeft",
+    "exitRight": "animated fadeOutRight",
+    "intro": "",
+  },
+}
+`;
+
+exports[`Step Wizard Functions firstStep 1`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {
+    "0": "",
+    "1": "hide",
+    "2": "hide",
+  },
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "transitions": Object {
+    "enterLeft": "animated fadeInLeft",
+    "enterRight": "animated fadeInRight",
+    "exitLeft": "animated fadeOutLeft",
+    "exitRight": "animated fadeOutRight",
+    "intro": "",
+  },
+}
+`;
+
+exports[`Step Wizard Functions lastStep 1`] = `
+Object {
+  "activeStep": 2,
+  "classes": Object {
+    "0": "hide animated fadeOutLeft",
+    "1": "hide",
+    "2": "animated fadeInRight",
+  },
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "transitions": Object {
+    "enterLeft": "animated fadeInLeft",
+    "enterRight": "animated fadeInRight",
+    "exitLeft": "animated fadeOutLeft",
+    "exitRight": "animated fadeOutRight",
+    "intro": "",
+  },
+}
+`;
+
+exports[`Step Wizard Functions nextStep 1`] = `
+Object {
+  "activeStep": 1,
+  "classes": Object {
+    "0": "hide animated fadeOutLeft",
+    "1": "animated fadeInRight",
     "2": "hide",
   },
   "hashKeys": Object {
