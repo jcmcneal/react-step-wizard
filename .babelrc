@@ -1,5 +1,8 @@
 {
-    "presets": [ "env", "react" ],
+    "presets": [
+        "@babel/env",
+        "@babel/react"
+    ],
     "env": {
         "production": {
             "plugins": [
@@ -10,5 +13,5 @@
             ]
         }
     },
-    "plugins": ["transform-class-properties"]
+    "plugins": ["@babel/plugin-proposal-class-properties"]
 }
