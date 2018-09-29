@@ -93,6 +93,16 @@ describe('Step Wizard Component', () => {
         ));
     });
 
+    it('nav', () => {
+        testComponent((
+            <StepWizard nav={<div>Nav</div>}>
+                <Step1 />
+                <Step2 />
+                <Step3 />
+            </StepWizard>
+        ));
+    });
+
     it('garbage props', () => {
         console.error.mockClear();
 
