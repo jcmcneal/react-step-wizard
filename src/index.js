@@ -147,7 +147,6 @@ export default class StepWizard extends Component {
         };
 
         const { classes } = this.state;
-
         const childrenWithProps = React.Children.map(this.props.children, (child, i) => {
             props.isActive = (i === this.state.activeStep);
             props.transitions = classes[i];
@@ -162,7 +161,8 @@ export default class StepWizard extends Component {
 
         return (
             <div className={styles['step-wizard']}>
-                { childrenWithProps }
+                {this.props.nav && React.cloneElement(this.props.nav, props)}
+                {childrenWithProps}
             </div>
         );
     }
@@ -173,6 +173,7 @@ StepWizard.propTypes = {
     initialStep: PropTypes.number,
     isHashEnabled: PropTypes.bool,
     isLazyMount: PropTypes.bool,
+    nav: PropTypes.node,
     onStepChange: PropTypes.func,
     transitions: PropTypes.object,
 };
@@ -182,6 +183,7 @@ StepWizard.defaultProps = {
     initialStep: 1,
     isHashEnabled: false,
     isLazyMount: false,
+    nav: null,
     onStepChange: () => {},
     transitions: undefined,
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StepWizard from 'react-step-wizard';
 
+import Nav from './nav';
 import styles from './wizard.less';
 /* eslint react/prop-types: 0 */
 
@@ -24,7 +25,7 @@ export default class Wizard extends Component {
     }
 
     onStepChange = (stats) => {
-        console.log({ stats });
+        // console.log({ stats });
     }
 
     render() {
@@ -35,7 +36,11 @@ export default class Wizard extends Component {
                 <div className='jumbotron'>
                     <div className='row'>
                         <div className='col-12 col-sm-6 offset-sm-3'>
-                            <StepWizard onStepChange={this.onStepChange}>
+                            <StepWizard
+                                onStepChange={this.onStepChange}
+                                isHashEnabled
+                                nav={<Nav />}
+                            >
                                 <First hashKey={'FirstStep'} update={this.updateForm} />
                                 <Second form={this.state.form} />
                                 <Progress />
