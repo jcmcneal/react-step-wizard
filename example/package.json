@@ -13,7 +13,7 @@
     "bootstrap": "^4.1.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-step-wizard": "^4.3.1"
+    "react-step-wizard": "^4.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
