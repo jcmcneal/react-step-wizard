@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [4.4.0]
+• Added navigation feature! 🎉
+
+> Dev Changes
+• Added Jest for unit/snapshot testing
+• Upgraded to Babel 7
+
 ### [4.3.1]
 • Updated component to change step `onhashchange` when using browser back/forward buttons - (applicable only when `isHashEnabled` is `true`)
 

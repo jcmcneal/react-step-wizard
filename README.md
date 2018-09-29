@@ -58,6 +58,7 @@ hashKey | `string` |`step{n}`| Prop on child component to use when updating URL 
 initialStep | `integer` | 1
 isHashEnabled | `bool` | false | Persists the current step in the URL (hash)
 isLazyMount | `boolean` | false | Only mounts the child component when `isActive` is true
+nav | `node` || Create a custom navigation component to include in the wizard
 onStepChange | `function` || Callback for step change
 transitions | `object`  || CSS classes for transitioning between steps
 
@@ -73,6 +74,17 @@ nextStep | `function`
 previousStep | `function`
 goToStep | `function` | `integer` : `goToStep(3)`
 ---
+### Navigation
+If you wish to include a navigation in your wizard you have the flexibility to create one however you want. All the props available to the steps will also be provided to your nav component.
+
+**Position**: By default the nav will be added to the top. If you want it on the bottom I suggest adding a class to the `StepWizard` component with `flex-direction: column-reverse`. That's just one solution.
+
+Be sure to pass your component in JSX syntax like this:
+```jsx
+import CoolNav from './CoolNav';
+
+<StepWizard nav={<CoolNav />}>...</StepWizard>
+```
 
 ### Transitions
 The default transitions are using CSS taken from [animate.css](https://daneden.github.io/animate.css/). You can override the transitions by passing in custom CSS classes to the `transitions` prop in `<StepWizard>`.
