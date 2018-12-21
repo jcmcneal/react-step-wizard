@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import StepWizard from '../../dist/react-step-wizard.min';
 
 import Nav from './nav';
+import Plugs from './Plugs';
+
 import styles from './wizard.less';
 /* eslint react/prop-types: 0 */
 
@@ -178,11 +180,7 @@ class Last extends Component {
                 <div className={'text-center'}>
                     <h3>This is the last step in this example!</h3>
                     <hr />
-                    <h4>Do you love it? Star it! 🤩</h4>
-                    <iframe
-                        src="https://ghbtns.com/github-btn.html?user=jcmcneal&repo=react-step-wizard&type=star&count=true&size=large"
-                        frameBorder="0" scrolling="0" width="160px" height="30px"
-                    />
+                    <Plugs />
                 </div>
                 <Stats {...this.props} nextStep={this.submit.bind(this)} />
             </div>
