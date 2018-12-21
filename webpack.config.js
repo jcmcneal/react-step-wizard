@@ -1,28 +1,45 @@
+// "dev": "webpack --watch --mode=development",
+// "build": "export NODE_ENV=production; webpack --progress --optimize-minimize --mode=production",
+const path = require('path');
+const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const args = require('minimist')(process.argv);
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
+const app = require('./package.json');
+
+const isProd = process.env.NODE_ENV === 'production';
 
 const config = {
     entry: './src/index.js',
     output: {
-        path: `${__dirname}/dist`,
-        filename: 'react-step-wizard.min.js',
+        path: path.resolve('dist'),
+        filename: path.basename(app.main),
         libraryTarget: 'umd',
-        publicPath: '/dist/',
         umdNamedDefine: true,
+        globalObject: 'this',
     },
     module: {
         rules: [
             {
+                enforce: 'pre',
                 test: /\.js$/,
-                exclude: ['node_modules'],
+                exclude: /node_modules/,
+                include: path.resolve('src/index.js'),
+                loader: 'eslint-loader',
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
                 loader: 'babel-loader',
             },
             {
+                /** Globals */
                 test: /(\.css)$/,
                 use: [{
-                    loader: 'style-loader',
-                    options: {
-                        hmr: false,
-                    },
+                    // https://www.npmjs.com/package/iso-morphic-style-loader
+                    loader: 'iso-morphic-style-loader',
                 }, {
                     loader: 'css-loader',
                     options: {
@@ -33,36 +50,69 @@ const config = {
                     },
                 }],
             },
+            {
+                test: /(\.less)$/,
+                use: [
+                    {
+                        // https://www.npmjs.com/package/iso-morphic-style-loader
+                        loader: 'iso-morphic-style-loader',
+                        options: {
+                            singleton: true,
+                        },
+                    },
+                    'css-loader?modules&importLoaders=1&localIdentName=[local]_[hash:base64:5]',
+                    'less-loader',
+                ],
+            },
         ],
     },
-    externals: {
-        // Don't bundle react
-        react: {
-            commonjs: 'react',
-            commonjs2: 'react',
-            amd: 'React',
-            root: 'React',
-        },
-    },
+    /** Don't bundle common dependencies */
+    externals: [
+        'prop-types',
+        'react-dom',
+        'react',
+    ],
     node: {
         Buffer: false,
     },
-    plugins: [
-        new UglifyJsPlugin({
-            uglifyOptions: {
-                mangle: true,
-                compress: {
-                    warnings: false,
-                    pure_getters: true,
-                    unsafe: true,
-                    unsafe_comps: true,
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                uglifyOptions: {
+                    cache: true,
+                    parallel: true,
+                    sourceMap: true,
+                    uglifyOptions: {
+                        output: {
+                            comments: false,
+                        },
+                    },
                 },
-                output: {
-                    comments: false,
-                },
+            }),
+            new OptimizeCSSAssetsPlugin({}),
+        ],
+    },
+    plugins: [],
+    stats: {
+        builtAt: false,
+        hash: false,
+        modules: false,
+        version: false,
+        warnings: false,
+    },
+};
+
+if (isProd) {
+    config.plugins.push(
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production'),
             },
         }),
-    ],
-};
+    );
+}
+
+// Analyze bundle with --analyze flag
+if (args.analyze) config.plugins.push(new BundleAnalyzerPlugin());
 
 module.exports = config;
