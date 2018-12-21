@@ -9,12 +9,15 @@ _config.yml
 .gitignore
 .nvmrc
 .vscode/
+app/
 CHANGELOG.md
 example.gif
 example/
 index.html
 jest.config.json
 react-step-wizard-*.tgz
+rollup.config.js
+scripts/
 src/
 webpack.config.js
 yarn.lock
