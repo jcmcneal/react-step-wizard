@@ -14,7 +14,7 @@ const Plugs = () => (
         <br />
 
         <div className={'alert alert-primary'}>
-            <p>More From Me...</p>
+            <p>More Cool Libraries 😎</p>
             • <Link href='https://github.com/relax-js/relax'>Relax - A Redux Alternative</Link> - <small>No more action types, switch statements, middleware, and especially no reducers!</small>
         </div>
     </Fragment>
