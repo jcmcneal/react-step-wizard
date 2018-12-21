@@ -7,10 +7,16 @@
         "airbnb-base",
         "plugin:react/recommended"
     ],
+    "settings": {
+        "react": {
+          "version": "16.0"
+        }
+    },
     "parser": "babel-eslint",
     "plugins": ["babel"],
     "rules": {
         "indent": [ "error", 4 ],
+        "no-console": ["error", { "allow": ["error"] }],
         "no-continue": 0,
         "operator-linebreak": 0,
         "react/no-unescaped-entities": 0,
