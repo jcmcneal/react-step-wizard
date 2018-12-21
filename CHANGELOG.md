@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [5.0.0]
+• Switched build process to rollup - Now `2.36kb` gzipped!
+
 ### [4.4.0]
 • Added navigation feature! 🎉
 
