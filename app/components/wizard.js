@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StepWizard from 'react-step-wizard';
+import StepWizard from '../../dist/react-step-wizard.min';
 
 import Nav from './nav';
 import styles from './wizard.less';

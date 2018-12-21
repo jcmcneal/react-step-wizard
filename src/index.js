@@ -194,10 +194,12 @@ export const Step = ({ children, transitions }) => (
     </div>
 );
 
-Step.propTypes = {
-    children: PropTypes.node,
-    transitions: PropTypes.string,
-};
+if (process.env.NODE_ENV !== 'production') {
+    Step.propTypes = {
+        children: PropTypes.node,
+        transitions: PropTypes.string,
+    };
+}
 
 Step.defaultProps = {
     children: [],
