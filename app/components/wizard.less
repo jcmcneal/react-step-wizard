@@ -1,4 +1,5 @@
 @progress-height: 5px;
+@duration: 3s;
 
 @keyframes stripes {
     from { background-position: 1rem 0 }
@@ -33,8 +34,8 @@
     width: 100%;
 
     .loaded & {
-        animation: grow 5s ease,
+        animation: grow @duration ease,
             stripes 1s linear infinite,
-            rainbow 5s ease infinite;
+            rainbow @duration ease infinite;
     }
 }

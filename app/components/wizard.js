@@ -130,26 +130,42 @@ class Second extends Component {
     }
 }
 
-const Progress = (props) => {
-    let isActiveClass = '';
-
-    if (props.isActive) {
-        isActiveClass = styles.loaded;
-
-        setTimeout(() => {
-            props.nextStep();
-        }, 5000);
+class Progress extends Component {
+    state = {
+        isActiveClass: '',
+        timeout: null,
     }
 
-    return (
-        <div className={styles['progress-wrapper']}>
-            <p className='text-center'>Automated Progress...</p>
-            <div className={`${styles.progress} ${isActiveClass}`}>
-                <div className={`${styles['progress-bar']} progress-bar-striped`} />
+    componentDidUpdate() {
+        const { timeout } = this.state;
+
+        if (this.props.isActive && !timeout) {
+            this.setState({
+                isActiveClass: styles.loaded,
+                timeout: setTimeout(() => {
+                    this.props.nextStep();
+                }, 3000),
+            });
+        } else if (!this.props.isActive && timeout) {
+            clearTimeout(timeout);
+            this.setState({
+                isActiveClass: '',
+                timeout: null,
+            });
+        }
+    }
+
+    render() {
+        return (
+            <div className={styles['progress-wrapper']}>
+                <p className='text-center'>Automated Progress...</p>
+                <div className={`${styles.progress} ${this.state.isActiveClass}`}>
+                    <div className={`${styles['progress-bar']} progress-bar-striped`} />
+                </div>
             </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 class Last extends Component {
     submit = () => {
