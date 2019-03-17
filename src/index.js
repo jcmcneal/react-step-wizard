@@ -12,7 +12,7 @@ export default class StepWizard extends Component {
 
         // Hash change listener - for back/forward button
         if (props.isHashEnabled) {
-            window.onhashchange = this.onHashChange;
+            window.addEventListener('hashchange', this.onHashChange);
         }
     }
 
@@ -22,15 +22,7 @@ export default class StepWizard extends Component {
             activeStep: 0,
             classes: {},
             hashKeys: {},
-            // Transition Classes
-            transitions: this.props.transitions || {
-                enterRight: `${Animate.animated} ${Animate.fadeInRight}`,
-                enterLeft: `${Animate.animated} ${Animate.fadeInLeft}`,
-                exitRight: `${Animate.animated} ${Animate.fadeOutRight}`,
-                exitLeft: `${Animate.animated} ${Animate.fadeOutLeft}`,
-            },
         };
-        state.transitions.intro = '';
 
         // Set initial classes
         const hash = this.getHash();
@@ -38,9 +30,6 @@ export default class StepWizard extends Component {
             // Create hashKey map
             state.hashKeys[i] = child.props.hashKey || `step${i + 1}`;
             state.hashKeys[state.hashKeys[i]] = i;
-
-            // Hide steps by default
-            state.classes[i] = styles.hide;
         });
 
         // Set activeStep to initialStep if exists
@@ -56,13 +45,22 @@ export default class StepWizard extends Component {
         }
 
         // Give initial step an intro class
-        state.classes[state.activeStep] = state.transitions.intro;
+        if (this.props.transitions) {
+            state.classes[state.activeStep] = this.props.transitions.intro || '';
+        }
 
         return state;
     }
 
     // Get hash and remove #
     getHash = () => decodeURI(window.location.hash).replace(/^#/, '')
+
+    getTransitions = () => this.props.transitions || {
+        enterRight: `${Animate.animated} ${Animate.fadeInRight}`,
+        enterLeft: `${Animate.animated} ${Animate.fadeInLeft}`,
+        exitRight: `${Animate.animated} ${Animate.fadeOutRight}`,
+        exitLeft: `${Animate.animated} ${Animate.fadeOutLeft}`,
+    }
 
     onHashChange = () => {
         const next = this.state.hashKeys[this.getHash()];
@@ -82,15 +80,16 @@ export default class StepWizard extends Component {
 
         // console.log(change, active, next);
 
-        const { classes, transitions } = this.state;
+        const { classes } = this.state;
+        const transitions = this.getTransitions();
 
         if (active < next) {
             // slide left
-            classes[active] = `${styles.hide} ${transitions.exitLeft}`;
+            classes[active] = transitions.exitLeft;
             classes[next] = transitions.enterRight;
         } else {
             // slide right
-            classes[active] = `${styles.hide} ${transitions.exitRight}`;
+            classes[active] = transitions.exitRight;
             classes[next] = transitions.enterLeft;
         }
 
@@ -162,7 +161,9 @@ export default class StepWizard extends Component {
         return (
             <div className={styles['step-wizard']}>
                 {this.props.nav && React.cloneElement(this.props.nav, props)}
-                {childrenWithProps}
+                <div className={styles['step-wrapper']}>
+                    {childrenWithProps}
+                </div>
             </div>
         );
     }
@@ -188,8 +189,8 @@ StepWizard.defaultProps = {
     transitions: undefined,
 };
 
-export const Step = ({ children, transitions }) => (
-    <div className={`${styles.step} ${transitions}`}>
+export const Step = ({ children, isActive, transitions }) => (
+    <div className={`${styles.step} ${transitions} ${isActive ? styles.active : ''}`.trim()}>
         { children }
     </div>
 );
@@ -197,11 +198,13 @@ export const Step = ({ children, transitions }) => (
 if (process.env.NODE_ENV !== 'production') {
     Step.propTypes = {
         children: PropTypes.node,
+        isActive: PropTypes.bool,
         transitions: PropTypes.string,
     };
 }
 
 Step.defaultProps = {
     children: [],
+    isActive: false,
     transitions: '',
 };

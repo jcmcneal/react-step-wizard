@@ -38,7 +38,9 @@ export default {
             exclude: 'node_modules/**',
         }),
         postcss({
-            modules: true,
+            modules: {
+                generateScopedName: 'rsw_[hash:base64:2]',
+            },
         }),
         isProd && uglify(),
         filesize(),

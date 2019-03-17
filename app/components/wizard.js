@@ -5,6 +5,7 @@ import Nav from './nav';
 import Plugs from './Plugs';
 
 import styles from './wizard.less';
+import transitions from './transitions.css';
 /* eslint react/prop-types: 0 */
 
 /**
@@ -16,6 +17,13 @@ export default class Wizard extends Component {
 
         this.state = {
             form: {},
+            transitions: {
+                enterRight: `${transitions.animated} ${transitions.enterRight}`,
+                enterLeft: `${transitions.animated} ${transitions.enterLeft}`,
+                exitRight: `${transitions.animated} ${transitions.exitRight}`,
+                exitLeft: `${transitions.animated} ${transitions.exitLeft}`,
+                intro: `${transitions.animated} ${transitions.intro}`,
+            },
         };
     }
 
@@ -35,12 +43,13 @@ export default class Wizard extends Component {
             <div className='container'>
                 <h3>React Step Wizard</h3>
 
-                <div className='jumbotron'>
+                <div className={'jumbotron'}>
                     <div className='row'>
                         <div className='col-12 col-sm-6 offset-sm-3'>
                             <StepWizard
                                 onStepChange={this.onStepChange}
                                 isHashEnabled
+                                transitions={this.state.transitions} // comment out this line to use default transitions
                                 nav={<Nav />}
                             >
                                 <First hashKey={'FirstStep'} update={this.updateForm} />
@@ -68,13 +77,14 @@ const Stats = ({
     nextStep,
     previousStep,
     totalSteps,
+    step,
 }) => (
     <div>
         <hr />
-        { currentStep > 1 &&
+        { step > 1 &&
             <button className='btn btn-default btn-block' onClick={previousStep}>Go Back</button>
         }
-        { currentStep < totalSteps ?
+        { step < totalSteps ?
             <button className='btn btn-primary btn-block' onClick={nextStep}>Continue</button>
             :
             <button className='btn btn-success btn-block' onClick={nextStep}>Finish</button>
@@ -99,8 +109,6 @@ class First extends Component {
     }
 
     render() {
-        if (!this.props.isActive) return null;
-
         return (
             <div>
                 <h3 className='text-center'>Welcome! Have a look around!</h3>
@@ -108,7 +116,7 @@ class First extends Component {
                 <label>First Name</label>
                 <input type='text' className='form-control' name='firstname' placeholder='First Name'
                     onChange={this.update} />
-                <Stats {...this.props} />
+                <Stats step={1} {...this.props} />
             </div>
         );
     }
@@ -126,7 +134,7 @@ class Second extends Component {
             <div>
                 { this.props.form.firstname && <h3>Hey {this.props.form.firstname}! 👋</h3> }
                 I've added validation to the previous button.
-                <Stats {...this.props} previousStep={this.validate} />
+                <Stats step={2} {...this.props} previousStep={this.validate} />
             </div>
         );
     }
@@ -182,7 +190,7 @@ class Last extends Component {
                     <hr />
                     <Plugs />
                 </div>
-                <Stats {...this.props} nextStep={this.submit.bind(this)} />
+                <Stats step={4} {...this.props} nextStep={this.submit} />
             </div>
         );
     }
