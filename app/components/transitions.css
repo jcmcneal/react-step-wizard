@@ -1,0 +1,88 @@
+.animated {
+  animation-duration: .8192s;
+  animation-fill-mode: backwards;
+  transform-style: preserve-3d;
+}
+
+/** intro */
+@keyframes intro {
+  from {
+    opacity: 0;
+    transform: perspective(500px) translate3d(0, 0, -50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.intro {
+  animation: intro 1s ease-out;
+}
+
+/** enterRight */
+@keyframes enterRight {
+  from {
+    opacity: 0;
+    transform: perspective(500px) translate3d(20%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.enterRight {
+  animation-name: enterRight;
+}
+
+/** enterLeft */
+@keyframes enterLeft {
+  from {
+    opacity: 0;
+    transform: perspective(500px) translate3d(-20%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.enterLeft {
+  animation-name: enterLeft;
+}
+
+/** exitRight */
+@keyframes exitRight {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: perspective(500px) translate3d(100%, 0, -100px);
+  }
+}
+
+.exitRight {
+  animation-name: exitRight;
+}
+
+/** exitLeft */
+@keyframes exitLeft {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: perspective(500px) translate3d(-100%, 0, -100px);
+  }
+}
+
+.exitLeft {
+  animation-name: exitLeft;
+}
