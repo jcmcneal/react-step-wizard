@@ -1,18 +1,29 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import Animate from './animate.custom.css';
 import styles from './styles.css';
 
-export default class StepWizard extends Component {
-    constructor(props) {
-        super(props);
+export default class StepWizard extends PureComponent {
+    state = {
+        activeStep: 0,
+        classes: {},
+        hashKeys: {},
+    }
 
-        this.state = this.initialState();
+    componentDidMount() {
+        this.setState({ ...this.initialState() });
 
         // Hash change listener - for back/forward button
-        if (props.isHashEnabled) {
+        if (this.props.isHashEnabled) {
             window.addEventListener('hashchange', this.onHashChange);
+        }
+    }
+
+    componentWillUnmount() {
+        // Remove listener
+        if (this.props.isHashEnabled) {
+            window.removeEventListener('hashchange', this.onHashChange);
         }
     }
 
