@@ -159,7 +159,7 @@ export default class StepWizard extends Component {
         });
 
         return (
-            <div className={styles['step-wizard']}>
+            <div>
                 {this.props.nav && React.cloneElement(this.props.nav, props)}
                 <div className={styles['step-wrapper']}>
                     {childrenWithProps}
