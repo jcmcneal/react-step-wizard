@@ -45,7 +45,7 @@ export default class Wizard extends Component {
 
                 <div className={'jumbotron'}>
                     <div className='row'>
-                        <div className='col-12 col-sm-6 offset-sm-3'>
+                        <div className={`col-12 col-sm-6 offset-sm-3 ${styles['rsw-wrapper']}`}>
                             <StepWizard
                                 onStepChange={this.onStepChange}
                                 isHashEnabled
