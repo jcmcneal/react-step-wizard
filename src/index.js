@@ -26,15 +26,16 @@ export default class StepWizard extends Component {
 
         // Set initial classes
         const hash = this.getHash();
-        this.props.children.forEach((child, i) => {
+        const children = React.Children.toArray(this.props.children);
+        children.forEach((child, i) => {
             // Create hashKey map
-            state.hashKeys[i] = child.props.hashKey || `step${i + 1}`;
+            state.hashKeys[i] = (child.props && child.props.hashKey) || `step${i + 1}`;
             state.hashKeys[state.hashKeys[i]] = i;
         });
 
         // Set activeStep to initialStep if exists
         const initialStep = this.props.initialStep - 1;
-        if (initialStep && this.props.children[initialStep]) {
+        if (initialStep && children[initialStep]) {
             state.activeStep = initialStep;
         }
 
@@ -132,6 +133,9 @@ export default class StepWizard extends Component {
         window.location.hash = this.state.hashKeys[activeStep];
     }
 
+    // Allows for using HTML elements as a step
+    isReactComponent = type => typeof type === 'function'
+
     /** Render */
     render() {
         const props = {
@@ -152,7 +156,13 @@ export default class StepWizard extends Component {
 
             // Not Lazy Mount || isLazyMount && isActive
             if (!this.props.isLazyMount || (this.props.isLazyMount && props.isActive)) {
-                return <Step {...props}>{ React.cloneElement(child, props) }</Step>;
+                return (
+                    <Step {...props}>{
+                        this.isReactComponent(child.type)
+                            ? React.cloneElement(child, props)
+                            : child
+                    }</Step>
+                );
             }
 
             return null;

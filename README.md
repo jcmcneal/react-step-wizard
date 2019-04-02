@@ -6,7 +6,7 @@ A flexible multistep wizard built for React
 ![What You Can Build](https://raw.githubusercontent.com/jcmcneal/react-step-wizard/master/example.gif)
 
 ### Try It Out!
-<a href='https://jcmcneal.github.io/react-step-wizard/app/'>Click here</a> to see a live example!
+<a href='https://jcmcneal.github.io/react-step-wizard/app/'>Click here</a> to see a live example! See example source code: [</>](https://github.com/jcmcneal/react-step-wizard/tree/master/app)
 
 ##### Showcasing
 If you've made something you're proud of with `react-step-wizard` and want to show it off to the world, send me a message with a link to your project and I'll add it to the README!
