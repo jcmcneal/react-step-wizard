@@ -5,15 +5,13 @@ import Animate from './animate.custom.css';
 import styles from './styles.css';
 
 export default class StepWizard extends PureComponent {
-    state = {
-        activeStep: 0,
-        classes: {},
-        hashKeys: {},
+    constructor(props) {
+        super(props);
+
+        this.state = this.initialState();
     }
 
     componentDidMount() {
-        this.setState({ ...this.initialState() });
-
         // Hash change listener - for back/forward button
         if (this.props.isHashEnabled) {
             window.addEventListener('hashchange', this.onHashChange);
