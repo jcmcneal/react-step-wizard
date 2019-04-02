@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [5.2.0]
+• Fixed pointer events on inactive steps
+• Allow for non-react components as steps (remember they won't have access to props)
+
+> Dev Changes
+• Added more unit tests (86% coverage)
+
 ### [5.1.0]
 • Fixed exit transitions
 
