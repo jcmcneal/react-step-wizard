@@ -7,3 +7,4 @@ yarn-error.log
 dist/
 !app/dist/
 react-step-wizard-*.tgz
+coverage/
