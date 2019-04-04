@@ -34,7 +34,8 @@ export default class StepWizard extends PureComponent {
         };
 
         // Set initial classes
-        const hash = this.getHash();
+        // Get hash only in client side
+        const hash = typeof window === 'object' ? this.getHash() : '';
         this.props.children.forEach((child, i) => {
             // Create hashKey map
             state.hashKeys[i] = child.props.hashKey || `step${i + 1}`;
