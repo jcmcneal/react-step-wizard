@@ -11,6 +11,7 @@ _config.yml
 .vscode/
 app/
 CHANGELOG.md
+coverage/
 example.gif
 example/
 index.html

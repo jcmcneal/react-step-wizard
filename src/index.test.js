@@ -8,6 +8,10 @@ import StepWizard from './index';
 // Enzyme.configure({ adapter: new Adapter() });
 
 /** Helper Functions */
+const Step1 = () => <div>Step 1</div>;
+const Step2 = () => <div>Step 2</div>;
+const Step3 = () => <div>Step 3</div>;
+
 const render = jsx => Renderer.create(jsx);
 const getInstance = (component) => {
     const wrapper = render(component);
@@ -41,6 +45,14 @@ console.error = jest.fn();
 describe('Step Wizard Component', () => {
     it('empty component', () => {
         testComponent(<StepWizard />);
+    });
+
+    it('html element steps', () => {
+        testComponent((
+            <StepWizard>
+                <Step1 />>
+            </StepWizard>
+        ));
     });
 
     it('with 3 basic components', () => {
@@ -145,17 +157,52 @@ describe('Step Wizard Functions', () => {
         takeSnapshot(wrapper.state);
         expect(wrapper.state.activeStep).toEqual(1);
     });
+    it('previousStep', () => {
+        const wrapper = basicComponent();
+        wrapper.lastStep();
+        wrapper.previousStep();
+        takeSnapshot(wrapper.state);
+        expect(wrapper.state.activeStep).toEqual(1);
+    });
+    it('goToStep', () => {
+        const wrapper = basicComponent();
+        wrapper.goToStep(3);
+        takeSnapshot(wrapper.state);
+        expect(wrapper.state.activeStep).toEqual(2);
+    });
+    it('isInvalidStep', () => {
+        const wrapper = basicComponent();
+        expect(wrapper.isInvalidStep(-1)).toEqual(true);
+        expect(wrapper.isInvalidStep(0)).toEqual(false);
+        expect(wrapper.isInvalidStep(1)).toEqual(false);
+        expect(wrapper.isInvalidStep(2)).toEqual(false);
+        expect(wrapper.isInvalidStep(3)).toEqual(true);
+        expect(wrapper.isInvalidStep(50)).toEqual(true);
+    });
+    it('onStepChange', () => {
+        const onStepChange = jest.fn();
+        const wrapper = getInstance((
+            <StepWizard onStepChange={onStepChange}>
+                <Step1 />
+                <Step2 />
+                <Step3 />
+            </StepWizard>
+        ));
+        wrapper.lastStep();
+        wrapper.previousStep();
+        wrapper.firstStep();
+        wrapper.nextStep();
+        wrapper.goToStep(1);
+        expect(onStepChange).toHaveBeenCalledTimes(5);
+
+        wrapper.firstStep(); // no change
+        expect(onStepChange).toHaveBeenCalledTimes(5);
+        takeSnapshot(wrapper.state);
+    });
     // getHash
-    // goToStep
     // initialState
     // isInvalidStep
     // onHashChange
-    // onStepChange
-    // previousStep
     // setActiveStep
     // updateHash
 });
-
-const Step1 = () => <div>Step 1</div>;
-const Step2 = () => <div>Step 2</div>;
-const Step3 = () => <div>Step 3</div>;

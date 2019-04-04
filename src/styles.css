@@ -1,14 +1,11 @@
 /** Step Wizard */
-.step-wizard {
-    min-height: 400px;
-}
-
 .step-wrapper {
     position: relative;
 }
 
 .step {
     opacity: 0;
+    pointer-events: none;
     position: absolute;
     top: 0;
     width: 100%;
@@ -17,6 +14,7 @@
 
 .active {
     opacity: 1;
+    pointer-events: inherit;
     position: relative;
     z-index: 1;
 }

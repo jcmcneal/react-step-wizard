@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Step Wizard Component empty component 1`] = `
-<div
-  className="step-wizard"
->
+<div>
   <div
     className="step-wrapper"
   />
@@ -19,9 +17,7 @@ Object {
 `;
 
 exports[`Step Wizard Component garbage props 1`] = `
-<div
-  className="step-wizard"
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -64,10 +60,42 @@ Object {
 }
 `;
 
+exports[`Step Wizard Component html element steps 1`] = `
+<div>
+  <div
+    className="step-wrapper"
+  >
+    <div
+      className="step  active"
+    >
+      <div>
+        Step 1
+      </div>
+    </div>
+    <div
+      className="step"
+    >
+      &gt;
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component html element steps 2`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {},
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "step1": 0,
+    "step2": 1,
+  },
+}
+`;
+
 exports[`Step Wizard Component initialStep set to 2 1`] = `
-<div
-  className="step-wizard"
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -112,9 +140,7 @@ Object {
 `;
 
 exports[`Step Wizard Component isHashEnabled - false 1`] = `
-<div
-  className="step-wizard"
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -159,9 +185,7 @@ Object {
 `;
 
 exports[`Step Wizard Component isHashEnabled - true 1`] = `
-<div
-  className="step-wizard"
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -206,9 +230,7 @@ Object {
 `;
 
 exports[`Step Wizard Component isLazyMount - true 1`] = `
-<div
-  className="step-wizard"
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -239,9 +261,7 @@ Object {
 `;
 
 exports[`Step Wizard Component nav 1`] = `
-<div
-  className="step-wizard"
->
+<div>
   <div
     currentStep={1}
     firstStep={[Function]}
@@ -298,9 +318,7 @@ Object {
 `;
 
 exports[`Step Wizard Component with 3 basic components 1`] = `
-<div
-  className="step-wizard"
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -359,6 +377,24 @@ Object {
 }
 `;
 
+exports[`Step Wizard Functions goToStep 1`] = `
+Object {
+  "activeStep": 2,
+  "classes": Object {
+    "0": "animated fadeOutLeft",
+    "2": "animated fadeInRight",
+  },
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+}
+`;
+
 exports[`Step Wizard Functions lastStep 1`] = `
 Object {
   "activeStep": 2,
@@ -383,6 +419,44 @@ Object {
   "classes": Object {
     "0": "animated fadeOutLeft",
     "1": "animated fadeInRight",
+  },
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+}
+`;
+
+exports[`Step Wizard Functions onStepChange 1`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {
+    "0": "animated fadeInLeft",
+    "1": "animated fadeOutRight",
+    "2": "animated fadeOutRight",
+  },
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+}
+`;
+
+exports[`Step Wizard Functions previousStep 1`] = `
+Object {
+  "activeStep": 1,
+  "classes": Object {
+    "0": "animated fadeOutLeft",
+    "1": "animated fadeInLeft",
+    "2": "animated fadeOutRight",
   },
   "hashKeys": Object {
     "0": "step1",
