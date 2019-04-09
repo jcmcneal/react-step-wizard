@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [5.2.2]
+• Fix for SSR - Thanks [mathvaleriano](https://github.com/mathvaleriano)!
+• Added CONTRIBUTING.md
+
 ### [5.2.0]
 • Fixed pointer events on inactive steps
 • Allow for non-react components as steps (remember they won't have access to props)
