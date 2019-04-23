@@ -144,7 +144,7 @@ export default class StepWizard extends PureComponent {
     }
 
     // Allows for using HTML elements as a step
-    isReactComponent = type => typeof type === 'function'
+    isReactComponent = child => typeof child === 'function' || typeof child.type === 'function'
 
     /** Render */
     render() {
