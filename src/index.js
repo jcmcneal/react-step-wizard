@@ -16,6 +16,9 @@ export default class StepWizard extends PureComponent {
         if (this.props.isHashEnabled) {
             window.addEventListener('hashchange', this.onHashChange);
         }
+
+        // Provide instance to parent
+        this.props.instance(this);
     }
 
     componentWillUnmount() {
@@ -194,6 +197,7 @@ export default class StepWizard extends PureComponent {
 StepWizard.propTypes = {
     children: PropTypes.node,
     initialStep: PropTypes.number,
+    instance: PropTypes.func,
     isHashEnabled: PropTypes.bool,
     isLazyMount: PropTypes.bool,
     nav: PropTypes.node,
@@ -204,6 +208,7 @@ StepWizard.propTypes = {
 StepWizard.defaultProps = {
     children: [],
     initialStep: 1,
+    instance: () => {},
     isHashEnabled: false,
     isLazyMount: false,
     nav: null,

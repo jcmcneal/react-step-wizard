@@ -139,6 +139,51 @@ Object {
 }
 `;
 
+exports[`Step Wizard Component instance 1`] = `
+<div>
+  <div
+    className="step-wrapper"
+  >
+    <div
+      className="step  active"
+    >
+      <div>
+        Step 1
+      </div>
+    </div>
+    <div
+      className="step"
+    >
+      <div>
+        Step 2
+      </div>
+    </div>
+    <div
+      className="step"
+    >
+      <div>
+        Step 3
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component instance 2`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {},
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+}
+`;
+
 exports[`Step Wizard Component isHashEnabled - false 1`] = `
 <div>
   <div
