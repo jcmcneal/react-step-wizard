@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [5.3.0]
+• Adds instance feature to control the step wizard from anywhere in your app!
+• Update to `isReactComponent` to support memo components
+
 ### [5.2.2]
 • Fix for SSR - Thanks [mathvaleriano](https://github.com/mathvaleriano)!
 • Added CONTRIBUTING.md
