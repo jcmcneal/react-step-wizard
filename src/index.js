@@ -144,7 +144,9 @@ export default class StepWizard extends PureComponent {
     }
 
     // Allows for using HTML elements as a step
-    isReactComponent = type => typeof type === 'function'
+    isReactComponent = ({ type }) => (
+        typeof type === 'function' || typeof type === 'object'
+    )
 
     /** Render */
     render() {
@@ -168,7 +170,7 @@ export default class StepWizard extends PureComponent {
             if (!this.props.isLazyMount || (this.props.isLazyMount && props.isActive)) {
                 return (
                     <Step {...props}>{
-                        this.isReactComponent(child.type)
+                        this.isReactComponent(child)
                             ? React.cloneElement(child, props)
                             : child
                     }</Step>
