@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import StepWizard from '../../dist/react-step-wizard.min';
 
 import Nav from './nav';
@@ -24,6 +24,7 @@ export default class Wizard extends Component {
                 exitLeft: `${transitions.animated} ${transitions.exitLeft}`,
                 intro: `${transitions.animated} ${transitions.intro}`,
             },
+            // demo: true, // uncomment to see more
         };
     }
 
@@ -34,15 +35,19 @@ export default class Wizard extends Component {
         this.setState({ form });
     }
 
+    // Do something on step change
     onStepChange = (stats) => {
-        // console.log({ stats });
+        // console.log(stats);
     }
 
+    setInstance = SW => this.setState({ SW })
+
     render() {
+        const { SW, demo } = this.state;
+
         return (
             <div className='container'>
                 <h3>React Step Wizard</h3>
-
                 <div className={'jumbotron'}>
                     <div className='row'>
                         <div className={`col-12 col-sm-6 offset-sm-3 ${styles['rsw-wrapper']}`}>
@@ -51,6 +56,7 @@ export default class Wizard extends Component {
                                 isHashEnabled
                                 transitions={this.state.transitions} // comment out this line to use default transitions
                                 nav={<Nav />}
+                                instance={this.setInstance}
                             >
                                 <First hashKey={'FirstStep'} update={this.updateForm} />
                                 <Second form={this.state.form} />
@@ -60,10 +66,21 @@ export default class Wizard extends Component {
                         </div>
                     </div>
                 </div>
+                { (demo && SW) && <InstanceDemo SW={SW} /> }
             </div>
         );
     }
 }
+
+/** Demo of using instance */
+const InstanceDemo = ({ SW }) => (
+    <Fragment>
+        <h4>Control from outside component</h4>
+        <button className={'btn btn-secondary'} onClick={SW.previousStep}>Previous Step</button>
+        &nbsp;
+        <button className={'btn btn-secondary'} onClick={SW.nextStep}>Next Step</button>
+    </Fragment>
+);
 
 /**
  * Stats Component - to illustrate the possible functions

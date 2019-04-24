@@ -115,6 +115,16 @@ describe('Step Wizard Component', () => {
         ));
     });
 
+    it('instance', () => {
+        testComponent((
+            <StepWizard instance={SW => SW}>
+                <Step1 />
+                <Step2 />
+                <Step3 />
+            </StepWizard>
+        ));
+    });
+
     it('garbage props', () => {
         console.error.mockClear();
 
