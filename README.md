@@ -56,6 +56,7 @@ Prop | Data Type | Default | Description
 --- | --- | --- | ---
 hashKey | `string` |`step{n}`| Prop on child component to use when updating URL hash. Corresponds with `isHashEnabled`.
 initialStep | `integer` | 1
+instance | `function` || Provides an instance of `StepWizard` to control from anywhere in your app
 isHashEnabled | `bool` | false | Persists the current step in the URL (hash)
 isLazyMount | `boolean` | false | Only mounts the child component when `isActive` is true
 nav | `node` || Create a custom navigation component to include in the wizard
