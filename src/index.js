@@ -184,7 +184,7 @@ export default class StepWizard extends PureComponent {
         });
 
         return (
-            <div>
+            <div className={this.props.className}>
                 {this.props.nav && React.cloneElement(this.props.nav, props)}
                 <div className={styles['step-wrapper']}>
                     {childrenWithProps}
@@ -196,6 +196,7 @@ export default class StepWizard extends PureComponent {
 
 StepWizard.propTypes = {
     children: PropTypes.node,
+    className: PropTypes.string,
     initialStep: PropTypes.number,
     instance: PropTypes.func,
     isHashEnabled: PropTypes.bool,
@@ -207,6 +208,7 @@ StepWizard.propTypes = {
 
 StepWizard.defaultProps = {
     children: [],
+    className: null,
     initialStep: 1,
     instance: () => {},
     isHashEnabled: false,
@@ -216,7 +218,11 @@ StepWizard.defaultProps = {
     transitions: undefined,
 };
 
-export const Step = ({ children, isActive, transitions }) => (
+export const Step = ({
+    children,
+    isActive,
+    transitions,
+}) => (
     <div className={`${styles.step} ${transitions} ${isActive ? styles.active : ''}`.trim()}>
         { children }
     </div>

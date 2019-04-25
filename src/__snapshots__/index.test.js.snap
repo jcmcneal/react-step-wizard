@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Step Wizard Component empty component 1`] = `
-<div>
+<div
+  className={null}
+>
   <div
     className="step-wrapper"
   />
@@ -17,7 +19,9 @@ Object {
 `;
 
 exports[`Step Wizard Component garbage props 1`] = `
-<div>
+<div
+  className={null}
+>
   <div
     className="step-wrapper"
   >
@@ -61,7 +65,9 @@ Object {
 `;
 
 exports[`Step Wizard Component html element steps 1`] = `
-<div>
+<div
+  className={null}
+>
   <div
     className="step-wrapper"
   >
@@ -95,7 +101,9 @@ Object {
 `;
 
 exports[`Step Wizard Component initialStep set to 2 1`] = `
-<div>
+<div
+  className={null}
+>
   <div
     className="step-wrapper"
   >
@@ -140,7 +148,9 @@ Object {
 `;
 
 exports[`Step Wizard Component instance 1`] = `
-<div>
+<div
+  className={null}
+>
   <div
     className="step-wrapper"
   >
@@ -185,7 +195,9 @@ Object {
 `;
 
 exports[`Step Wizard Component isHashEnabled - false 1`] = `
-<div>
+<div
+  className={null}
+>
   <div
     className="step-wrapper"
   >
@@ -230,7 +242,9 @@ Object {
 `;
 
 exports[`Step Wizard Component isHashEnabled - true 1`] = `
-<div>
+<div
+  className={null}
+>
   <div
     className="step-wrapper"
   >
@@ -275,7 +289,9 @@ Object {
 `;
 
 exports[`Step Wizard Component isLazyMount - true 1`] = `
-<div>
+<div
+  className={null}
+>
   <div
     className="step-wrapper"
   >
@@ -306,7 +322,9 @@ Object {
 `;
 
 exports[`Step Wizard Component nav 1`] = `
-<div>
+<div
+  className={null}
+>
   <div
     currentStep={1}
     firstStep={[Function]}
@@ -363,7 +381,9 @@ Object {
 `;
 
 exports[`Step Wizard Component with 3 basic components 1`] = `
-<div>
+<div
+  className={null}
+>
   <div
     className="step-wrapper"
   >
