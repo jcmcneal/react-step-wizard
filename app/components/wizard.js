@@ -17,6 +17,8 @@ export default class Wizard extends Component {
 
         this.state = {
             form: {},
+            conditional: false,
+            dynamicSteps: [],
             transitions: {
                 enterRight: `${transitions.animated} ${transitions.enterRight}`,
                 enterLeft: `${transitions.animated} ${transitions.enterLeft}`,
@@ -42,9 +44,23 @@ export default class Wizard extends Component {
 
     setInstance = SW => this.setState({ SW })
 
-    render() {
-        const { SW, demo } = this.state;
+    toggleOptional = () => {
+        const { conditional } = this.state;
+        this.setState({ conditional: !conditional });
+    }
 
+    addDynamicStep = (numberToAdd) => {
+        const { dynamicSteps } = this.state;
+        this.setState({
+            dynamicSteps: [
+                ...dynamicSteps,
+                ...Array(numberToAdd).keys(),
+            ]
+        });
+    }
+
+    render() {
+        const { SW, demo, conditional, dynamicSteps } = this.state;
         return (
             <div className='container'>
                 <h3>React Step Wizard</h3>
@@ -58,15 +74,41 @@ export default class Wizard extends Component {
                                 nav={<Nav />}
                                 instance={this.setInstance}
                             >
-                                <First hashKey={'FirstStep'} update={this.updateForm} />
-                                <Second form={this.state.form} />
+                                <First
+                                    hashKey={'FirstStep'}
+                                    update={this.updateForm}
+                                    toggleOptional={this.toggleOptional}
+                                    conditional={conditional}
+                                    addDynamicStep={this.addDynamicStep}
+                                />
+                                <Second
+                                    form={this.state.form}
+                                    toggleOptional={this.toggleOptional}
+                                    conditional={conditional}
+                                    addDynamicStep={this.addDynamicStep}
+                                />
+                                {conditional && (
+                                    <Optional
+                                        hashKey={'ConditionalStep'}
+                                        addDynamicStep={this.addDynamicStep}
+                                    />
+                                ) }
+                                { dynamicSteps.length > 0 && (
+                                    dynamicSteps.map((dynamicStep, id) => (
+                                        <Dynamic
+                                            key={id}
+                                            dynamicStepNumber={id + 1}
+                                            addDynamicStep={this.addDynamicStep}
+                                        />
+                                    ))
+                                ) }
                                 <Progress />
                                 <Last hashKey={'TheEnd!'} />
                             </StepWizard>
                         </div>
                     </div>
                 </div>
-                { (demo && SW) && <InstanceDemo SW={SW} /> }
+                { (demo && SW) && <InstanceDemo SW={SW} toggleOptional={this.toggleOptional} conditional={conditional} /> }
             </div>
         );
     }
@@ -95,6 +137,9 @@ const Stats = ({
     previousStep,
     totalSteps,
     step,
+    toggleOptional,
+    conditional,
+    addDynamicStep,
 }) => (
     <div>
         <hr />
@@ -114,6 +159,8 @@ const Stats = ({
             <button className='btn btn-block btn-default' onClick={firstStep}>First Step</button>
             <button className='btn btn-block btn-default' onClick={lastStep}>Last Step</button>
             <button className='btn btn-block btn-default' onClick={() => goToStep(2)}>Go to Step 2</button>
+            <button className='btn btn-block btn-default' onClick={toggleOptional}>{conditional ? 'Remove conditional step' : 'Add conditional step'}</button>
+            <button className='btn btn-block btn-default' onClick={() => addDynamicStep(3)}>Add 3 steps</button>
         </div>
     </div>
 );
@@ -157,11 +204,29 @@ class Second extends Component {
     }
 }
 
+const Optional = (props) => {
+    return (
+        <div>
+            Optional step
+            <Stats step={-1} {...props} />
+        </div>
+    );
+}
+
+const Dynamic = ({ dynamicStepNumber, ...restProps }) => {
+    return (
+        <div>
+            Dynamic step #{dynamicStepNumber}
+            <Stats step={-1} {...restProps} />
+        </div>
+    );
+};
+
 class Progress extends Component {
     state = {
         isActiveClass: '',
         timeout: null,
-    }
+    };
 
     componentDidUpdate() {
         const { timeout } = this.state;

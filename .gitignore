@@ -8,3 +8,5 @@ dist/
 !app/dist/
 react-step-wizard-*.tgz
 coverage/
+
+.idea

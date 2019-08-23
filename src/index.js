@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import compact from 'lodash/compact';
+import flatten from 'lodash/flatten';
 
 import Animate from './animate.custom.css';
 import styles from './styles.css';
@@ -7,7 +9,6 @@ import styles from './styles.css';
 export default class StepWizard extends PureComponent {
     constructor(props) {
         super(props);
-
         this.state = this.initialState();
     }
 
@@ -28,6 +29,10 @@ export default class StepWizard extends PureComponent {
         }
     }
 
+    flattenChildren = children => (
+        flatten(compact(children))
+    )
+
     /** Setup Steps */
     initialState = () => {
         const state = {
@@ -39,7 +44,7 @@ export default class StepWizard extends PureComponent {
         // Set initial classes
         // Get hash only in client side
         const hash = typeof window === 'object' ? this.getHash() : '';
-        const children = React.Children.toArray(this.props.children);
+        const children = React.Children.toArray(this.flattenChildren(this.props.children));
         children.forEach((child, i) => {
             // Create hashKey map
             state.hashKeys[i] = (child.props && child.props.hashKey) || `step${i + 1}`;
@@ -82,7 +87,7 @@ export default class StepWizard extends PureComponent {
         if (next !== undefined) this.setActiveStep(next);
     }
 
-    isInvalidStep = next => (next < 0 || next >= this.props.children.length)
+    isInvalidStep = next => (next < 0 || next >= this.flattenChildren(this.props.children).length)
 
     setActiveStep = (next) => {
         const active = this.state.activeStep;
@@ -131,7 +136,7 @@ export default class StepWizard extends PureComponent {
     firstStep = () => this.goToStep(1)
 
     /** Go to last step */
-    lastStep = () => this.goToStep(this.props.children.length)
+    lastStep = () => this.goToStep(this.flattenChildren(this.props.children).length)
 
     /** Next Step */
     nextStep = () => this.setActiveStep(this.state.activeStep + 1)
@@ -155,7 +160,7 @@ export default class StepWizard extends PureComponent {
     render() {
         const props = {
             currentStep: this.state.activeStep + 1,
-            totalSteps: this.props.children.length,
+            totalSteps: this.flattenChildren(this.props.children).length,
             /** Functions */
             nextStep: this.nextStep,
             previousStep: this.previousStep,
@@ -165,23 +170,30 @@ export default class StepWizard extends PureComponent {
         };
 
         const { classes } = this.state;
-        const childrenWithProps = React.Children.map(this.props.children, (child, i) => {
-            props.isActive = (i === this.state.activeStep);
-            props.transitions = classes[i];
+        const childrenWithProps = React.Children.map(
+            this.flattenChildren(this.props.children),
+            (child, i) => {
+                props.isActive = (i === this.state.activeStep);
+                props.transitions = classes[i];
 
-            // Not Lazy Mount || isLazyMount && isActive
-            if (!this.props.isLazyMount || (this.props.isLazyMount && props.isActive)) {
-                return (
-                    <Step {...props}>{
-                        this.isReactComponent(child)
-                            ? React.cloneElement(child, props)
-                            : child
-                    }</Step>
-                );
-            }
+                if (!child) {
+                    return null;
+                }
 
-            return null;
-        });
+                // Not Lazy Mount || isLazyMount && isActive
+                if (!this.props.isLazyMount || (this.props.isLazyMount && props.isActive)) {
+                    return (
+                        <Step {...props}>{
+                            this.isReactComponent(child)
+                                ? React.cloneElement(child, props)
+                                : child
+                        }</Step>
+                    );
+                }
+
+                return null;
+            },
+        );
 
         return (
             <div className={this.props.className}>
