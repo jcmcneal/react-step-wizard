@@ -163,20 +163,10 @@ export default class StepWizard extends PureComponent {
             firstStep: this.firstStep,
             lastStep: this.lastStep,
         };
-        /**
-         * from code by https://github.com/wallawe
-         * found on https://github.com/jcmcneal/react-step-wizard/issues/55
-         */
-        const childrenMinusNulls = [];
-
-        React.Children.forEach(this.props.children, (child) => {
-            if (child) {
-                childrenMinusNulls.push(child);
-            }
-        });
 
         const { classes } = this.state;
-        const childrenWithProps = React.Children.map(childrenMinusNulls, (child, i) => {
+        const childrenWithProps = React.Children.map(this.props.children, (child, i) => {
+            if (!child) return null;
             props.isActive = (i === this.state.activeStep);
             props.transitions = classes[i];
 
