@@ -5,7 +5,7 @@ import Nav from './nav';
 import Plugs from './Plugs';
 
 import styles from './wizard.less';
-import transitions from './transitions.css';
+import transitions from './transitions.less';
 /* eslint react/prop-types: 0 */
 
 /**

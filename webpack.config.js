@@ -2,7 +2,7 @@
 // "build": "export NODE_ENV=production; webpack --progress --optimize-minimize --mode=production",
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const args = require('minimist')(process.argv);
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -40,15 +40,7 @@ const config = {
                 use: [{
                     // https://www.npmjs.com/package/iso-morphic-style-loader
                     loader: 'iso-morphic-style-loader',
-                }, {
-                    loader: 'css-loader',
-                    options: {
-                        modules: true,
-                        importLoaders: 1,
-                        sourceMap: false,
-                        localIdentName: '[local]_[hash:base64:5]',
-                    },
-                }],
+                }, 'css-loader'],
             },
             {
                 test: /(\.less)$/,
@@ -60,7 +52,16 @@ const config = {
                             singleton: true,
                         },
                     },
-                    'css-loader?modules&importLoaders=1&localIdentName=[local]_[hash:base64:5]',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                localIdentName: "[local]_[hash:base64:5]",
+                            },
+                            importLoaders: 1,
+                            sourceMap: false,
+                        },
+                    },
                     'less-loader',
                 ],
             },
@@ -77,17 +78,13 @@ const config = {
     },
     optimization: {
         minimizer: [
-            new UglifyJsPlugin({
-                uglifyOptions: {
-                    cache: true,
-                    parallel: true,
-                    sourceMap: true,
-                    uglifyOptions: {
-                        output: {
-                            comments: false,
-                        },
-                    },
+            new TerserPlugin({
+                terserOptions: {
+                    output: {
+                        comments: false
+                    }
                 },
+                extractComments: false
             }),
             new OptimizeCSSAssetsPlugin({}),
         ],

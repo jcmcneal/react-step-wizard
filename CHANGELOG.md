@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [5.3.1]
+• Support conditional steps
+
 ### [5.3.0]
 • Adds instance feature to control the step wizard from anywhere in your app!
 • Update to `isReactComponent` to support memo components

@@ -15,6 +15,7 @@
     "parser": "babel-eslint",
     "plugins": ["babel"],
     "rules": {
+        "arrow-parens": 0,
         "indent": [ "error", 4 ],
         "no-console": ["error", { "allow": ["error"] }],
         "no-continue": 0,

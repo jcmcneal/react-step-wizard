@@ -167,6 +167,7 @@ export default class StepWizard extends PureComponent {
         const { classes } = this.state;
         const childrenWithProps = React.Children.map(this.props.children, (child, i) => {
             if (!child) return null;
+
             props.isActive = (i === this.state.activeStep);
             props.transitions = classes[i];
 
