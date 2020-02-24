@@ -126,6 +126,15 @@ export default class StepWizard extends PureComponent {
         // Update hash if prop set
         if (this.props.isHashEnabled) this.updateHash(this.state.activeStep);
     }
+    
+    /** Getters */
+    get currentStep = () => {
+        return this.state.activeStep + 1;
+    }
+    
+    get totalSteps = () => {
+        return this.props.children.filter(el => el).length;
+    }
 
     /** Go to first step */
     firstStep = () => this.goToStep(1)
@@ -154,8 +163,8 @@ export default class StepWizard extends PureComponent {
     /** Render */
     render() {
         const props = {
-            currentStep: this.state.activeStep + 1,
-            totalSteps: this.props.children.filter(el => el).length,
+            currentStep: this.currentStep,
+            totalSteps: this.totalSteps,
             /** Functions */
             nextStep: this.nextStep,
             previousStep: this.previousStep,
