@@ -126,13 +126,13 @@ export default class StepWizard extends PureComponent {
         // Update hash if prop set
         if (this.props.isHashEnabled) this.updateHash(this.state.activeStep);
     }
-    
+
     /** Getters */
-    get currentStep = () => {
+    get currentStep() {
         return this.state.activeStep + 1;
     }
-    
-    get totalSteps = () => {
+
+    get totalSteps() {
         return this.props.children.filter(el => el).length;
     }
 
