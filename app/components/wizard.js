@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import StepWizard from '../../dist/react-step-wizard.min';
 
 import Nav from './nav';
@@ -11,66 +11,68 @@ import transitions from './transitions.less';
 /**
  * A basic demonstration of how to use the step wizard
  */
-export default class Wizard extends Component {
-    constructor(props) {
-        super(props);
+const Wizard = () => {
+    const [state, updateState] = useState({
+        form: {},
+        transitions: {
+            enterRight: `${transitions.animated} ${transitions.enterRight}`,
+            enterLeft: `${transitions.animated} ${transitions.enterLeft}`,
+            exitRight: `${transitions.animated} ${transitions.exitRight}`,
+            exitLeft: `${transitions.animated} ${transitions.exitLeft}`,
+            intro: `${transitions.animated} ${transitions.intro}`,
+        },
+        // demo: true, // uncomment to see more
+    });
 
-        this.state = {
-            form: {},
-            transitions: {
-                enterRight: `${transitions.animated} ${transitions.enterRight}`,
-                enterLeft: `${transitions.animated} ${transitions.enterLeft}`,
-                exitRight: `${transitions.animated} ${transitions.exitRight}`,
-                exitLeft: `${transitions.animated} ${transitions.exitLeft}`,
-                intro: `${transitions.animated} ${transitions.intro}`,
-            },
-            // demo: true, // uncomment to see more
-        };
-    }
-
-    updateForm = (key, value) => {
-        const { form } = this.state;
+    const updateForm = (key, value) => {
+        const { form } = state;
 
         form[key] = value;
-        this.setState({ form });
-    }
+        updateState({
+            ...state,
+            form,
+        });
+    };
 
     // Do something on step change
-    onStepChange = (stats) => {
+    const onStepChange = (stats) => {
         // console.log(stats);
-    }
+    };
 
-    setInstance = SW => this.setState({ SW })
+    const setInstance = SW => updateState({
+        ...state,
+        SW,
+    });
 
-    render() {
-        const { SW, demo } = this.state;
+    const { SW, demo } = state;
 
-        return (
-            <div className='container'>
-                <h3>React Step Wizard</h3>
-                <div className={'jumbotron'}>
-                    <div className='row'>
-                        <div className={`col-12 col-sm-6 offset-sm-3 ${styles['rsw-wrapper']}`}>
-                            <StepWizard
-                                onStepChange={this.onStepChange}
-                                isHashEnabled
-                                transitions={this.state.transitions} // comment out this line to use default transitions
-                                nav={<Nav />}
-                                instance={this.setInstance}
-                            >
-                                <First hashKey={'FirstStep'} update={this.updateForm} />
-                                <Second form={this.state.form} />
-                                <Progress />
-                                <Last hashKey={'TheEnd!'} />
-                            </StepWizard>
-                        </div>
+    return (
+        <div className='container'>
+            <h3>React Step Wizard</h3>
+            <div className={'jumbotron'}>
+                <div className='row'>
+                    <div className={`col-12 col-sm-6 offset-sm-3 ${styles['rsw-wrapper']}`}>
+                        <StepWizard
+                            onStepChange={onStepChange}
+                            isHashEnabled
+                            transitions={state.transitions} // comment out for default transitions
+                            nav={<Nav />}
+                            instance={setInstance}
+                        >
+                            <First hashKey={'FirstStep'} update={updateForm} />
+                            <Second form={state.form} />
+                            <Progress />
+                            <Last hashKey={'TheEnd!'} />
+                        </StepWizard>
                     </div>
                 </div>
-                { (demo && SW) && <InstanceDemo SW={SW} /> }
             </div>
-        );
-    }
-}
+            { (demo && SW) && <InstanceDemo SW={SW} /> }
+        </div>
+    );
+};
+
+export default Wizard;
 
 /** Demo of using instance */
 const InstanceDemo = ({ SW }) => (
@@ -120,95 +122,87 @@ const Stats = ({
 
 /** Steps */
 
-class First extends Component {
-    update = (e) => {
-        this.props.update(e.target.name, e.target.value);
-    }
+const First = props => {
+    const update = (e) => {
+        props.update(e.target.name, e.target.value);
+    };
 
-    render() {
-        return (
-            <div>
-                <h3 className='text-center'>Welcome! Have a look around!</h3>
+    return (
+        <div>
+            <h3 className='text-center'>Welcome! Have a look around!</h3>
 
-                <label>First Name</label>
-                <input type='text' className='form-control' name='firstname' placeholder='First Name'
-                    onChange={this.update} />
-                <Stats step={1} {...this.props} />
-            </div>
-        );
-    }
-}
+            <label>First Name</label>
+            <input type='text' className='form-control' name='firstname' placeholder='First Name'
+                onChange={update} />
+            <Stats step={1} {...props} />
+        </div>
+    );
+};
 
-class Second extends Component {
-    validate = () => {
+const Second = props => {
+    const validate = () => {
         if (confirm('Are you sure you want to go back?')) { // eslint-disable-line
-            this.props.previousStep();
+            props.previousStep();
         }
-    }
+    };
 
-    render() {
-        return (
-            <div>
-                { this.props.form.firstname && <h3>Hey {this.props.form.firstname}! 👋</h3> }
-                I've added validation to the previous button.
-                <Stats step={2} {...this.props} previousStep={this.validate} />
-            </div>
-        );
-    }
-}
+    return (
+        <div>
+            { props.form.firstname && <h3>Hey {props.form.firstname}! 👋</h3> }
+            I've added validation to the previous button.
+            <Stats step={2} {...props} previousStep={validate} />
+        </div>
+    );
+};
 
-class Progress extends Component {
-    state = {
+const Progress = (props) => {
+    const [state, updateState] = useState({
         isActiveClass: '',
         timeout: null,
-    }
+    });
 
-    componentDidUpdate() {
-        const { timeout } = this.state;
+    useEffect(() => {
+        const { timeout } = state;
 
-        if (this.props.isActive && !timeout) {
-            this.setState({
+        if (props.isActive && !timeout) {
+            updateState({
                 isActiveClass: styles.loaded,
                 timeout: setTimeout(() => {
-                    this.props.nextStep();
+                    props.nextStep();
                 }, 3000),
             });
-        } else if (!this.props.isActive && timeout) {
+        } else if (!props.isActive && timeout) {
             clearTimeout(timeout);
-            this.setState({
+            updateState({
                 isActiveClass: '',
                 timeout: null,
             });
         }
-    }
+    });
 
-    render() {
-        return (
-            <div className={styles['progress-wrapper']}>
-                <p className='text-center'>Automated Progress...</p>
-                <div className={`${styles.progress} ${this.state.isActiveClass}`}>
-                    <div className={`${styles['progress-bar']} progress-bar-striped`} />
-                </div>
+    return (
+        <div className={styles['progress-wrapper']}>
+            <p className='text-center'>Automated Progress...</p>
+            <div className={`${styles.progress} ${state.isActiveClass}`}>
+                <div className={`${styles['progress-bar']} progress-bar-striped`} />
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
-class Last extends Component {
-    submit = () => {
+const Last = (props) => {
+    const submit = () => {
         alert('You did it! Yay!') // eslint-disable-line
-    }
+    };
 
-    render() {
-        return (
-            <div>
-                <div className={'text-center'}>
-                    <h3>This is the last step in this example!</h3>
-                    <hr />
-                    <Plugs />
-                </div>
-                <Stats step={4} {...this.props} nextStep={this.submit} />
+    return (
+        <div>
+            <div className={'text-center'}>
+                <h3>This is the last step in this example!</h3>
+                <hr />
+                <Plugs />
             </div>
-        );
-    }
-}
+            <Stats step={4} {...props} nextStep={submit} />
+        </div>
+    );
+};
