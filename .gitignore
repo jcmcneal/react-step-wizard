@@ -1,10 +1,10 @@
 .cache/
-node_modules/
+node_modules
 .DS_Store
 .cache/
 .vscode/
 yarn-error.log
-dist/
+dist
 !app/dist/
 react-step-wizard-*.tgz
 coverage/

@@ -39,7 +39,7 @@ export default class StepWizard extends PureComponent {
         // Set initial classes
         // Get hash only in client side
         const hash = typeof window === 'object' ? this.getHash() : '';
-        const children = React.Children.toArray(this.props.children);
+        const children = React.Children.toArray(this.getSteps());
         children.forEach((child, i) => {
             // Create hashKey map
             state.hashKeys[i] = (child.props && child.props.hashKey) || `step${i + 1}`;
@@ -82,7 +82,7 @@ export default class StepWizard extends PureComponent {
         if (next !== undefined) this.setActiveStep(next);
     }
 
-    isInvalidStep = next => (next < 0 || next >= this.props.children.length)
+    isInvalidStep = next => (next < 0 || next >= this.totalSteps)
 
     setActiveStep = (next) => {
         const active = this.state.activeStep;
@@ -133,14 +133,16 @@ export default class StepWizard extends PureComponent {
     }
 
     get totalSteps() {
-        return this.props.children.filter(el => el).length;
+        return this.getSteps().length;
     }
+
+    getSteps = () => this.props.children.filter(el => el);
 
     /** Go to first step */
     firstStep = () => this.goToStep(1)
 
     /** Go to last step */
-    lastStep = () => this.goToStep(this.props.children.length)
+    lastStep = () => this.goToStep(this.totalSteps)
 
     /** Next Step */
     nextStep = () => this.setActiveStep(this.state.activeStep + 1)
@@ -174,7 +176,7 @@ export default class StepWizard extends PureComponent {
         };
 
         const { classes } = this.state;
-        const childrenWithProps = React.Children.map(this.props.children, (child, i) => {
+        const childrenWithProps = React.Children.map(this.getSteps(), (child, i) => {
             if (!child) return null;
 
             props.isActive = (i === this.state.activeStep);
