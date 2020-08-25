@@ -1,5 +1,5 @@
 /**
- * Called with `yarn app:dev` || `yarn app:build`
+ * Called with `npm run app:dev` || `npm run app:build`
  */
 const path = require('path');
 const Webpack = require('webpack');
