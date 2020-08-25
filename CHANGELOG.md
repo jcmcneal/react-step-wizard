@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [5.3.4]
+• Automate publishing to NPM
+• Support for TypeScript - Thanks [resolritter](https://github.com/resolritter)!
+
 ### [5.3.1]
 • Support conditional steps
 
