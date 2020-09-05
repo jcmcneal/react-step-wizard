@@ -23,7 +23,7 @@ export type StepWizardProps = Partial<{
     exitLeft?: string
   }
 
-  children: JSX.Element[]
+  children: JSX.Element | JSX.Element[]
 }>
 
 export type StepWizardChildProps<T extends Record<string, any> = {}> = {
