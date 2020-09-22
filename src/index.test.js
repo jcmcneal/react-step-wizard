@@ -146,6 +146,14 @@ describe('Step Wizard Component', () => {
             </StepWizard>));
     });
 
+    it('renders a single child without issues (#65)', () => {
+        testComponent((
+            <StepWizard>
+                <Step1 />
+            </StepWizard>
+        ));
+    })
+
     it('garbage props', () => {
         console.error.mockClear();
 
