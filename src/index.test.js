@@ -152,17 +152,17 @@ describe('Step Wizard Component', () => {
                 <Step1 />
             </StepWizard>
         ));
-    })
+    });
 
     it('renders dynamic trees from mapped collections', () => {
-        const data = [1,2,3,4]
+        const data = [1, 2, 3, 4];
         const { instance } = testComponent((
             <StepWizard>
-                {data.map((i) => <div>{i}</div>)}
+                {data.map((i) => <div key={i}>{i}</div>)}
             </StepWizard>
         ));
-        expect(instance.totalSteps).toBe(data.length)
-    })
+        expect(instance.totalSteps).toBe(data.length);
+    });
 
     it('garbage props', () => {
         console.error.mockClear();
@@ -197,7 +197,8 @@ describe('Step Wizard Functions', () => {
                 <Step2 />
                 {null}
             </StepWizard>
-        ))
+        ));
+        // only non-null children are kept, i.e. 1. Step1 and 2. Step2
         expect(wrapper.totalSteps).toEqual(2);
         // first child is null, thus it should've been pruned and we should be at <Step1 />
         expect(wrapper.state.activeStep).toEqual(0);
