@@ -483,6 +483,64 @@ Object {
 }
 `;
 
+exports[`Step Wizard Component renders a single child without issues (#65) 1`] = `
+<div
+  className={null}
+>
+  <div
+    className="step-wrapper"
+  >
+    <div
+      className="step  active"
+    >
+      <div>
+        Step 1
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component renders a single child without issues (#65) 2`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {},
+  "hashKeys": Object {
+    "0": "step1",
+    "step1": 0,
+  },
+}
+`;
+
+exports[`Step Wizard Component renders a single child without problems (#65) 1`] = `
+<div
+  className={null}
+>
+  <div
+    className="step-wrapper"
+  >
+    <div
+      className="step  active"
+    >
+      <div>
+        Step 1
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component renders a single child without problems (#65) 2`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {},
+  "hashKeys": Object {
+    "0": "step1",
+    "step1": 0,
+  },
+}
+`;
+
 exports[`Step Wizard Component with 3 basic components 1`] = `
 <div
   className={null}
