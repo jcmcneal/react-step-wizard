@@ -170,6 +170,28 @@ describe('Step Wizard Component', () => {
 });
 
 describe('Step Wizard Functions', () => {
+    it('null elements are pruned away', () => {
+        const wrapper = getInstance((
+            <StepWizard>
+                {null}
+                <Step1 />
+                {null}
+                <Step2 />
+                {null}
+            </StepWizard>
+        ))
+        expect(wrapper.totalSteps).toEqual(2);
+        // first child is null, thus it should've been pruned and we should be at <Step1 />
+        expect(wrapper.state.activeStep).toEqual(0);
+        takeSnapshot(wrapper.state);
+        // null children in-between <Step1> and <Step2 /> should have been pruned
+        wrapper.nextStep();
+        expect(wrapper.state.activeStep).toEqual(1);
+        // last children is null, so it should have been pruned; therefore we stay at <Step 2 />
+        wrapper.lastStep();
+        expect(wrapper.state.activeStep).toEqual(1);
+        takeSnapshot(wrapper.state);
+    });
     it('lastStep', () => {
         const wrapper = basicComponent();
         wrapper.lastStep();

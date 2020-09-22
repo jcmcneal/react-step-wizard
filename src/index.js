@@ -136,7 +136,7 @@ export default class StepWizard extends PureComponent {
         return this.getSteps().length;
     }
 
-    getSteps = () => React.Children.toArray(this.props.children).filter(el => el);
+    getSteps = () => React.Children.toArray(this.props.children);
 
     /** Go to first step */
     firstStep = () => this.goToStep(1)

@@ -599,6 +599,35 @@ Object {
 }
 `;
 
+exports[`Step Wizard Functions null elements are pruned away 1`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {},
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "step1": 0,
+    "step2": 1,
+  },
+}
+`;
+
+exports[`Step Wizard Functions null elements are pruned away 2`] = `
+Object {
+  "activeStep": 1,
+  "classes": Object {
+    "0": "animated fadeOutLeft",
+    "1": "animated fadeInRight",
+  },
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "step1": 0,
+    "step2": 1,
+  },
+}
+`;
+
 exports[`Step Wizard Functions onStepChange 1`] = `
 Object {
   "activeStep": 0,
