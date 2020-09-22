@@ -27,7 +27,7 @@ const testComponent = (component) => {
     const state = getState(component);
     takeSnapshot(state);
 
-    return state;
+    return { instance: getInstance(component), state };
 };
 const basicComponent = () => (
     getInstance((
@@ -146,12 +146,22 @@ describe('Step Wizard Component', () => {
             </StepWizard>));
     });
 
-    it('renders a single child without issues (#65)', () => {
+    it('renders a single child without issues', () => {
         testComponent((
             <StepWizard>
                 <Step1 />
             </StepWizard>
         ));
+    })
+
+    it('renders dynamic trees from mapped collections', () => {
+        const data = [1,2,3,4]
+        const { instance } = testComponent((
+            <StepWizard>
+                {data.map((i) => <div>{i}</div>)}
+            </StepWizard>
+        ));
+        expect(instance.totalSteps).toBe(data.length)
     })
 
     it('garbage props', () => {

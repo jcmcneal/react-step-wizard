@@ -483,7 +483,7 @@ Object {
 }
 `;
 
-exports[`Step Wizard Component renders a single child without issues (#65) 1`] = `
+exports[`Step Wizard Component renders a single child without issues 1`] = `
 <div
   className={null}
 >
@@ -501,7 +501,7 @@ exports[`Step Wizard Component renders a single child without issues (#65) 1`] =
 </div>
 `;
 
-exports[`Step Wizard Component renders a single child without issues (#65) 2`] = `
+exports[`Step Wizard Component renders a single child without issues 2`] = `
 Object {
   "activeStep": 0,
   "classes": Object {},
@@ -512,7 +512,7 @@ Object {
 }
 `;
 
-exports[`Step Wizard Component renders a single child without problems (#65) 1`] = `
+exports[`Step Wizard Component renders dynamic trees from mapped collections 1`] = `
 <div
   className={null}
 >
@@ -523,20 +523,47 @@ exports[`Step Wizard Component renders a single child without problems (#65) 1`]
       className="step  active"
     >
       <div>
-        Step 1
+        1
+      </div>
+    </div>
+    <div
+      className="step"
+    >
+      <div>
+        2
+      </div>
+    </div>
+    <div
+      className="step"
+    >
+      <div>
+        3
+      </div>
+    </div>
+    <div
+      className="step"
+    >
+      <div>
+        4
       </div>
     </div>
   </div>
 </div>
 `;
 
-exports[`Step Wizard Component renders a single child without problems (#65) 2`] = `
+exports[`Step Wizard Component renders dynamic trees from mapped collections 2`] = `
 Object {
   "activeStep": 0,
   "classes": Object {},
   "hashKeys": Object {
     "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "3": "step4",
     "step1": 0,
+    "step2": 1,
+    "step3": 2,
+    "step4": 3,
   },
 }
 `;
