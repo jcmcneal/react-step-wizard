@@ -62,6 +62,7 @@ const Wizard = () => {
                             <First hashKey={'FirstStep'} update={updateForm} />
                             <Second form={state.form} />
                             <Progress />
+                            {null /* will be ignored */}
                             <Last hashKey={'TheEnd!'} />
                         </StepWizard>
                     </div>
