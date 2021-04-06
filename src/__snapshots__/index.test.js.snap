@@ -648,6 +648,24 @@ Object {
 }
 `;
 
+exports[`Step Wizard Functions goToStep with hash 1`] = `
+Object {
+  "activeStep": 2,
+  "classes": Object {
+    "0": "animated fadeOutLeft",
+    "2": "animated fadeInRight",
+  },
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+}
+`;
+
 exports[`Step Wizard Functions lastStep 1`] = `
 Object {
   "activeStep": 2,
