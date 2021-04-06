@@ -39,6 +39,16 @@ const basicComponent = () => (
     ))
 );
 
+const basicComponentHashEnabled = () => (
+    getInstance((
+        <StepWizard isHashEnabled>
+            <Step1 hash="step1" />
+            <Step2 hash="step2" />
+            <Step3 hash="step3" />
+        </StepWizard>
+    ))
+);
+
 /** Capture console errors */
 console.error = jest.fn();
 
@@ -239,6 +249,12 @@ describe('Step Wizard Functions', () => {
     it('goToStep', () => {
         const wrapper = basicComponent();
         wrapper.goToStep(3);
+        takeSnapshot(wrapper.state);
+        expect(wrapper.state.activeStep).toEqual(2);
+    });
+    it('goToStep with hash', () => {
+        const wrapper = basicComponentHashEnabled();
+        wrapper.goToStep('step3');
         takeSnapshot(wrapper.state);
         expect(wrapper.state.activeStep).toEqual(2);
     });

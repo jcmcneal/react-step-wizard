@@ -151,7 +151,13 @@ export default class StepWizard extends PureComponent {
     previousStep = () => this.setActiveStep(this.state.activeStep - 1)
 
     /** Go to step index */
-    goToStep = step => this.setActiveStep(step - 1)
+    goToStep = step => {
+        if (this.props.isHashEnabled && typeof step === 'string' && this.state.hashKeys[step] !== undefined) {
+            this.setActiveStep(this.state.hashKeys[step]);
+        } else {
+            this.setActiveStep(step - 1);
+        }
+    };
 
     updateHash = (activeStep) => {
         window.location.hash = this.state.hashKeys[activeStep];
