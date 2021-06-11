@@ -81,9 +81,7 @@ export default class StepWizard extends PureComponent {
     }
 
     onHashChange = () => {
-        const next = this.state.hashKeys[this.getHash()];
-
-        if (next !== undefined) this.setActiveStep(next);
+        this.setActiveStep(this.state.hashKeys[this.getHash()] || 0);
     }
 
     isInvalidStep = next => (next < 0 || next >= this.totalSteps)
@@ -92,7 +90,9 @@ export default class StepWizard extends PureComponent {
         const active = this.state.activeStep;
         if (active === next) return;
         if (this.isInvalidStep(next)) {
-            console.error(`${next + 1} is an invalid step`);
+            if (process.env.NODE_ENV !== 'production') {
+                console.error(`${next + 1} is an invalid step`);
+            }
             return;
         }
 
