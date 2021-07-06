@@ -44,6 +44,14 @@ Object {
     "step2": 1,
     "step3": 2,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
 }
 `;
 
@@ -100,6 +108,16 @@ Object {
     "step3": 2,
     "step4": 3,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "3": "step4",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+    "step4": 3,
+  },
 }
 `;
 
@@ -118,6 +136,7 @@ Object {
   "activeStep": 0,
   "classes": Object {},
   "hashKeys": Object {},
+  "namedSteps": Object {},
 }
 `;
 
@@ -164,6 +183,14 @@ Object {
     "First *3@ #$~!,\\";": 0,
     "step2": 1,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
 }
 `;
 
@@ -195,6 +222,12 @@ Object {
   "activeStep": 0,
   "classes": Object {},
   "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "step1": 0,
+    "step2": 1,
+  },
+  "namedSteps": Object {
     "0": "step1",
     "1": "step2",
     "step1": 0,
@@ -240,6 +273,14 @@ Object {
   "activeStep": 1,
   "classes": Object {},
   "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "namedSteps": Object {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -294,6 +335,14 @@ Object {
     "step2": 1,
     "step3": 2,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
 }
 `;
 
@@ -340,6 +389,14 @@ Object {
     "First": 0,
     "The End!": 2,
     "step2": 1,
+  },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
   },
 }
 `;
@@ -388,6 +445,14 @@ Object {
     "The End!": 2,
     "step2": 1,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
 }
 `;
 
@@ -420,6 +485,124 @@ Object {
     "step1": 0,
     "step2": 1,
     "step3": 2,
+  },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+}
+`;
+
+exports[`Step Wizard Component namedStepsEnabled - false 1`] = `
+<div
+  className={null}
+>
+  <div
+    className="step-wrapper"
+  >
+    <div
+      className="step  active"
+    >
+      <div>
+        Step 1
+      </div>
+    </div>
+    <div
+      className="step"
+    >
+      <div>
+        Step 2
+      </div>
+    </div>
+    <div
+      className="step"
+    >
+      <div>
+        Step 3
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component namedStepsEnabled - false 2`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {},
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "namedSteps": Object {
+    "0": "info",
+    "1": "step2",
+    "2": "contact",
+    "contact": 2,
+    "info": 0,
+    "step2": 1,
+  },
+}
+`;
+
+exports[`Step Wizard Component namedStepsEnabled - true 1`] = `
+<div
+  className={null}
+>
+  <div
+    className="step-wrapper"
+  >
+    <div
+      className="step  active"
+    >
+      <div>
+        Step 1
+      </div>
+    </div>
+    <div
+      className="step"
+    >
+      <div>
+        Step 2
+      </div>
+    </div>
+    <div
+      className="step"
+    >
+      <div>
+        Step 3
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Step Wizard Component namedStepsEnabled - true 2`] = `
+Object {
+  "activeStep": 0,
+  "classes": Object {},
+  "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "namedSteps": Object {
+    "0": "info",
+    "1": "step2",
+    "2": "contact",
+    "contact": 2,
+    "info": 0,
+    "step2": 1,
   },
 }
 `;
@@ -480,6 +663,14 @@ Object {
     "step2": 1,
     "step3": 2,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
 }
 `;
 
@@ -506,6 +697,10 @@ Object {
   "activeStep": 0,
   "classes": Object {},
   "hashKeys": Object {
+    "0": "step1",
+    "step1": 0,
+  },
+  "namedSteps": Object {
     "0": "step1",
     "step1": 0,
   },
@@ -565,6 +760,16 @@ Object {
     "step3": 2,
     "step4": 3,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "3": "step4",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+    "step4": 3,
+  },
 }
 `;
 
@@ -612,6 +817,14 @@ Object {
     "step2": 1,
     "step3": 2,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
 }
 `;
 
@@ -620,6 +833,14 @@ Object {
   "activeStep": 0,
   "classes": Object {},
   "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "namedSteps": Object {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -645,6 +866,14 @@ Object {
     "step2": 1,
     "step3": 2,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
 }
 `;
 
@@ -656,6 +885,14 @@ Object {
     "2": "animated fadeInRight",
   },
   "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "namedSteps": Object {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -681,6 +918,14 @@ Object {
     "step2": 1,
     "step3": 2,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
 }
 `;
 
@@ -692,6 +937,14 @@ Object {
     "1": "animated fadeInRight",
   },
   "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "namedSteps": Object {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -712,6 +965,12 @@ Object {
     "step1": 0,
     "step2": 1,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "step1": 0,
+    "step2": 1,
+  },
 }
 `;
 
@@ -723,6 +982,12 @@ Object {
     "1": "animated fadeInRight",
   },
   "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "step1": 0,
+    "step2": 1,
+  },
+  "namedSteps": Object {
     "0": "step1",
     "1": "step2",
     "step1": 0,
@@ -747,6 +1012,14 @@ Object {
     "step2": 1,
     "step3": 2,
   },
+  "namedSteps": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
 }
 `;
 
@@ -759,6 +1032,14 @@ Object {
     "2": "animated fadeOutRight",
   },
   "hashKeys": Object {
+    "0": "step1",
+    "1": "step2",
+    "2": "step3",
+    "step1": 0,
+    "step2": 1,
+    "step3": 2,
+  },
+  "namedSteps": Object {
     "0": "step1",
     "1": "step2",
     "2": "step3",

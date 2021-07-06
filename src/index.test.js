@@ -106,6 +106,26 @@ describe('Step Wizard Component', () => {
         ));
     });
 
+    it('namedStepsEnabled - true', () => {
+        testComponent((
+            <StepWizard namedStepsEnabled>
+                <Step1 stepName={'info'} />
+                <Step2 />
+                <Step3 stepName={'contact'} />
+            </StepWizard>
+        ));
+    });
+
+    it('namedStepsEnabled - false', () => {
+        testComponent((
+            <StepWizard>
+                <Step1 stepName={'info'} />
+                <Step2 />
+                <Step3 stepName={'contact'} />
+            </StepWizard>
+        ));
+    });
+
     it('isLazyMount - true', () => {
         testComponent((
             <StepWizard isLazyMount initialStep={2}>

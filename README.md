@@ -69,6 +69,7 @@ For example:
 | initialStep   | `integer`  | 1         |
 | instance      | `function` |           | Provides an instance of `StepWizard` to control from anywhere in your app                |
 | isHashEnabled | `bool`     | false     | Persists the current step in the URL (hash)                                              |
+| isHashEnabled | `bool`     | false     | Allows for setting names for steps                                                       |
 | isLazyMount   | `boolean`  | false     | Only mounts the child component when `isActive` is true                                  |
 | nav           | `node`     |           | Create a custom navigation component to include in the wizard                            |
 | onStepChange  | `function` |           | Callback for step change                                                                 |
@@ -141,3 +142,18 @@ An example of how `isHashEnabled` and `hashKey` work together:
 As you can see, the `hashKey` corresponds with the url hash and will be updated when the step becomes active. The `hashKey` defaults to `step{n}`. If `isHashEnabled` is `false` then the url hash, or `hashKey`, will not be used.
 
 When isHashEnabled is true, `goToStep` accepts a `hashKey` as an argument
+
+### Use name steps
+
+If we don't need to use hash keys and just simply want to switch steps by their names we can use `namedStepsEnabled`.  
+An example of how `namedStepsEnabled` and `stepName` work together:
+
+```jsx
+<StepWizard namedStepsEnabled={true}>
+  <BasicInfo stepName={"basic"} /> // https://domain.com/#basic
+  <ContactInfo stepName={"contact"} /> // https://domain.com/#contact
+  <TermsConditions /> // https://domain.com/#step3
+</StepWizard>
+```
+
+When namedStepsEnabled is true, `goToStep` accepts a `stepName` as an argument
