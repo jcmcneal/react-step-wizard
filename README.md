@@ -143,16 +143,16 @@ As you can see, the `hashKey` corresponds with the url hash and will be updated 
 
 When isHashEnabled is true, `goToStep` accepts a `hashKey` as an argument
 
-### Use name steps
+### Use named steps
 
 If we don't need to use hash keys and just simply want to switch steps by their names we can use `namedStepsEnabled`.  
 An example of how `namedStepsEnabled` and `stepName` work together:
 
 ```jsx
 <StepWizard namedStepsEnabled={true}>
-  <BasicInfo stepName={"basic"} /> // https://domain.com/#basic
-  <ContactInfo stepName={"contact"} /> // https://domain.com/#contact
-  <TermsConditions /> // https://domain.com/#step3
+  <BasicInfo stepName={"basic"} />
+  <ContactInfo stepName={"contact"} />
+  <TermsConditions />
 </StepWizard>
 ```
 
