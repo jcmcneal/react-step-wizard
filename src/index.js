@@ -34,6 +34,7 @@ export default class StepWizard extends PureComponent {
             activeStep: 0,
             classes: {},
             hashKeys: {},
+            namedSteps: {},
         };
 
         // Set initial classes
@@ -44,6 +45,9 @@ export default class StepWizard extends PureComponent {
             // Create hashKey map
             state.hashKeys[i] = (child.props && child.props.hashKey) || `step${i + 1}`;
             state.hashKeys[state.hashKeys[i]] = i;
+            // Create namedSteps map
+            state.namedSteps[i] = (child.props && child.props.stepName) || `step${i + 1}`;
+            state.namedSteps[state.namedSteps[i]] = i;
         });
 
         // Set activeStep to initialStep if exists
@@ -154,6 +158,8 @@ export default class StepWizard extends PureComponent {
     goToStep = step => {
         if (this.props.isHashEnabled && typeof step === 'string' && this.state.hashKeys[step] !== undefined) {
             this.setActiveStep(this.state.hashKeys[step]);
+        } else if (this.props.namedStepsEnabled && typeof step === 'string' && this.state.namedSteps[step] !== undefined) {
+            this.setActiveStep(this.state.namedSteps[step]);
         } else {
             this.setActiveStep(step - 1);
         }
@@ -219,6 +225,7 @@ StepWizard.propTypes = {
     initialStep: PropTypes.number,
     instance: PropTypes.func,
     isHashEnabled: PropTypes.bool,
+    namedStepsEnabled: PropTypes.bool,
     isLazyMount: PropTypes.bool,
     nav: PropTypes.node,
     onStepChange: PropTypes.func,
@@ -231,6 +238,7 @@ StepWizard.defaultProps = {
     initialStep: 1,
     instance: () => {},
     isHashEnabled: false,
+    namedStepsEnabled: false,
     isLazyMount: false,
     nav: null,
     onStepChange: () => {},
