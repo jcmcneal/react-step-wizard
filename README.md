@@ -152,7 +152,7 @@ An example of how `namedStepsEnabled` and `stepName` work together:
 <StepWizard namedStepsEnabled={true}>
   <BasicInfo stepName={"basic"} />
   <ContactInfo stepName={"contact"} />
-  <TermsConditions />
+  <TermsConditions /> // step3
 </StepWizard>
 ```
 
