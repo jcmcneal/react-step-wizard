@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [5.3.7]
+• Update Step TS - [LucasCostaAtCyberSaint](https://github.com/LucasCostaAtCyberSaint)
+
 ### [5.3.6]
 • Support hash as argument to `goToStep` - [GabrielFerrarini](https://github.com/GabrielFerrarini)
 
