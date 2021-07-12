@@ -5,9 +5,11 @@ export type StepWizardProps = Partial<{
   className: string
 
   hashKey: string
+  stepName: string
   initialStep: number
   instance: (wizard: StepWizardProps) => void
   isHashEnabled: boolean
+  namedStepsEnabled: boolean
   isLazyMount: boolean
   nav: JSX.Element
 
@@ -36,6 +38,7 @@ export type StepWizardChildProps<T extends Record<string, any> = {}> = {
   previousStep: () => void
   goToStep: (step: number) => void
   hashKey?: string
+  stepName?: string
 } & T
 
 export declare function StepWizard(props: StepWizardProps): JSX.Element
