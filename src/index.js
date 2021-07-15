@@ -158,10 +158,17 @@ export default class StepWizard extends PureComponent {
     goToStep = step => {
         if (this.props.isHashEnabled && typeof step === 'string' && this.state.hashKeys[step] !== undefined) {
             this.setActiveStep(this.state.hashKeys[step]);
-        } else if (this.props.namedStepsEnabled && typeof step === 'string' && this.state.namedSteps[step] !== undefined) {
-            this.setActiveStep(this.state.namedSteps[step]);
         } else {
             this.setActiveStep(step - 1);
+        }
+    };
+
+    /** Go to named step */
+    goToNamedStep = step => {
+        if (typeof step === 'string' && this.state.namedSteps[step] !== undefined) {
+            this.setActiveStep(this.state.namedSteps[step]);
+        } else {
+            console.error(`Cannot find step with name "${step}"`);
         }
     };
 
@@ -225,7 +232,6 @@ StepWizard.propTypes = {
     initialStep: PropTypes.number,
     instance: PropTypes.func,
     isHashEnabled: PropTypes.bool,
-    namedStepsEnabled: PropTypes.bool,
     isLazyMount: PropTypes.bool,
     nav: PropTypes.node,
     onStepChange: PropTypes.func,
@@ -238,7 +244,6 @@ StepWizard.defaultProps = {
     initialStep: 1,
     instance: () => {},
     isHashEnabled: false,
-    namedStepsEnabled: false,
     isLazyMount: false,
     nav: null,
     onStepChange: () => {},
