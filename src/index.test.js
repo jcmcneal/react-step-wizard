@@ -106,17 +106,7 @@ describe('Step Wizard Component', () => {
         ));
     });
 
-    it('namedStepsEnabled - true', () => {
-        testComponent((
-            <StepWizard namedStepsEnabled>
-                <Step1 stepName={'info'} />
-                <Step2 />
-                <Step3 stepName={'contact'} />
-            </StepWizard>
-        ));
-    });
-
-    it('namedStepsEnabled - false', () => {
+    it('with named steps', () => {
         testComponent((
             <StepWizard>
                 <Step1 stepName={'info'} />
@@ -275,6 +265,12 @@ describe('Step Wizard Functions', () => {
     it('goToStep with hash', () => {
         const wrapper = basicComponentHashEnabled();
         wrapper.goToStep('step3');
+        takeSnapshot(wrapper.state);
+        expect(wrapper.state.activeStep).toEqual(2);
+    });
+    it('goToNamedStep', () => {
+        const wrapper = basicComponent();
+        wrapper.goToNamedStep('step3');
         takeSnapshot(wrapper.state);
         expect(wrapper.state.activeStep).toEqual(2);
     });

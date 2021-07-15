@@ -69,7 +69,6 @@ For example:
 | initialStep   | `integer`  | 1         |
 | instance      | `function` |           | Provides an instance of `StepWizard` to control from anywhere in your app                |
 | isHashEnabled | `bool`     | false     | Persists the current step in the URL (hash)                                              |
-| isHashEnabled | `bool`     | false     | Allows for setting names for steps                                                       |
 | isLazyMount   | `boolean`  | false     | Only mounts the child component when `isActive` is true                                  |
 | nav           | `node`     |           | Create a custom navigation component to include in the wizard                            |
 | onStepChange  | `function` |           | Callback for step change                                                                 |
@@ -77,17 +76,18 @@ For example:
 
 #### Props Accessible On Each Child (_Step_) Component
 
-| Prop         | Data Type  | Parameters                     |
-| ------------ | ---------- | ------------------------------ |
-| isActive     | `boolean`  |
-| currentStep  | `integer`  |
-| totalSteps   | `integer`  |
-| firstStep    | `function` |
-| lastStep     | `function` |
-| nextStep     | `function` |
-| previousStep | `function` |
-| goToStep     | `function` | `integer` : `goToStep(3)`      |
-| goToStep     | `function` | `string` : `goToStep('step3')` |
+| Prop          | Data Type  | Parameters                            |
+| ------------- | ---------- | ------------------------------------- |
+| isActive      | `boolean`  |
+| currentStep   | `integer`  |
+| totalSteps    | `integer`  |
+| firstStep     | `function` |
+| lastStep      | `function` |
+| nextStep      | `function` |
+| previousStep  | `function` |
+| goToStep      | `function` | `integer` : `goToStep(3)`             |
+| goToStep      | `function` | `string` : `goToStep('step3')`        |
+| goToNamedStep | `function` | `string` : `goToNamedStep('contact')` |
 
 ---
 
@@ -145,15 +145,14 @@ When isHashEnabled is true, `goToStep` accepts a `hashKey` as an argument
 
 ### Use named steps
 
-If we don't need to use hash keys and just simply want to switch steps by their names we can use `namedStepsEnabled`.  
-An example of how `namedStepsEnabled` and `stepName` work together:
+If we don't need to use hash keys and just simply want to switch steps by their names we can use use `stepName`.  
 
 ```jsx
-<StepWizard namedStepsEnabled={true}>
+<StepWizard>
   <BasicInfo stepName={"basic"} />
   <ContactInfo stepName={"contact"} />
   <TermsConditions /> // step3
 </StepWizard>
 ```
 
-When namedStepsEnabled is true, `goToStep` accepts a `stepName` as an argument
+Now we can use `goToNamedStep` and set `stepName` as an argument
