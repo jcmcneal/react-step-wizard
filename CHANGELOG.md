@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [5.3.8]
+• Added support for named steps - [Wojciech-Florczak](https://github.com/Wojciech-Florczak)
+
+> Dev Changes
+• Updated dev dependencies to address vulnerabilities
+
 ### [5.3.7]
 • Update Step TS - [LucasCostaAtCyberSaint](https://github.com/LucasCostaAtCyberSaint)
 
