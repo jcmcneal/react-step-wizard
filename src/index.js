@@ -190,6 +190,7 @@ export default class StepWizard extends PureComponent {
             nextStep: this.nextStep,
             previousStep: this.previousStep,
             goToStep: this.goToStep,
+            goToNamedStep: this.goToNamedStep,
             firstStep: this.firstStep,
             lastStep: this.lastStep,
         };

@@ -21,7 +21,7 @@ const Wizard = () => {
             exitLeft: `${transitions.animated} ${transitions.exitLeft}`,
             intro: `${transitions.animated} ${transitions.intro}`,
         },
-        // demo: true, // uncomment to see more
+        demo: true, // uncomment to see more
     });
 
     const updateForm = (key, value) => {
@@ -61,7 +61,7 @@ const Wizard = () => {
                         >
                             <First hashKey={'FirstStep'} update={updateForm} />
                             <Second form={state.form} />
-                            <Progress />
+                            <Progress stepName='progress' />
                             {null /* will be ignored */}
                             <Last hashKey={'TheEnd!'} />
                         </StepWizard>
@@ -82,6 +82,8 @@ const InstanceDemo = ({ SW }) => (
         <button className={'btn btn-secondary'} onClick={SW.previousStep}>Previous Step</button>
         &nbsp;
         <button className={'btn btn-secondary'} onClick={SW.nextStep}>Next Step</button>
+        &nbsp;
+        <button className={'btn btn-secondary'} onClick={() => SW.goToNamedStep('progress')}>Go to 'progress'</button>
     </Fragment>
 );
 
