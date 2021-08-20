@@ -63,16 +63,17 @@ For example:
 
 #### User-Defined Props
 
-| Prop          | Data Type  | Default   | Description                                                                              |
-| ------------- | ---------- | --------- | ---------------------------------------------------------------------------------------- |
-| hashKey       | `string`   | `step{n}` | Prop on child component to use when updating URL hash. Corresponds with `isHashEnabled`. |
-| initialStep   | `integer`  | 1         |
-| instance      | `function` |           | Provides an instance of `StepWizard` to control from anywhere in your app                |
-| isHashEnabled | `bool`     | false     | Persists the current step in the URL (hash)                                              |
-| isLazyMount   | `boolean`  | false     | Only mounts the child component when `isActive` is true                                  |
-| nav           | `node`     |           | Create a custom navigation component to include in the wizard                            |
-| onStepChange  | `function` |           | Callback for step change                                                                 |
-| transitions   | `object`   |           | CSS classes for transitioning between steps                                              |
+| Prop             | Data Type  | Default   | Description                                                                              |
+| ---------------- | ---------- | --------- | ---------------------------------------------------------------------------------------- |
+| hashKey          | `string`   | `step{n}` | Prop on child component to use when updating URL hash. Corresponds with `isHashEnabled`. |
+| initialStep      | `integer`  | 1         |
+| instance         | `function` |           | Provides an instance of `StepWizard` to control from anywhere in your app                |
+| isHashEnabled    | `bool`     | false     | Persists the current step in the URL (hash)                                              |
+| isLazyMount      | `boolean`  | false     | Only mounts the child component when `isActive` is true                                  |
+| nav              | `node`     |           | Create a custom navigation component to include in the wizard                            |
+| onStepChange     | `function` |           | Callback for step change                                                                 |
+| transitions      | `object`   |           | CSS classes for transitioning between steps                                              |
+| raiseOnStepError | `bool`     | false     | Raise an error when attempting to transition to an invalid step                          |
 
 #### Props Accessible On Each Child (_Step_) Component
 

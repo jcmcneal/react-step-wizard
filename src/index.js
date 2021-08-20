@@ -92,7 +92,7 @@ export default class StepWizard extends PureComponent {
         const active = this.state.activeStep;
         if (active === next) return;
         if (this.isInvalidStep(next)) {
-            console.error(`${next + 1} is an invalid step`);
+            this.onError(`${next + 1} is an invalid step`);
             return;
         }
 
@@ -129,6 +129,14 @@ export default class StepWizard extends PureComponent {
 
         // Update hash if prop set
         if (this.props.isHashEnabled) this.updateHash(this.state.activeStep);
+    }
+
+    onError = (errorMessage) => {
+        if (this.props.raiseOnStepError) {
+            throw new Error(errorMessage);
+        } else {
+            console.error(errorMessage);
+        }
     }
 
     /** Getters */
@@ -168,7 +176,7 @@ export default class StepWizard extends PureComponent {
         if (typeof step === 'string' && this.state.namedSteps[step] !== undefined) {
             this.setActiveStep(this.state.namedSteps[step]);
         } else {
-            console.error(`Cannot find step with name "${step}"`);
+            this.onError(`Cannot find step with name "${step}"`);
         }
     };
 
@@ -237,6 +245,7 @@ StepWizard.propTypes = {
     nav: PropTypes.node,
     onStepChange: PropTypes.func,
     transitions: PropTypes.object,
+    raiseOnStepError: PropTypes.bool,
 };
 
 StepWizard.defaultProps = {
@@ -249,6 +258,7 @@ StepWizard.defaultProps = {
     nav: null,
     onStepChange: () => {},
     transitions: undefined,
+    raiseOnStepError: false,
 };
 
 export const Step = ({

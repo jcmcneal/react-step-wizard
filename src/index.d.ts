@@ -11,6 +11,7 @@ export type StepWizardProps = Partial<{
   isHashEnabled: boolean
   isLazyMount: boolean
   nav: JSX.Element
+  raiseOnStepError?: boolean
 
   onStepChange: (stepChange: {
     previousStep: number

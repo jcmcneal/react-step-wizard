@@ -49,6 +49,16 @@ const basicComponentHashEnabled = () => (
     ))
 );
 
+const basicComponentRaiseErrors = () => (
+    getInstance((
+        <StepWizard raiseOnStepError>
+            <Step1 hash="step1" />
+            <Step2 hash="step2" />
+            <Step3 hash="step3" />
+        </StepWizard>
+    ))
+);
+
 /** Capture console errors */
 console.error = jest.fn();
 
@@ -262,6 +272,11 @@ describe('Step Wizard Functions', () => {
         takeSnapshot(wrapper.state);
         expect(wrapper.state.activeStep).toEqual(2);
     });
+    it('goToStep with raise on error', () => {
+        const wrapper = basicComponentRaiseErrors();
+        expect(() => wrapper.goToStep(1)).not.toThrow();
+        expect(() => wrapper.goToStep(9001)).toThrow();
+    });
     it('goToStep with hash', () => {
         const wrapper = basicComponentHashEnabled();
         wrapper.goToStep('step3');
@@ -273,6 +288,11 @@ describe('Step Wizard Functions', () => {
         wrapper.goToNamedStep('step3');
         takeSnapshot(wrapper.state);
         expect(wrapper.state.activeStep).toEqual(2);
+    });
+    it('goToNamedStep with raise on error', () => {
+        const wrapper = basicComponentRaiseErrors();
+        expect(() => wrapper.goToNamedStep('step3')).not.toThrow();
+        expect(() => wrapper.goToNamedStep('Unknown Step')).toThrow();
     });
     it('isInvalidStep', () => {
         const wrapper = basicComponent();
