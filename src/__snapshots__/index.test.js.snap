@@ -503,6 +503,7 @@ exports[`Step Wizard Component nav 1`] = `
 >
   <div
     currentStep={1}
+    currentStepName="step1"
     firstStep={[Function]}
     goToNamedStep={[Function]}
     goToStep={[Function]}
