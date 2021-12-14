@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 • Fallback to step1 when no hash is found.
 • Only show console.error message in non production environments.
 
-Thanks [sharpdressedcodes](https://github.com/sharpdressedcodes)
+Thanks [sharpdressedcodes](https://github.com/sharpdressedcodes)!
 
 ### [5.3.8]
 • Added support for named steps - [Wojciech-Florczak](https://github.com/Wojciech-Florczak)
