@@ -76,18 +76,19 @@ For example:
 
 #### Props Accessible On Each Child (_Step_) Component
 
-| Prop          | Data Type  | Parameters                            |
-| ------------- | ---------- | ------------------------------------- |
-| isActive      | `boolean`  |
-| currentStep   | `integer`  |
-| totalSteps    | `integer`  |
-| firstStep     | `function` |
-| lastStep      | `function` |
-| nextStep      | `function` |
-| previousStep  | `function` |
-| goToStep      | `function` | `integer` : `goToStep(3)`             |
-| goToStep      | `function` | `string` : `goToStep('step3')`        |
-| goToNamedStep | `function` | `string` : `goToNamedStep('contact')` |
+| Prop            | Data Type  | Parameters                            |
+| --------------- | ---------- | ------------------------------------- |
+| isActive        | `boolean`  |
+| currentStep     | `integer`  |
+| currentStepName | `string`   |
+| totalSteps      | `integer`  |
+| firstStep       | `function` |
+| lastStep        | `function` |
+| nextStep        | `function` |
+| previousStep    | `function` |
+| goToStep        | `function` | `integer` : `goToStep(3)`             |
+| goToStep        | `function` | `string` : `goToStep('step3')`        |
+| goToNamedStep   | `function` | `string` : `goToNamedStep('contact')` |
 
 ---
 
@@ -111,12 +112,12 @@ The default transitions are using CSS taken from [animate.css](https://daneden.g
 
 ```jsx
 let custom = {
-  enterRight: 'your custom css transition classes',
-  enterLeft : 'your custom css transition classes',
-  exitRight : 'your custom css transition classes',
-  exitLeft  : 'your custom css transition classes'
-}
-<StepWizard transitions={custom}>...</StepWizard>
+  enterRight: "your custom css transition classes",
+  enterLeft: "your custom css transition classes",
+  exitRight: "your custom css transition classes",
+  exitLeft: "your custom css transition classes",
+};
+<StepWizard transitions={custom}>...</StepWizard>;
 ```
 
 ### Initial Step
@@ -145,7 +146,7 @@ When isHashEnabled is true, `goToStep` accepts a `hashKey` as an argument
 
 ### Use named steps
 
-If we don't need to use hash keys and just simply want to switch steps by their names we can use use `stepName`.  
+If we don't need to use hash keys and just simply want to switch steps by their names we can use use `stepName`.
 
 ```jsx
 <StepWizard>

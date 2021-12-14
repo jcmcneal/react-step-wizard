@@ -140,6 +140,10 @@ export default class StepWizard extends PureComponent {
         return this.getSteps().length;
     }
 
+    get currentStepName() {
+        return this.state.namedSteps[this.state.activeStep];
+    }
+
     getSteps = () => React.Children.toArray(this.props.children);
 
     /** Go to first step */
@@ -186,6 +190,7 @@ export default class StepWizard extends PureComponent {
         const props = {
             currentStep: this.currentStep,
             totalSteps: this.totalSteps,
+            currentStepName: this.currentStepName,
             /** Functions */
             nextStep: this.nextStep,
             previousStep: this.previousStep,
