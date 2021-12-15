@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [5.3.11]
+• Add missing transition type - intro - Thanks [bundit](https://github.com/bundit)
+
 ### [5.3.10]
 • Fallback to step1 when no hash is found.
 • Only show console.error message in non production environments.
