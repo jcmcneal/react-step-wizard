@@ -114,7 +114,8 @@ let custom = {
   enterRight: 'your custom css transition classes',
   enterLeft : 'your custom css transition classes',
   exitRight : 'your custom css transition classes',
-  exitLeft  : 'your custom css transition classes'
+  exitLeft  : 'your custom css transition classes',
+  intro     : 'your custom css transition classes'
 }
 <StepWizard transitions={custom}>...</StepWizard>
 ```
