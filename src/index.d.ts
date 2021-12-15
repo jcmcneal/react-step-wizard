@@ -22,6 +22,7 @@ export type StepWizardProps = Partial<{
     enterLeft?: string
     exitRight?: string
     exitLeft?: string
+    intro?: string
   }
 
   children: JSX.Element | JSX.Element[] | React.ReactElement
