@@ -1,6 +1,6 @@
 {
   "name": "react-step-wizard",
-  "version": "5.3.10",
+  "version": "5.3.11",
   "description": "A modern flexible step wizard component built for React",
   "main": "dist/react-step-wizard.min.js",
   "typings": "dist/index.d.ts",
