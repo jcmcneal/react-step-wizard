@@ -16,7 +16,6 @@ export interface StepWizardInstanceProps {
     onHashChange: () => void;
     isInvalidStep: (next: number) => boolean;
     setActiveStep: (next: number) => void;
-    // do we need onStepChange ??
     currentStep: number;
     totalSteps: number;
     getSteps: () => JSX.Element[] | React.ReactElement[];
