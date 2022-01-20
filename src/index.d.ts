@@ -44,7 +44,7 @@ export type StepWizardProps = Partial<{
     activeStep: number
   }) => void
 
-  transitions: StepWizardInstanceProps;
+  transitions: StepWizardTransitionProps;
 
   children: JSX.Element | JSX.Element[] | React.ReactElement
 }>
