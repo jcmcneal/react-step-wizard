@@ -34,7 +34,7 @@ export type StepWizardProps = Partial<{
   hashKey: string
   stepName: string
   initialStep: number
-  instance: (wizard: StepWizardTransitionProps) => void
+  instance: (wizard: StepWizardInstanceProps) => void
   isHashEnabled: boolean
   isLazyMount: boolean
   nav: JSX.Element
