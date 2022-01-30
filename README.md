@@ -88,6 +88,7 @@ For example:
 | goToStep      | `function` | `integer` : `goToStep(3)`             |
 | goToStep      | `function` | `string` : `goToStep('step3')`        |
 | goToNamedStep | `function` | `string` : `goToNamedStep('contact')` |
+| stepProps     | `function` | `string` : `stepProps(3)`             |
 
 ---
 
