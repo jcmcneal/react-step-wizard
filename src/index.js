@@ -119,6 +119,7 @@ export default class StepWizard extends PureComponent {
             this.onStepChange({
                 previousStep: active + 1,
                 activeStep: next + 1,
+                stepName: this.state.namedSteps[next],
             });
         });
     }
