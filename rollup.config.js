@@ -52,7 +52,7 @@ export default {
         typescript(),
         postcss({
             modules: {
-                generateScopedName: 'rsw_[hash:base64:2]',
+                generateScopedName: 'rsw_[local]',
             },
         }),
         isProd && terser(),
