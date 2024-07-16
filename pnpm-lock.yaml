@@ -107,6 +107,9 @@ importers:
       rollup-plugin-postcss:
         specifier: ^4.0.2
         version: 4.0.2(postcss@8.4.39)
+      style-loader:
+        specifier: ^4.0.0
+        version: 4.0.0(webpack@5.93.0(webpack-cli@5.1.4))
       terser-webpack-plugin:
         specifier: ^2.3.5
         version: 2.3.8(webpack@5.93.0(webpack-cli@5.1.4))
@@ -4621,6 +4624,12 @@ packages:
 
   style-inject@0.3.0:
     resolution: {integrity: sha512-IezA2qp+vcdlhJaVm5SOdPPTUu0FCEqfNSli2vRuSIBbu5Nq5UvygTk/VzeCqfLz2Atj3dVII5QBKGZRZ0edzw==}
+
+  style-loader@4.0.0:
+    resolution: {integrity: sha512-1V4WqhhZZgjVAVJyt7TdDPZoPBPNHbekX4fWnCJL1yQukhCeZhJySUL+gL9y6sNdN95uEOS83Y55SqHcP7MzLA==}
+    engines: {node: '>= 18.12.0'}
+    peerDependencies:
+      webpack: ^5.27.0
 
   stylehacks@5.1.1:
     resolution: {integrity: sha512-sBpcd5Hx7G6seo7b1LkpttvTz7ikD0LlH5RmdcBNb6fFR0Fl7LQwHDFr300q4cwUqi+IYrFGmsIHieMBfnN/Bw==}
@@ -10589,6 +10598,10 @@ snapshots:
   strip-json-comments@3.1.1: {}
 
   style-inject@0.3.0: {}
+
+  style-loader@4.0.0(webpack@5.93.0(webpack-cli@5.1.4)):
+    dependencies:
+      webpack: 5.93.0(webpack-cli@5.1.4)
 
   stylehacks@5.1.1(postcss@8.4.39):
     dependencies:

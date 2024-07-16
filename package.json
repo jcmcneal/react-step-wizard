@@ -11,8 +11,8 @@
         "dev": "rollup --config rollup.config.js --watch --bundleConfigAsCjs",
         "build": "rollup --config rollup.config.js --environment NODE_ENV:production --bundleConfigAsCjs && npm run build:types",
         "build:types": "tsc --declaration --emitDeclarationOnly --outFile ./dist/index.d.ts",
-        "app:dev": "webpack-dev-server --open --mode='development' --hotOnly --config app/webpack.config.js",
-        "app:build": "export NODE_ENV=production; webpack --progress --optimize-minimize --mode=production --config app/webpack.config.js",
+        "app:dev": "webpack-dev-server --open --mode='development' --config app/webpack.config.js",
+        "app:build": "export NODE_ENV=production; webpack --progress --mode=production --config app/webpack.config.js",
         "prepublishOnly": "rm -rf ./dist && npm run build",
         "test": "jest --config=jest.config.js",
         "lint": "eslint src/"
@@ -71,6 +71,7 @@
         "rollup": "^4.18.1",
         "rollup-plugin-filesize": "^10.0.0",
         "rollup-plugin-postcss": "^4.0.2",
+        "style-loader": "^4.0.0",
         "terser-webpack-plugin": "^2.3.5",
         "ts-jest": "^29.2.2",
         "tsconfig-paths-webpack-plugin": "^4.1.0",

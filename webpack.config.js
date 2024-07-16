@@ -46,9 +46,6 @@ const config = {
                 use: [
                     {
                         loader: 'style-loader',
-                        options: {
-                            singleton: true,
-                        },
                     },
                     {
                         loader: 'css-loader',
@@ -70,9 +67,6 @@ const config = {
         'react-dom',
         'react',
     ],
-    node: {
-        Buffer: false,
-    },
     optimization: {
         minimizer: [
             new TerserPlugin({
@@ -90,13 +84,6 @@ const config = {
             configFile: path.resolve(__dirname, './tsconfig.json'),
         }),
     ],
-    stats: {
-        builtAt: false,
-        hash: false,
-        modules: false,
-        version: false,
-        warnings: false,
-    },
 };
 
 if (isProd) {
