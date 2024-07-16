@@ -1,6 +1,7 @@
-.nav {
+.wizard-nav {
     margin-bottom: 15px;
     text-align: center;
+    justify-content: center;
 }
 
 .dot {

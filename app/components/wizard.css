@@ -3,8 +3,10 @@
 }
 
 /** Progress Bar */
-@progress-height: 5px;
-@duration: 3s;
+:root {
+    --progress-height: 5px;
+    --duration: 3s;
+}
 
 @keyframes stripes {
     from { background-position: 1rem 0 }
@@ -30,17 +32,17 @@
 }
 
 .progress {
-    height: @progress-height;
+    height: var(progress-height);
     overflow: hidden;
 }
 
 .progress-bar {
-    height: @progress-height;
+    height: var(--progress-height);
     width: 100%;
+}
 
-    .loaded & {
-        animation: grow @duration ease,
-            stripes 1s linear infinite,
-            rainbow @duration ease infinite;
-    }
+.loaded .progress-bar {
+    animation: grow var(--duration) ease,
+        stripes 1s linear infinite,
+        rainbow var(--duration) ease infinite;
 }
