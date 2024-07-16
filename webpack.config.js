@@ -3,7 +3,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const args = require('minimist')(process.argv);
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
@@ -24,13 +23,6 @@ const config = {
     module: {
         rules: [
             {
-                enforce: 'pre',
-                test: /\.js$/,
-                exclude: /node_modules/,
-                include: path.resolve('src/index.js'),
-                loader: 'eslint-loader',
-            },
-            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
@@ -39,8 +31,7 @@ const config = {
                 /** Globals */
                 test: /(\.css)$/,
                 use: [{
-                    // https://www.npmjs.com/package/iso-morphic-style-loader
-                    loader: 'iso-morphic-style-loader',
+                    loader: 'style-loader',
                 }, {
                     loader: 'css-loader',
                     options: {
@@ -54,8 +45,7 @@ const config = {
                 test: /(\.less)$/,
                 use: [
                     {
-                        // https://www.npmjs.com/package/iso-morphic-style-loader
-                        loader: 'iso-morphic-style-loader',
+                        loader: 'style-loader',
                         options: {
                             singleton: true,
                         },
@@ -93,7 +83,6 @@ const config = {
                 },
                 extractComments: false
             }),
-            new OptimizeCSSAssetsPlugin({}),
         ],
     },
     plugins: [
