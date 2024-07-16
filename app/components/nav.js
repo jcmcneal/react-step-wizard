@@ -1,6 +1,5 @@
 import React from 'react';
-/* eslint react/prop-types: 0 */
-import styles from './nav.less';
+import styles from './nav.css';
 
 const Nav = (props) => {
     const dots = [];
@@ -16,7 +15,7 @@ const Nav = (props) => {
     }
 
     return (
-        <div className={styles.nav}>{dots}</div>
+        <div className={styles['wizard-nav']}>{dots}</div>
     );
 };
 

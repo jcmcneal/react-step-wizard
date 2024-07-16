@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { hot } from 'react-hot-loader';
 
 import Wizard from './components/wizard';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './less/app.less';
 
 const App = () => (
@@ -14,4 +13,7 @@ const App = () => (
 /** HMR */
 hot(module)(App);
 
-ReactDOM.render(<App />, document.getElementById('app'));
+const domNode = document.getElementById('app');
+const root = createRoot(domNode);
+
+root.render(<App />);
