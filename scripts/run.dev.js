@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { spawn } = require('child_process');
+import { spawn } from 'child_process';
 
 // Start Component Webpack
 spawn('npm', ['run', 'dev'], { shell: true, stdio: 'inherit' });

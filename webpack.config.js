@@ -6,13 +6,14 @@ const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const args = require('minimist')(process.argv);
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const app = require('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
 
 const config = {
-    entry: './src/index.js',
+    entry: './src/index.tsx',
     output: {
         path: path.resolve('dist'),
         filename: path.basename(app.main),
@@ -40,7 +41,14 @@ const config = {
                 use: [{
                     // https://www.npmjs.com/package/iso-morphic-style-loader
                     loader: 'iso-morphic-style-loader',
-                }, 'css-loader'],
+                }, {
+                    loader: 'css-loader',
+                    options: {
+                        modules: {
+                            localIdentName: "[local]",
+                        },
+                    },
+                }],
             },
             {
                 test: /(\.less)$/,
@@ -69,7 +77,6 @@ const config = {
     },
     /** Don't bundle common dependencies */
     externals: [
-        'prop-types',
         'react-dom',
         'react',
     ],
@@ -89,7 +96,11 @@ const config = {
             new OptimizeCSSAssetsPlugin({}),
         ],
     },
-    plugins: [],
+    plugins: [
+        new TsconfigPathsPlugin({
+            configFile: path.resolve(__dirname, './tsconfig.json'),
+        }),
+    ],
     stats: {
         builtAt: false,
         hash: false,
