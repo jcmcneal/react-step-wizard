@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-### [5.4.0-beta.1]
+### [5.4.0-beta.2]
 • Generate `main: cjs`, `browser: umd`, and `module: esm` bundles for better import compatibility - like with Next.js
 • Generate accurate types thanks to TypeScript
 
