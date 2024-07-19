@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Step Wizard Component conditional step when not visible 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -33,10 +31,10 @@ exports[`Step Wizard Component conditional step when not visible 1`] = `
 `;
 
 exports[`Step Wizard Component conditional step when not visible 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -44,7 +42,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -56,9 +54,7 @@ Object {
 `;
 
 exports[`Step Wizard Component conditional step when visible 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -95,10 +91,10 @@ exports[`Step Wizard Component conditional step when visible 1`] = `
 `;
 
 exports[`Step Wizard Component conditional step when visible 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -108,7 +104,7 @@ Object {
     "step3": 2,
     "step4": 3,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -122,9 +118,7 @@ Object {
 `;
 
 exports[`Step Wizard Component empty component 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   />
@@ -132,11 +126,11 @@ exports[`Step Wizard Component empty component 1`] = `
 `;
 
 exports[`Step Wizard Component empty component 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {},
-  "namedSteps": Object {},
+  "classes": {},
+  "hashKeys": {},
+  "namedSteps": {},
 }
 `;
 
@@ -195,9 +189,7 @@ Object {
 `;
 
 exports[`Step Wizard Component html element steps 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -208,38 +200,27 @@ exports[`Step Wizard Component html element steps 1`] = `
         Step 1
       </div>
     </div>
-    <div
-      className="step"
-    >
-      &gt;
-    </div>
   </div>
 </div>
 `;
 
 exports[`Step Wizard Component html element steps 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
-    "1": "step2",
     "step1": 0,
-    "step2": 1,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
-    "1": "step2",
     "step1": 0,
-    "step2": 1,
   },
 }
 `;
 
 exports[`Step Wizard Component initialStep set to 2 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -269,10 +250,10 @@ exports[`Step Wizard Component initialStep set to 2 1`] = `
 `;
 
 exports[`Step Wizard Component initialStep set to 2 2`] = `
-Object {
+{
   "activeStep": 1,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -280,7 +261,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -292,9 +273,7 @@ Object {
 `;
 
 exports[`Step Wizard Component instance 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -324,10 +303,10 @@ exports[`Step Wizard Component instance 1`] = `
 `;
 
 exports[`Step Wizard Component instance 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -335,7 +314,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -347,9 +326,7 @@ Object {
 `;
 
 exports[`Step Wizard Component isHashEnabled - false 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -379,10 +356,10 @@ exports[`Step Wizard Component isHashEnabled - false 1`] = `
 `;
 
 exports[`Step Wizard Component isHashEnabled - false 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "First",
     "1": "step2",
     "2": "The End!",
@@ -390,7 +367,7 @@ Object {
     "The End!": 2,
     "step2": 1,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -402,9 +379,7 @@ Object {
 `;
 
 exports[`Step Wizard Component isHashEnabled - true 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -434,10 +409,10 @@ exports[`Step Wizard Component isHashEnabled - true 1`] = `
 `;
 
 exports[`Step Wizard Component isHashEnabled - true 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "First",
     "1": "step2",
     "2": "The End!",
@@ -445,7 +420,7 @@ Object {
     "The End!": 2,
     "step2": 1,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -457,9 +432,7 @@ Object {
 `;
 
 exports[`Step Wizard Component isLazyMount - true 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -475,10 +448,10 @@ exports[`Step Wizard Component isLazyMount - true 1`] = `
 `;
 
 exports[`Step Wizard Component isLazyMount - true 2`] = `
-Object {
+{
   "activeStep": 1,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -486,7 +459,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -498,9 +471,7 @@ Object {
 `;
 
 exports[`Step Wizard Component nav 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     currentStep={1}
     firstStep={[Function]}
@@ -543,10 +514,10 @@ exports[`Step Wizard Component nav 1`] = `
 `;
 
 exports[`Step Wizard Component nav 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -554,7 +525,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -566,9 +537,7 @@ Object {
 `;
 
 exports[`Step Wizard Component renders a single child without issues 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -584,14 +553,14 @@ exports[`Step Wizard Component renders a single child without issues 1`] = `
 `;
 
 exports[`Step Wizard Component renders a single child without issues 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "step1": 0,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "step1": 0,
   },
@@ -599,9 +568,7 @@ Object {
 `;
 
 exports[`Step Wizard Component renders dynamic trees from mapped collections 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -638,10 +605,10 @@ exports[`Step Wizard Component renders dynamic trees from mapped collections 1`]
 `;
 
 exports[`Step Wizard Component renders dynamic trees from mapped collections 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -651,7 +618,7 @@ Object {
     "step3": 2,
     "step4": 3,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -665,9 +632,7 @@ Object {
 `;
 
 exports[`Step Wizard Component with 3 basic components 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -697,10 +662,10 @@ exports[`Step Wizard Component with 3 basic components 1`] = `
 `;
 
 exports[`Step Wizard Component with 3 basic components 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -708,7 +673,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -720,9 +685,7 @@ Object {
 `;
 
 exports[`Step Wizard Component with named steps 1`] = `
-<div
-  className={null}
->
+<div>
   <div
     className="step-wrapper"
   >
@@ -752,10 +715,10 @@ exports[`Step Wizard Component with named steps 1`] = `
 `;
 
 exports[`Step Wizard Component with named steps 2`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -763,7 +726,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "info",
     "1": "step2",
     "2": "contact",
@@ -775,10 +738,10 @@ Object {
 `;
 
 exports[`Step Wizard Functions firstStep 1`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -786,7 +749,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -798,13 +761,13 @@ Object {
 `;
 
 exports[`Step Wizard Functions goToNamedStep 1`] = `
-Object {
+{
   "activeStep": 2,
-  "classes": Object {
+  "classes": {
     "0": "animated fadeOutLeft",
     "2": "animated fadeInRight",
   },
-  "hashKeys": Object {
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -812,7 +775,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -824,13 +787,13 @@ Object {
 `;
 
 exports[`Step Wizard Functions goToStep 1`] = `
-Object {
+{
   "activeStep": 2,
-  "classes": Object {
+  "classes": {
     "0": "animated fadeOutLeft",
     "2": "animated fadeInRight",
   },
-  "hashKeys": Object {
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -838,7 +801,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -850,13 +813,13 @@ Object {
 `;
 
 exports[`Step Wizard Functions goToStep with hash 1`] = `
-Object {
+{
   "activeStep": 2,
-  "classes": Object {
+  "classes": {
     "0": "animated fadeOutLeft",
     "2": "animated fadeInRight",
   },
-  "hashKeys": Object {
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -864,7 +827,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -876,13 +839,13 @@ Object {
 `;
 
 exports[`Step Wizard Functions lastStep 1`] = `
-Object {
+{
   "activeStep": 2,
-  "classes": Object {
+  "classes": {
     "0": "animated fadeOutLeft",
     "2": "animated fadeInRight",
   },
-  "hashKeys": Object {
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -890,7 +853,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -902,13 +865,13 @@ Object {
 `;
 
 exports[`Step Wizard Functions nextStep 1`] = `
-Object {
+{
   "activeStep": 1,
-  "classes": Object {
+  "classes": {
     "0": "animated fadeOutLeft",
     "1": "animated fadeInRight",
   },
-  "hashKeys": Object {
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -916,7 +879,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -928,16 +891,16 @@ Object {
 `;
 
 exports[`Step Wizard Functions null elements are pruned away 1`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {},
-  "hashKeys": Object {
+  "classes": {},
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "step1": 0,
     "step2": 1,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "step1": 0,
@@ -947,19 +910,19 @@ Object {
 `;
 
 exports[`Step Wizard Functions null elements are pruned away 2`] = `
-Object {
+{
   "activeStep": 1,
-  "classes": Object {
+  "classes": {
     "0": "animated fadeOutLeft",
     "1": "animated fadeInRight",
   },
-  "hashKeys": Object {
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "step1": 0,
     "step2": 1,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "step1": 0,
@@ -969,14 +932,14 @@ Object {
 `;
 
 exports[`Step Wizard Functions onStepChange 1`] = `
-Object {
+{
   "activeStep": 0,
-  "classes": Object {
+  "classes": {
     "0": "animated fadeInLeft",
     "1": "animated fadeOutRight",
     "2": "animated fadeOutRight",
   },
-  "hashKeys": Object {
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -984,7 +947,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -996,14 +959,14 @@ Object {
 `;
 
 exports[`Step Wizard Functions previousStep 1`] = `
-Object {
+{
   "activeStep": 1,
-  "classes": Object {
+  "classes": {
     "0": "animated fadeOutLeft",
     "1": "animated fadeInLeft",
     "2": "animated fadeOutRight",
   },
-  "hashKeys": Object {
+  "hashKeys": {
     "0": "step1",
     "1": "step2",
     "2": "step3",
@@ -1011,7 +974,7 @@ Object {
     "step2": 1,
     "step3": 2,
   },
-  "namedSteps": Object {
+  "namedSteps": {
     "0": "step1",
     "1": "step2",
     "2": "step3",

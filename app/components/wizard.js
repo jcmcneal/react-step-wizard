@@ -1,12 +1,12 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import StepWizard from '../../dist/react-step-wizard.min';
+import StepWizard from '../../';
 
 import Nav from './nav';
 import Plugs from './Plugs';
 
-import styles from './wizard.less';
-import transitions from './transitions.less';
-/* eslint react/prop-types: 0 */
+import styles from './wizard.css';
+import transitions from './transitions.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 /**
  * A basic demonstration of how to use the step wizard
@@ -64,11 +64,12 @@ const Wizard = () => {
                             <Progress stepName='progress' />
                             {null /* will be ignored */}
                             <Last hashKey={'TheEnd!'} />
+                            <Last />
                         </StepWizard>
                     </div>
                 </div>
             </div>
-            { (demo && SW) && <InstanceDemo SW={SW} /> }
+            {(demo && SW) && <InstanceDemo SW={SW} />}
         </div>
     );
 };
@@ -103,10 +104,10 @@ const Stats = ({
 }) => (
     <div>
         <hr />
-        { step > 1 &&
+        {step > 1 &&
             <button className='btn btn-default btn-block' onClick={previousStep}>Go Back</button>
         }
-        { step < totalSteps ?
+        {step < totalSteps ?
             <button className='btn btn-primary btn-block' onClick={nextStep}>Continue</button>
             :
             <button className='btn btn-success btn-block' onClick={nextStep}>Finish</button>
@@ -151,7 +152,7 @@ const Second = props => {
 
     return (
         <div>
-            { props.form.firstname && <h3>Hey {props.form.firstname}! 👋</h3> }
+            {props.form.firstname && <h3>Hey {props.form.firstname}! 👋</h3>}
             I've added validation to the previous button.
             <Stats step={2} {...props} previousStep={validate} />
         </div>

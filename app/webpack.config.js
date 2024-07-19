@@ -33,18 +33,11 @@ if (isDev) {
 
     config.output.publicPath = publicPath;
     config.devServer = {
-        compress: true,
-        host: '0',
-        index: server.index,
-        openPage: server.root,
-        overlay: {
-            warnings: false,
-            errors: true,
-        },
         port: server.port,
-        public: host,
-        publicPath,
-        stats: config.stats,
+        static: {
+            directory: path.join(__dirname),
+            serveIndex: true,
+        },
     };
     config.optimization = {
         minimize: false,
