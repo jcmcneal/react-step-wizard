@@ -8,8 +8,10 @@ _config.yml
 .eslintrc
 .gitignore
 .nvmrc
+.prettierrc
 .vscode/
 app/
+docs/
 CHANGELOG.md
 coverage/
 example.gif
@@ -17,10 +19,12 @@ example/
 .github/
 index.html
 jest.config.json
+jest.config.js
 react-step-wizard-*.tgz
 rollup.config.js
 scripts/
 src/
+tsconfig.json
 webpack.config.js
 yarn.lock
 yarn*.log

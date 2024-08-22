@@ -3,16 +3,16 @@
 const path = require('path');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const args = require('minimist')(process.argv);
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const app = require('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
 
 const config = {
-    entry: './src/index.js',
+    entry: './src/index.tsx',
     output: {
         path: path.resolve('dist'),
         filename: path.basename(app.main),
@@ -23,13 +23,6 @@ const config = {
     module: {
         rules: [
             {
-                enforce: 'pre',
-                test: /\.js$/,
-                exclude: /node_modules/,
-                include: path.resolve('src/index.js'),
-                loader: 'eslint-loader',
-            },
-            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
@@ -38,19 +31,21 @@ const config = {
                 /** Globals */
                 test: /(\.css)$/,
                 use: [{
-                    // https://www.npmjs.com/package/iso-morphic-style-loader
-                    loader: 'iso-morphic-style-loader',
-                }, 'css-loader'],
+                    loader: 'style-loader',
+                }, {
+                    loader: 'css-loader',
+                    options: {
+                        modules: {
+                            localIdentName: "[local]",
+                        },
+                    },
+                }],
             },
             {
                 test: /(\.less)$/,
                 use: [
                     {
-                        // https://www.npmjs.com/package/iso-morphic-style-loader
-                        loader: 'iso-morphic-style-loader',
-                        options: {
-                            singleton: true,
-                        },
+                        loader: 'style-loader',
                     },
                     {
                         loader: 'css-loader',
@@ -69,13 +64,9 @@ const config = {
     },
     /** Don't bundle common dependencies */
     externals: [
-        'prop-types',
         'react-dom',
         'react',
     ],
-    node: {
-        Buffer: false,
-    },
     optimization: {
         minimizer: [
             new TerserPlugin({
@@ -86,17 +77,13 @@ const config = {
                 },
                 extractComments: false
             }),
-            new OptimizeCSSAssetsPlugin({}),
         ],
     },
-    plugins: [],
-    stats: {
-        builtAt: false,
-        hash: false,
-        modules: false,
-        version: false,
-        warnings: false,
-    },
+    plugins: [
+        new TsconfigPathsPlugin({
+            configFile: path.resolve(__dirname, './tsconfig.json'),
+        }),
+    ],
 };
 
 if (isProd) {

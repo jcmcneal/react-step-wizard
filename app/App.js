@@ -1,17 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { hot } from 'react-hot-loader';
+import { createRoot } from 'react-dom/client';
 
 import Wizard from './components/wizard';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './less/app.less';
 
 const App = () => (
     <Wizard />
 );
 
-/** HMR */
-hot(module)(App);
+const domNode = document.getElementById('app');
+const root = createRoot(domNode);
 
-ReactDOM.render(<App />, document.getElementById('app'));
+root.render(<App />);
