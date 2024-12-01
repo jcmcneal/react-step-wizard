@@ -239,17 +239,17 @@ StepWizard.propTypes = {
     transitions: PropTypes.object,
 };
 
-StepWizard.defaultProps = {
-    children: [],
-    className: null,
-    initialStep: 1,
-    instance: () => {},
-    isHashEnabled: false,
-    isLazyMount: false,
-    nav: null,
-    onStepChange: () => {},
-    transitions: undefined,
-};
+// StepWizard.defaultProps = {
+//     children: [],
+//     className: null,
+//     initialStep: 1,
+//     instance: () => {},
+//     isHashEnabled: false,
+//     isLazyMount: false,
+//     nav: null,
+//     onStepChange: () => {},
+//     transitions: undefined,
+// };
 
 export const Step = ({
     children,
@@ -269,8 +269,8 @@ if (process.env.NODE_ENV !== 'production') {
     };
 }
 
-Step.defaultProps = {
-    children: [],
-    isActive: false,
-    transitions: '',
-};
+// Step.defaultProps = {
+//     children: [],
+//     isActive: false,
+//     transitions: '',
+// };
