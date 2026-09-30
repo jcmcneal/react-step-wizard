@@ -1,10 +1,8 @@
-.cache/
-node_modules
-.DS_Store
-.cache/
-.vscode/
-yarn-error.log
-dist
-!app/dist/
-react-step-wizard-*.tgz
+node_modules/
+dist/
+app/dist/
 coverage/
+playwright-report/
+test-results/
+*.tgz
+.DS_Store

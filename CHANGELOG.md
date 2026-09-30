@@ -1,4 +1,25 @@
 # Changelog
+
+### [6.0.0-beta.0] (unpublished review candidate)
+
+- Replace the class implementation with strict TypeScript, hooks and reactive context.
+- Ship native ESM and CJS exports with separate declarations; remove the UMD main.
+- Support React 18/19 types and modern JSX; remove function defaultProps/PropTypes.
+- Add async navigation guards, typed refs, footer slots, ordered step metadata,
+  named callback values, original-step props, zero indexing, and opt-in swipe.
+- Reconcile dynamic steps by key/name/hash and cancel obsolete async work/animations.
+- Hide/inert inactive steps before CSS; preserve eager state and clean up timers/listeners.
+- Make animation CSS explicit and preserve Next App Router client directives.
+- Replace legacy Babel/Webpack/Jest infrastructure with a locked modern toolchain,
+  observable regressions, real packed consumer checks and browser/integration fixtures.
+- See MIGRATION.md for breaking changes and docs/RESOLUTION_MAP.md for audit dispositions.
+
+Feature/type proposals reviewed include [galr52's #96](https://github.com/jcmcneal/react-step-wizard/pull/96),
+[GeenCo86's #104](https://github.com/jcmcneal/react-step-wizard/pull/104),
+[jeremylynch's #105](https://github.com/jcmcneal/react-step-wizard/pull/105), and
+[Jason's TypeScript refactor #130](https://github.com/jcmcneal/react-step-wizard/pull/130).
+Their individual incorporation/supersession dispositions are recorded in the resolution map.
+
 All notable changes to this project will be documented in this file.
 
 ### [5.3.11]

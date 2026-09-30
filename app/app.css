@@ -1,0 +1,7 @@
+:root { color: #172d38; background: #f4f8fa; font: 16px/1.5 system-ui, sans-serif; }
+main { max-width: 720px; margin: 60px auto; padding: 24px; }
+.panels { margin-top: 24px; padding: 20px; border: 1px solid #ccdbe1; border-radius: 12px; background: white; }
+button { margin: 4px; padding: 8px 14px; border: 1px solid #6b8d9e; border-radius: 6px; background: white; color: inherit; cursor: pointer; }
+button[aria-current] { background: #d3e9f1; }
+button:disabled { opacity: .45; cursor: default; }
+label { display: block; } input:not([type=checkbox]) { display: block; margin: 8px 0; padding: 8px; }
