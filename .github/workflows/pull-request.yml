@@ -1,27 +1,64 @@
-name: Pull Request
-
+name: Validate candidate
 on:
   pull_request:
-    branches:
-      - '**' # This triggers the workflow on pull requests to any branch
-
+  push:
+    branches: [master, 'codex/**']
+permissions:
+  contents: read
 jobs:
-  build-and-test:
+  react:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - react: 18.0.0
+            types: 18
+          - react: 18.3.1
+            types: 18
+          - react: 19.3.0
+            types: 19
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.3
+          cache: npm
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false react@${{ matrix.react }} react-dom@${{ matrix.react }} @types/react@${{ matrix.types }} @types/react-dom@${{ matrix.types }}
+      - run: npm run check
+      - run: npm audit --audit-level=moderate
+  browsers:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20.13.1
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build project
-        run: npm run build
-
-      - name: Run tests
-        run: npm test
+          node-version: 22.22.3
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run app:build
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run test:browser
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-traces
+          path: test-results/
+  next:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        next: [13.5.11, 16.3.8]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.3
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:next
+        env:
+          NEXT_VERSION: ${{ matrix.next }}

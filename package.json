@@ -1,18 +1,25 @@
 {
   "name": "react-step-wizard",
-  "version": "5.3.11",
+  "version": "6.0.0-beta.0",
   "description": "A modern flexible step wizard component built for React",
-  "main": "dist/react-step-wizard.min.js",
-  "typings": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
   "scripts": {
-    "start": "export NODE_ENV=development; ./scripts/run.dev.js",
-    "dev": "rollup --config rollup.config.js --watch",
-    "build": "rollup --config rollup.config.js --environment NODE_ENV:production",
-    "app:dev": "webpack-dev-server --open --mode='development' --hotOnly --config app/webpack.config.js",
-    "app:build": "export NODE_ENV=production; webpack --progress --optimize-minimize --mode=production --config app/webpack.config.js",
-    "prepublishOnly": "rm -rf ./dist && npm run build",
-    "test": "jest --config=jest.config.json",
-    "lint": "eslint src/"
+    "start": "npm run app:dev",
+    "app:dev": "node scripts/dev.mjs",
+    "app:build": "vite build --config app/vite.config.ts",
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src app tests scripts *.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:browser": "playwright test",
+    "test:package": "node scripts/check-package.mjs",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build && npm run app:build && npm run test:package",
+    "prepack": "npm run build",
+    "prepublishOnly": "npm run check",
+    "test:next": "node scripts/check-next.mjs",
+    "app:preview": "vite preview --config app/vite.config.ts",
+    "app:dev:vite": "vite --config app/vite.config.ts"
   },
   "repository": {
     "type": "git",
@@ -32,46 +39,55 @@
   },
   "homepage": "https://github.com/jcmcneal/react-step-wizard#readme",
   "peerDependencies": {
-    "react": ">=15.0.1"
+    "react": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/preset-react": "^7.8.3",
-    "babel-eslint": "^10.0.3",
-    "babel-jest": "^25.1.0",
-    "babel-loader": "^8.0.6",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "bootstrap": "^4.4.1",
-    "css-loader": "^3.4.2",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-loader": "^3.0.3",
-    "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-react": "^7.18.3",
-    "identity-obj-proxy": "^3.0.0",
-    "iso-morphic-style-loader": "^2.0.1",
-    "jest": "^25.1.0",
-    "less": "^3.13.1",
-    "less-loader": "^5.0.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-hot-loader": "^4.12.19",
-    "react-test-renderer": "^16.12.0",
-    "rollup": "^1.31.1",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-eslint": "^7.0.0",
-    "rollup-plugin-filesize": "^6.2.1",
-    "rollup-plugin-postcss": "^2.0.6",
-    "rollup-plugin-uglify": "^5.0.2",
-    "terser-webpack-plugin": "^2.3.5",
-    "webpack": "^4.41.6",
-    "webpack-bundle-analyzer": "^3.6.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.2"
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^22.19.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^10.11.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^17.0.0",
+    "jsdom": "^29.0.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.71.0",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.3"
+  },
+  "type": "module",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "MIGRATION.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
