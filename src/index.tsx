@@ -55,13 +55,18 @@ export const StepWizard = forwardRef<StepWizardHandle, StepWizardProps>(function
     const wrapper = useRef<HTMLDivElement>(null);
     useClientLayoutEffect(() => {
         if (!transition || !wrapper.current) return;
-        const outgoing = Array.from(wrapper.current.children).find(element => element.getAttribute('aria-hidden') === 'true' && !element.hasAttribute('hidden'));
-        if (!outgoing) return;
-        const style = window.getComputedStyle(outgoing);
-        const hasAnimation = style.animationName.split(',').some(name => name.trim() !== '' && name.trim() !== 'none');
-        const hasTransition = style.transitionDuration.split(',').some(duration => parseFloat(duration) > 0);
-        // Without optional CSS, hide immediately instead of overlaying stale content for 820ms.
-        if (!hasAnimation && !hasTransition) finishTransition();
+        const panels = Array.from(wrapper.current.children);
+        function hasMotion(element: Element | undefined) {
+            if (!element) return false;
+            const style = window.getComputedStyle(element);
+            return style.animationName.split(',').some(name => name.trim() !== '' && name.trim() !== 'none') ||
+                style.transitionDuration.split(',').some(duration => parseFloat(duration) > 0);
+        }
+        const outgoing = panels.find(element => element.getAttribute('aria-hidden') === 'true' && !element.hasAttribute('hidden'));
+        const incoming = panels.find(element => element.getAttribute('aria-hidden') === 'false');
+        // Each panel has its own lifecycle: disabling exit must not cancel entry.
+        if (transition.from && !hasMotion(outgoing)) finishTransition('exit');
+        if (transition.to && !hasMotion(incoming)) finishTransition('enter');
     }, [transition, finishTransition]);
     const touch = useRef<{ x: number; y: number } | null>(null);
     return <WizardContext.Provider value={snapshot}>
@@ -87,13 +92,14 @@ export const StepWizard = forwardRef<StepWizardHandle, StepWizardProps>(function
                     const isActive = i === snapshot.currentIndex;
                     const isExiting = !isLazyMount && descriptor.key === transition?.from;
                     if (isLazyMount && !isActive) return null;
-                    const animation = transition ? (isActive ? (transition.forward ? transitions.enterRight : transitions.enterLeft) :
+                    const animation = transition ? (isActive && descriptor.key === transition.to ? (transition.forward ? transitions.enterRight : transitions.enterLeft) :
                         isExiting ? (transition.forward ? transitions.exitLeft : transitions.exitRight) : '') : (intro && isActive ? transitions.intro : '');
                     const injected = { ...snapshot, isActive, transitions: animation ?? '' };
                     const marker = element.type === Step ? element.props as StepProps : undefined;
                     return <Step {...marker} key={descriptor.key} isActive={isActive} isExiting={isExiting}
                         transitions={animation} className={[stepClassName, marker?.className].filter(Boolean).join(' ')} style={{ ...stepStyle, ...marker?.style }}
-                        onAnimationEnd={event => { marker?.onAnimationEnd?.(event); if (event.target === event.currentTarget) finishTransition(); }}>
+                        onAnimationEnd={event => { marker?.onAnimationEnd?.(event); if (event.target === event.currentTarget) finishTransition(transition ? (isActive ? 'enter' : 'exit') : undefined); }}
+                        onTransitionEnd={event => { marker?.onTransitionEnd?.(event); if (event.target === event.currentTarget) finishTransition(transition ? (isActive ? 'enter' : 'exit') : undefined); }}>
                         {marker ? marker.children as ReactNode : typeof element.type === 'string' ? element : cloneElement(element, injected)}
                     </Step>;
                 })}

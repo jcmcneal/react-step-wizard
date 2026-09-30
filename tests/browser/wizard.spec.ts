@@ -52,3 +52,13 @@ test('navigation without optional CSS hides outgoing content immediately', async
     await expect(page.locator('.rsw-step[hidden]')).toHaveCount(2);
     await expect(page.getByRole('heading', { name: 'Welcome', exact: true, includeHidden: true })).toBeHidden();
 });
+
+test('disabling outgoing animation preserves incoming animation before paint', async ({ page }) => {
+    await page.goto('/');
+    await page.addStyleTag({ content: '.rsw-exit-left { animation: none !important; }' });
+    await page.getByRole('button', { name: 'Next', exact: true }).click();
+    await expect(page.locator('.rsw-active.rsw-enter-right')).toHaveCount(1);
+    await expect(page.locator('.rsw-step[hidden]')).toHaveCount(2);
+    await expect(page.getByRole('heading', { name: 'Welcome', exact: true, includeHidden: true })).toBeHidden();
+    await expect(page.locator('.rsw-enter-right')).toHaveCount(0);
+});

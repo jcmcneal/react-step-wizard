@@ -3,7 +3,7 @@ import { readHash, writeHash } from './steps.js';
 import type { NormalizedStep, StepChangeStats, StepWizardControls, StepWizardHandle, StepWizardProps, StepWizardSnapshot } from './types.js';
 
 const useClientLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
-interface Transition { from: string; to: string; forward: boolean }
+interface Transition { from: string | null; to: string | null; forward: boolean; request: number }
 interface WizardState { key: string | null; index: number; signature: string; transition: Transition | null; intro: boolean }
 
 export function useWizardController(steps: NormalizedStep[], props: StepWizardProps) {
@@ -44,7 +44,7 @@ export function useWizardController(steps: NormalizedStep[], props: StepWizardPr
             const from = r.steps[r.index]?.descriptor;
             const to = r.steps[target]?.descriptor;
             const restoreHash = () => {
-                if (reason === 'hash' && from && r.props.isHashEnabled) writeHash(from.hashKey, true);
+                if (from && r.props.isHashEnabled) writeHash(from.hashKey, true);
             };
             setPending(false);
             if (!Number.isInteger(target) || !from || !to || target === r.index) {
@@ -79,7 +79,7 @@ export function useWizardController(steps: NormalizedStep[], props: StepWizardPr
             const forward = target > r.index;
             r.index = target;
             setState({ key: to.key, index: target, signature: r.signature,
-                transition: { from: from.key, to: to.key, forward }, intro: false });
+                transition: { from: from.key, to: to.key, forward, request }, intro: false });
             if (r.props.isHashEnabled) writeHash(to.hashKey, reason === 'hash');
             r.props.onStepChange?.(change);
             return true;
@@ -116,15 +116,17 @@ export function useWizardController(steps: NormalizedStep[], props: StepWizardPr
 
     useEffect(() => {
         if (!props.isHashEnabled) return;
-        let pendingHash: string | null = null;
+        let pendingHash: { hash: string; request: number } | null = null;
         const onHash = () => {
             const r = runtime.current;
             const hash = readHash();
             if (!hash && r.steps[r.index]) { writeHash(r.steps[r.index].descriptor.hashKey, true); return; }
             const target = r.steps.findIndex(s => s.descriptor.hashKey === hash);
-            if (target >= 0 && hash !== pendingHash) {
-                pendingHash = hash;
-                void navigateHash(target).finally(() => { if (pendingHash === hash) pendingHash = null; });
+            if (target >= 0 && (hash !== pendingHash?.hash || pendingHash.request !== r.request)) {
+                const promise = navigateHash(target);
+                const pending = { hash, request: r.request };
+                pendingHash = pending;
+                void promise.finally(() => { if (pendingHash === pending) pendingHash = null; });
             }
         };
         onHash();
@@ -136,12 +138,19 @@ export function useWizardController(steps: NormalizedStep[], props: StepWizardPr
         };
     }, [props.isHashEnabled, navigateHash]);
 
-    const finishTransition = useCallback(() => setState(previous => (previous.transition || previous.intro) ? { ...previous, transition: null, intro: false } : previous), []);
+    const finishTransition = useCallback((part?: 'enter' | 'exit') => setState(previous => {
+        if (part && previous.transition) {
+            const transition = { ...previous.transition, [part === 'enter' ? 'to' : 'from']: null };
+            return { ...previous, transition: transition.from || transition.to ? transition : null };
+        }
+        return (previous.transition || previous.intro) ? { ...previous, transition: null, intro: false } : previous;
+    }), []);
+    const transitionRequest = transition?.request;
     useEffect(() => {
-        if (!transition) return;
-        const timer = setTimeout(() => setState(previous => previous.transition === transition ? { ...previous, transition: null } : previous),
+        if (transitionRequest === undefined) return;
+        const timer = setTimeout(() => setState(previous => previous.transition?.request === transitionRequest ? { ...previous, transition: null } : previous),
             Math.max(0, props.transitionDuration ?? 820));
         return () => clearTimeout(timer);
-    }, [transition, props.transitionDuration]);
+    }, [transitionRequest, props.transitionDuration]);
     return { snapshot, handle, transition, intro: state.intro, finishTransition };
 }

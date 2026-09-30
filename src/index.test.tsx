@@ -263,6 +263,51 @@ describe('guards and lifecycle (#86, #111)', () => {
 });
 
 describe('URL and SSR (#93, #119, #127)', () => {
+    it('preserves application history state on initialization, navigation and veto restoration', async () => {
+        const applicationState = { router: { key: 'existing', index: 4 }, draft: 'saved' };
+        window.history.replaceState(applicationState, '', '/?campaign=review');
+        const ref = createRef<StepWizardHandle>();
+        render(<StepWizard ref={ref} isHashEnabled beforeStepChange={({ activeStepName }) => activeStepName !== 'C'}>{children}</StepWizard>);
+        expect(window.history.state).toEqual(applicationState);
+        await move(() => ref.current!.nextStep());
+        expect(window.history.state).toEqual(applicationState);
+        await act(async () => { window.history.pushState(applicationState, '', '/?campaign=review#c'); window.dispatchEvent(new HashChangeEvent('hashchange')); });
+        expect(window.location.hash).toBe('#b');
+        expect(window.location.search).toBe('?campaign=review');
+        expect(window.history.state).toEqual(applicationState);
+    });
+    it.each(['no-op', 'veto'] as const)('reconciles a pending URL request canceled by a %s imperative request', async kind => {
+        let approve!: (value: boolean) => void;
+        const ref = createRef<StepWizardHandle>();
+        const changed = vi.fn();
+        const guard = vi.fn(({ reason }) => reason === 'hash' ? new Promise<boolean>(resolve => { approve = resolve; }) : false);
+        render(<StepWizard ref={ref} isHashEnabled beforeStepChange={guard} onStepChange={changed}>{children}</StepWizard>);
+        act(() => { window.history.pushState(null, '', '/#b'); window.dispatchEvent(new HashChangeEvent('hashchange')); });
+        expect(ref.current!.isPending).toBe(true);
+        expect(await move(() => kind === 'no-op' ? ref.current!.firstStep() : ref.current!.lastStep())).toBe(false);
+        await act(async () => approve(true));
+        expect(ref.current!.currentStepName).toBe('A');
+        expect(ref.current!.isPending).toBe(false);
+        expect(window.location.hash).toBe('#a');
+        expect(changed).not.toHaveBeenCalled();
+    });
+    it('allows the same hash to be retried after a no-op cancels its pending guard', async () => {
+        const approvals: ((value: boolean) => void)[] = [];
+        const guard = vi.fn(() => new Promise<boolean>(resolve => { approvals.push(resolve); }));
+        const ref = createRef<StepWizardHandle>();
+        render(<StepWizard ref={ref} isHashEnabled beforeStepChange={guard}>{children}</StepWizard>);
+        const requestHash = () => { window.history.pushState(null, '', '/#b'); window.dispatchEvent(new HashChangeEvent('hashchange')); };
+        act(requestHash);
+        await move(() => ref.current!.firstStep());
+        act(requestHash);
+        expect(guard).toHaveBeenCalledTimes(2);
+        await act(async () => approvals[0](true));
+        expect(ref.current!.currentStepName).toBe('A');
+        expect(ref.current!.isPending).toBe(true);
+        await act(async () => approvals[1](true));
+        expect(ref.current!.currentStepName).toBe('B');
+        expect(window.location.hash).toBe('#b');
+    });
     it('encodes arbitrary hashes, tolerates malformed URLs and ignores unknown hashes', async () => {
         const ref = createRef<StepWizardHandle>();
         render(<StepWizard ref={ref} isHashEnabled>{children[0]}<Step hashKey="hello #/世界" stepName="encoded" /></StepWizard>);
@@ -334,6 +379,62 @@ describe('URL and SSR (#93, #119, #127)', () => {
 });
 
 describe('transitions and swipe', () => {
+    it('keeps an entering-only animation while immediately hiding the unanimated outgoing panel', async () => {
+        const style = document.createElement('style');
+        style.textContent = '.incoming-only { animation-name: review-enter; }';
+        document.head.append(style);
+        try {
+            const ref = createRef<StepWizardHandle>();
+            const view = render(<StepWizard ref={ref} transitions={{ enterRight: 'incoming-only', exitLeft: '' }}>{children}</StepWizard>);
+            await move(() => ref.current!.nextStep());
+            const enter = view.container.querySelector('.incoming-only');
+            expect(enter).not.toBeNull();
+            expect(view.container.querySelectorAll('[hidden]')).toHaveLength(2);
+            fireEvent.animationEnd(enter!);
+            expect(view.container.querySelector('.incoming-only')).toBeNull();
+        } finally { style.remove(); }
+    });
+    it('completes entering-only CSS transitions on their own transitionend event', async () => {
+        const style = document.createElement('style');
+        style.textContent = '.css-enter { transition-duration: 300ms; }';
+        document.head.append(style);
+        try {
+            const ref = createRef<StepWizardHandle>();
+            const view = render(<StepWizard ref={ref} transitions={{ enterRight: 'css-enter', exitLeft: '' }}>{children}</StepWizard>);
+            await move(() => ref.current!.nextStep());
+            const enter = view.container.querySelector('.css-enter');
+            expect(enter).not.toBeNull();
+            expect(view.container.querySelectorAll('[hidden]')).toHaveLength(2);
+            fireEvent.transitionEnd(enter!);
+            expect(view.container.querySelector('.css-enter')).toBeNull();
+        } finally { style.remove(); }
+    });
+    it('finishes outgoing and incoming animations independently', async () => {
+        const ref = createRef<StepWizardHandle>();
+        const view = render(<StepWizard ref={ref}>{children}</StepWizard>);
+        await move(() => ref.current!.nextStep());
+        fireEvent.animationEnd(view.container.querySelector('.rsw-exit-left')!);
+        const enter = view.container.querySelector('.rsw-enter-right');
+        expect(enter).not.toBeNull();
+        expect(view.container.querySelectorAll('[hidden]')).toHaveLength(2);
+        fireEvent.animationEnd(enter!);
+        expect(view.container.querySelector('.rsw-enter-right')).toBeNull();
+    });
+    it('preserves the outgoing animation when the incoming panel finishes first', async () => {
+        vi.useFakeTimers();
+        try {
+            const ref = createRef<StepWizardHandle>();
+            const view = render(<StepWizard ref={ref} transitionDuration={100}>{children}</StepWizard>);
+            await move(() => ref.current!.nextStep());
+            act(() => vi.advanceTimersByTime(40));
+            fireEvent.animationEnd(view.container.querySelector('.rsw-enter-right')!);
+            expect(view.container.querySelector('.rsw-exit-left')).not.toBeNull();
+            // Partial completion must not restart the overall timeout.
+            act(() => vi.advanceTimersByTime(60));
+            expect(view.container.querySelector('.rsw-exit-left')).toBeNull();
+            expect(view.container.querySelectorAll('[hidden]')).toHaveLength(2);
+        } finally { vi.useRealTimers(); }
+    });
     it('hides inactive steps, keeps exit animations briefly, clears classes on completion (#89)', async () => {
         const ref = createRef<StepWizardHandle>();
         const view = render(<StepWizard ref={ref}>{children}</StepWizard>);

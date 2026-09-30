@@ -9,18 +9,18 @@ exact final PR head before treating it as ready for review.
 
 | Check | Result |
 | --- | --- |
-| `npm run check`, React 18.0.0 + React 18 types | Passed: lint, strict types, 32 regressions, library/example builds and packed consumer checks |
-| `npm run check`, React 18.3.1 + React 18 types | Passed, same checks and 32 regressions |
-| `npm ci && npm run check`, locked React 19.3.0 + React 19 types | Passed, same checks and 32 regressions; locked install restored |
+| `npm run check`, React 18.0.0 + React 18 types | Passed: lint, strict types, 40 regressions, library/example builds and packed consumer checks |
+| `npm run check`, React 18.3.1 + React 18 types | Passed, same checks and 40 regressions |
+| `npm ci && npm run check`, locked React 19.3.0 + React 19 types | Passed, same checks and 40 regressions; locked install restored |
 | Packed ESM import and CJS require | Both render through React SSR without browser globals |
 | Packed declarations, NodeNext and Bundler resolution | Passed on all three React versions with strict mode, `skipLibCheck:false`, `.mts`/`.cts` consumers and negative type assertions |
 | Packed Vite 8.3.1 / Rolldown consumer | Production build passed under all three React versions; default import is the component |
-| Production example browsers | 15/15: three scenarios each in Chromium, Firefox, WebKit, installed Chrome and installed Edge |
-| Example development fallback | 3/3 Chromium scenarios; touching example CSS triggered a successful rebuild |
-| Packed Next 13.5.11 + React 18.3.1 | Production build, direct server-component package import, HTTP SSR, hydration and named navigation passed |
+| Production example browsers | 20/20: four scenarios each in Chromium, Firefox, WebKit, installed Chrome and installed Edge |
+| Example development fallback | 4/4 Chromium scenarios; touching example CSS triggered a successful rebuild |
+| Packed Next 13.5.11 + React 18.3.1 | Production build, direct server-component package import, HTTP SSR, hydration, named navigation and Back/Forward passed |
 | Packed Next 16.3.8 + React 19.3.0 | Same checks passed with the webpack build path |
 | `npm audit --audit-level=moderate` | Zero reported vulnerabilities from the locked development tree |
-| `npm pack --dry-run --ignore-scripts` | 18 files, about 23 KB compressed; only built JS/maps/declarations/CSS, package metadata, license, README, migration and changelog |
+| `npm pack --dry-run --ignore-scripts` | 18 files, about 24 KB compressed; only built JS/maps/declarations/CSS, package metadata, license, README, migration and changelog |
 | `git diff --check` | Passed |
 
 The behavioral suite covers defaults, zero/one numbering, reactive context/live
@@ -35,6 +35,16 @@ The Next fixtures are disposable applications installed from an actual tarball.
 They test representative framework paths; they are not the missing original
 applications from #93/#127. Next 16 Turbopack and arbitrary router integrations are
 outside the completed checks.
+
+Independent review of the initial candidate `b9afe3a` reproduced five failing
+assertions: entering-only animation was removed before paint, outgoing completion
+also removed incoming motion, initial fragment setup erased application history
+state, and no-op/veto requests canceled async hash validation without restoring the
+active URL. These are now regression-covered fixes. Enter/exit completion is
+separate with one overall timeout; history updates preserve existing state; latest
+unsuccessful requests restore the active hash. Additional tests cover canceled-hash
+retry, incoming-first completion and CSS transition events. The real-browser suite
+checks disabled exit motion while entry still runs, and Next fixtures check history.
 
 ## Dependency PR evidence
 

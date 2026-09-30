@@ -55,6 +55,10 @@ export default function Page() { return <Wizard isHashEnabled footer={<Controls 
         await page.getByRole('button', { name: 'Contact', exact: true }).click();
         await page.waitForFunction(() => document.querySelector('output')?.textContent === 'contact');
         assert.equal(await page.locator('output').textContent(), 'contact');
+        await page.goBack();
+        await page.waitForFunction(() => document.querySelector('output')?.textContent === 'account');
+        await page.goForward();
+        await page.waitForFunction(() => document.querySelector('output')?.textContent === 'contact');
         assert.equal(errors.length, 0, errors.join('\n'));
     } finally { await browser.close(); }
     const packageInfo = JSON.parse(await readFile(path.join(fixture, 'node_modules/next/package.json'), 'utf8'));

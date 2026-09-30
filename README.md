@@ -97,7 +97,7 @@ are forwarded to the container.
 | `wrapperClassName`, `wrapperStyle` | Style the step wrapper |
 | `stepClassName`, `stepStyle` | Style every step; `<Step className/style>` may customize one |
 | `transitions` | Default classes; a supplied object replaces the defaults; `''` disables a direction |
-| `transitionDuration` | `820` ms, maximum exit lifetime; match custom animation duration |
+| `transitionDuration` | `820` ms, maximum transition lifetime; match custom animation duration |
 | `isSwipeEnabled`, `swipeThreshold` | `false`, `50` pixels; left advances, right goes back |
 
 Snapshot props plus `isActive` and a `transitions` class string are injected into
@@ -149,7 +149,9 @@ only in effects/navigation; package imports and SSR work without `window`.
 Inactive steps have `hidden`, inline `display:none` and `aria-hidden`; they take no
 space even before a stylesheet loads. Eager steps retain local state. During exits
 the outgoing content is absolute and inert, and wrapper overflow is clipped. An
-animation-end event or timeout hides it. Lazy mounting skips exit content.
+animation/transition-end event or timeout hides it. Incoming and outgoing panels
+finish independently; disabling exit motion preserves an entering animation.
+Without motion CSS, the outgoing panel hides immediately. Lazy mounting skips exit content.
 
 Optional `styles.css` supplies default animations and reduced-motion support.
 Stable classes are `rsw-step-wrapper`, `rsw-step`, and `rsw-active`. Supply custom

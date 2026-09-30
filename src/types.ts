@@ -80,7 +80,7 @@ export interface StepWizardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'c
     beforeStepChange?: (change: StepChangeStats) => boolean | void | Promise<boolean | void>;
     onNavigationError?: (error: unknown) => void;
     transitions?: StepWizardTransitionProps;
-    /** Maximum exit duration; animationend can finish sooner. Defaults to 820ms. */
+    /** Maximum transition duration; animation/transitionend can finish sooner. Defaults to 820ms. */
     transitionDuration?: number;
     wrapperClassName?: string;
     wrapperStyle?: CSSProperties;

@@ -47,5 +47,5 @@ export function writeHash(hash: string, replace = false): void {
     if (typeof window === 'undefined' || readHash() === hash) return;
     const url = `${window.location.pathname}${window.location.search}#${encodeURIComponent(hash)}`;
     // pushState preserves Back/Forward without triggering a second guard/hashchange loop.
-    window.history[replace ? 'replaceState' : 'pushState'](null, '', url);
+    window.history[replace ? 'replaceState' : 'pushState'](window.history.state, '', url);
 }
